@@ -1,3 +1,4 @@
+import React from "react";
 import { useGameState } from "./hooks/useGameState";
 import StartPage from "./components/StartPage";
 import HowToPlayPage from "./components/HowToPlayPage";
