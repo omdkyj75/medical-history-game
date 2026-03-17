@@ -1,0 +1,60 @@
+{
+  "achievements": [
+    {
+      "id": "first-play",
+      "title": "첫 발을 내딛다",
+      "description": "게임을 처음으로 완료했습니다",
+      "icon": "🏁",
+      "condition": { "type": "play-count", "count": 1 }
+    },
+    {
+      "id": "different-path",
+      "title": "다른 길",
+      "description": "서로 다른 결과 유형 2개를 달성했습니다",
+      "icon": "🔀",
+      "condition": { "type": "unique-results", "count": 2 }
+    },
+    {
+      "id": "balanced-master",
+      "title": "만능 의원",
+      "description": "균형성장형을 달성했습니다",
+      "icon": "⚖️",
+      "condition": { "type": "specific-result", "resultId": "balanced-growth" }
+    },
+    {
+      "id": "hidden-ending",
+      "title": "숨겨진 길",
+      "description": "히든 콤보 엔딩을 발견했습니다",
+      "icon": "🔮",
+      "condition": { "type": "combo-ending" }
+    },
+    {
+      "id": "all-basic",
+      "title": "전설의 의원",
+      "description": "기본 결과 유형 5개를 모두 달성했습니다",
+      "icon": "👑",
+      "condition": { "type": "unique-results", "count": 5 }
+    },
+    {
+      "id": "completionist",
+      "title": "완전 정복",
+      "description": "콤보 포함 전체 결과 유형을 달성했습니다",
+      "icon": "🏆",
+      "condition": { "type": "unique-results", "count": 8 }
+    },
+    {
+      "id": "extremist",
+      "title": "극단주의자",
+      "description": "한 성향 점수가 20 이상에 도달했습니다",
+      "icon": "🔥",
+      "condition": { "type": "max-score", "threshold": 20 }
+    },
+    {
+      "id": "hard-path",
+      "title": "고난의 길",
+      "description": "한 성향 점수가 0 이하로 떨어졌습니다",
+      "icon": "💀",
+      "condition": { "type": "min-score", "threshold": 0 }
+    }
+  ]
+}

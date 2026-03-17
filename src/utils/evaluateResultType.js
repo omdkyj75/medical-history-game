@@ -31,7 +31,16 @@ function resolveTieByPriority(scores, candidatePrimaryKeys, scorePriorityOrder) 
 }
 
 export function evaluateResultType(scores, resultTypesData) {
-  const { resultTypes, scorePriorityOrder } = resultTypesData;
+  const { resultTypes, comboTypes, scorePriorityOrder } = resultTypesData;
+
+  // Check combo (hidden) endings first
+  if (comboTypes && comboTypes.length > 0) {
+    const matchedCombo = comboTypes.find((combo) => {
+      const { keys, minEach } = combo.rule;
+      return keys.every((key) => scores[key] >= minEach);
+    });
+    if (matchedCombo) return matchedCombo;
+  }
 
   const balancedType = resultTypes.find((type) => type.rule.type === "range");
   if (

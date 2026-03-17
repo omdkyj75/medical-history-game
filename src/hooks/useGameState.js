@@ -2,11 +2,22 @@ import { useMemo, useState } from "react";
 import stagesData from "../data/stages.json";
 import resultTypesData from "../data/resultTypes.json";
 import { evaluateResultType } from "../utils/evaluateResultType";
+import { saveResult, getResults } from "../utils/resultStorage";
+import { checkNewAchievements } from "../utils/checkAchievements";
 
 const { gameMeta, stages } = stagesData;
 
 function cloneInitialScores() {
   return { ...gameMeta.initialScores };
+}
+
+function pickRandomChoices(stage, count = 4) {
+  const all = [...stage.choices];
+  for (let i = all.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [all[i], all[j]] = [all[j], all[i]];
+  }
+  return all.slice(0, count);
 }
 
 export function useGameState() {
@@ -18,12 +29,24 @@ export function useGameState() {
   const [selectedChoiceResult, setSelectedChoiceResult] = useState(null);
   const [isResultModalOpen, setIsResultModalOpen] = useState(false);
   const [finalResult, setFinalResult] = useState(null);
+  const [activeEvent, setActiveEvent] = useState(null);
+  const [currentChoices, setCurrentChoices] = useState([]);
+  const [newAchievements, setNewAchievements] = useState([]);
+  const [savedResults, setSavedResults] = useState(() => getResults());
 
   const currentStage = useMemo(() => {
     return stages[currentStageIndex] ?? null;
   }, [currentStageIndex]);
 
   const isLastStage = currentStageIndex === stages.length - 1;
+
+  function pickRandomEvent(stage) {
+    const events = stage?.events;
+    if (!events || events.length === 0) return null;
+    // 50% 확률로 이벤트 미출현
+    if (Math.random() < 0.5) return null;
+    return events[Math.floor(Math.random() * events.length)];
+  }
 
   function startGame(name = "") {
     setPlayerName(name.trim());
@@ -34,6 +57,9 @@ export function useGameState() {
     setSelectedChoiceResult(null);
     setIsResultModalOpen(false);
     setFinalResult(null);
+    setNewAchievements([]);
+    setActiveEvent(pickRandomEvent(stages[0]));
+    setCurrentChoices(pickRandomChoices(stages[0]));
   }
 
   function goToHowToPlay() {
@@ -49,6 +75,15 @@ export function useGameState() {
     setScreen("progress");
   }
 
+  function goToHistory() {
+    setSavedResults(getResults());
+    setScreen("history");
+  }
+
+  function goToAchievements() {
+    setScreen("achievements");
+  }
+
   function closeProgress() {
     setScreen("stage");
   }
@@ -56,36 +91,52 @@ export function useGameState() {
   function selectChoice(choice) {
     if (!currentStage || !choice) return;
 
-    const updatedScores = {
-      academicReputation:
-        scores.academicReputation + choice.delta.academicReputation,
-      clinicalTrust: scores.clinicalTrust + choice.delta.clinicalTrust,
-      textUnderstanding:
-        scores.textUnderstanding + choice.delta.textUnderstanding,
-      publicFavor: scores.publicFavor + choice.delta.publicFavor
+    // Apply event modifier to delta
+    const eventMod = activeEvent?.modifier || {};
+    const effectiveDelta = {
+      academicReputation: choice.delta.academicReputation + (eventMod.academicReputation || 0),
+      clinicalTrust: choice.delta.clinicalTrust + (eventMod.clinicalTrust || 0),
+      textUnderstanding: choice.delta.textUnderstanding + (eventMod.textUnderstanding || 0),
+      publicFavor: choice.delta.publicFavor + (eventMod.publicFavor || 0)
     };
 
-    const historyEntry = {
-      stageId: currentStage.id,
-      stageTitle: currentStage.title,
-      choiceId: choice.id,
-      choiceTitle: choice.title,
-      figure: choice.figure,
-      book: choice.book,
-      concept: choice.concept,
-      delta: choice.delta,
-      resultComment: choice.resultComment
+    const updatedScores = {
+      academicReputation: scores.academicReputation + effectiveDelta.academicReputation,
+      clinicalTrust: scores.clinicalTrust + effectiveDelta.clinicalTrust,
+      textUnderstanding: scores.textUnderstanding + effectiveDelta.textUnderstanding,
+      publicFavor: scores.publicFavor + effectiveDelta.publicFavor
     };
+
+    const newHistory = [
+      ...history,
+      {
+        stageId: currentStage.id,
+        stageTitle: currentStage.title,
+        choiceId: choice.id,
+        choiceTitle: choice.title,
+        figure: choice.figure,
+        book: choice.book,
+        concept: choice.concept,
+        delta: effectiveDelta,
+        baseDelta: choice.delta,
+        eventTitle: activeEvent?.title || null,
+        eventModifier: activeEvent?.modifier || null,
+        resultComment: choice.resultComment
+      }
+    ];
 
     setScores(updatedScores);
-    setHistory((prev) => [...prev, historyEntry]);
+    setHistory(newHistory);
     setSelectedChoiceResult({
       stageTitle: currentStage.title,
       choiceTitle: choice.title,
       figure: choice.figure,
       book: choice.book,
       concept: choice.concept,
-      delta: choice.delta,
+      delta: effectiveDelta,
+      baseDelta: choice.delta,
+      eventTitle: activeEvent?.title || null,
+      eventModifier: activeEvent?.modifier || null,
       resultComment: choice.resultComment
     });
     setIsResultModalOpen(true);
@@ -93,6 +144,20 @@ export function useGameState() {
     if (isLastStage) {
       const evaluated = evaluateResultType(updatedScores, resultTypesData);
       setFinalResult(evaluated);
+
+      // 결과 저장
+      const saved = saveResult({
+        playerName,
+        finalResult: evaluated,
+        scores: updatedScores,
+        history: newHistory
+      });
+
+      // 업적 체크
+      const allResults = [saved, ...savedResults];
+      setSavedResults(allResults);
+      const unlocked = checkNewAchievements(saved, allResults);
+      setNewAchievements(unlocked);
     }
   }
 
@@ -104,11 +169,18 @@ export function useGameState() {
       return;
     }
 
-    setCurrentStageIndex((prev) => prev + 1);
+    const nextIndex = currentStageIndex + 1;
+    setCurrentStageIndex(nextIndex);
+    setActiveEvent(pickRandomEvent(stages[nextIndex]));
+    setCurrentChoices(pickRandomChoices(stages[nextIndex]));
   }
 
   function restartGame() {
     startGame(playerName);
+  }
+
+  function dismissAchievements() {
+    setNewAchievements([]);
   }
 
   return {
@@ -122,6 +194,10 @@ export function useGameState() {
     isResultModalOpen,
     finalResult,
     isLastStage,
+    activeEvent,
+    currentChoices,
+    newAchievements,
+    savedResults,
     gameMeta,
     stages,
     setPlayerName,
@@ -130,8 +206,11 @@ export function useGameState() {
     goToHowToPlay,
     goToStart,
     goToProgress,
+    goToHistory,
+    goToAchievements,
     closeProgress,
     selectChoice,
-    goToNextStage
+    goToNextStage,
+    dismissAchievements
   };
 }

@@ -1,12 +1,31 @@
 import React from "react";
+
+const TENDENCY_SHORT = {
+  academicReputation: "이론",
+  clinicalTrust: "임상",
+  textUnderstanding: "문헌",
+  publicFavor: "민생"
+};
+
+function getTopTendency(delta) {
+  let top = null;
+  let max = -Infinity;
+  for (const [key, val] of Object.entries(delta)) {
+    if (val > max) { max = val; top = key; }
+  }
+  return top ? TENDENCY_SHORT[top] : null;
+}
+
 export default function ChoiceCard({ choice, onSelect }) {
+  const badge = getTopTendency(choice.delta);
+
   return (
-    <article className="choice-card">
+    <article className="choice-card" onClick={onSelect}>
+      {badge && <span className="choice-card-badge">{badge}</span>}
       <h3>{choice.title}</h3>
-      <p><strong>대표 인물:</strong> {choice.figure}</p>
-      <p><strong>대표 문헌:</strong> {choice.book}</p>
-      <p><strong>대표 개념:</strong> {choice.concept}</p>
-      <button onClick={onSelect}>이 길을 택한다</button>
+      <p className="choice-card-meta">
+        {choice.figure} · {choice.book} · {choice.concept}
+      </p>
     </article>
   );
 }

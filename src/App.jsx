@@ -6,6 +6,9 @@ import StagePage from "./components/StagePage";
 import FinalResultPage from "./components/FinalResultPage";
 import ProgressPage from "./components/ProgressPage";
 import ResultModal from "./components/ResultModal";
+import HistoryPage from "./components/HistoryPage";
+import AchievementPage from "./components/AchievementPage";
+import AchievementToast from "./components/AchievementToast";
 
 export default function App() {
   const game = useGameState();
@@ -17,12 +20,22 @@ export default function App() {
       {game.screen === "stage" && <StagePage game={game} />}
       {game.screen === "final" && <FinalResultPage game={game} />}
       {game.screen === "progress" && <ProgressPage game={game} />}
+      {game.screen === "history" && <HistoryPage game={game} />}
+      {game.screen === "achievements" && <AchievementPage game={game} />}
 
       {game.isResultModalOpen && (
         <ResultModal
           result={game.selectedChoiceResult}
           onNext={game.goToNextStage}
           onViewProgress={game.goToProgress}
+          gameMeta={game.gameMeta}
+        />
+      )}
+
+      {game.newAchievements.length > 0 && (
+        <AchievementToast
+          achievements={game.newAchievements}
+          onDismiss={game.dismissAchievements}
         />
       )}
     </div>
