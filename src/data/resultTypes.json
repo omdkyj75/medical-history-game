@@ -1,1 +1,74 @@
-
+{
+  "resultTypes": [
+    {
+      "id": "balanced-growth",
+      "title": "均衡成長型",
+      "priority": 1,
+      "description": "특정 한 길에 치우치지 않고 시대의 요구에 따라 균형 있게 성장한 유형입니다.",
+      "longDescription": "당신은 均衡成長型 의원입니다. 특정 한 방향보다 조화와 균형을 중시하며, 시대마다 다른 의학적 요구에 유연하게 대응했습니다.",
+      "summaryKeywords": ["균형", "조화", "유연한 대응"],
+      "rule": {
+        "type": "range",
+        "maxMinusMinLte": 2
+      }
+    },
+    {
+      "id": "classic-research",
+      "title": "經典硏究型",
+      "priority": 2,
+      "description": "이론과 학설, 고전 체계를 중시하며 의학사의 구조를 깊이 이해하는 유형입니다.",
+      "longDescription": "당신은 經典硏究型 의원입니다. 고전과 학설의 체계를 중시하며, 의학사를 학문적 구조 속에서 이해하는 성향이 강합니다.",
+      "summaryKeywords": ["고전", "학설", "체계 이해"],
+      "rule": {
+        "type": "top-score",
+        "primary": "academicReputation",
+        "secondaryPreferred": ["textUnderstanding"]
+      }
+    },
+    {
+      "id": "text-compilation",
+      "title": "文獻集成型",
+      "priority": 3,
+      "description": "의서를 읽고 정리하며 시대별 지식의 흐름을 연결하는 데 강한 유형입니다.",
+      "longDescription": "당신은 文獻集成型 의원입니다. 의서를 탐독하고 정리하며, 시대별 지식을 축적하고 연결하는 힘이 돋보입니다.",
+      "summaryKeywords": ["문헌", "정리", "집성"],
+      "rule": {
+        "type": "top-score",
+        "primary": "textUnderstanding",
+        "secondaryPreferred": ["academicReputation", "clinicalTrust"]
+      }
+    },
+    {
+      "id": "clinical-practice",
+      "title": "臨床實踐型",
+      "priority": 4,
+      "description": "현장 진료와 실제 치료를 중시하며 질병 상황에 직접 대응하는 힘이 강한 유형입니다.",
+      "longDescription": "당신은 臨床實踐型 의원입니다. 실제 환자와 질병 상황에 직접 맞서며, 현장에서 의술을 실천하는 성향이 두드러집니다.",
+      "summaryKeywords": ["임상", "현장", "실천"],
+      "rule": {
+        "type": "top-score",
+        "primary": "clinicalTrust",
+        "secondaryPreferred": ["publicFavor"]
+      }
+    },
+    {
+      "id": "medical-ethics-public",
+      "title": "醫德民本型",
+      "priority": 5,
+      "description": "의학을 백성의 삶 가까이에서 실천하며 구휼과 생활 의료를 중시하는 유형입니다.",
+      "longDescription": "당신은 醫德民本型 의원입니다. 백성과 가까운 자리에서 의학을 실천하며, 민생과 구휼, 생활 의료를 중시하는 성향이 강합니다.",
+      "summaryKeywords": ["의덕", "민생", "구휼"],
+      "rule": {
+        "type": "top-score",
+        "primary": "publicFavor",
+        "secondaryPreferred": ["clinicalTrust"]
+      }
+    }
+  ],
+  "scorePriorityOrder": [
+    "textUnderstanding",
+    "clinicalTrust",
+    "academicReputation",
+    "publicFavor"
+  ]
+}
