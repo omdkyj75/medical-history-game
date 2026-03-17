@@ -1,3 +1,4 @@
+import React from "react";
 export default function HowToPlayPage({ game }) {
   return (
     <main className="page how-to-play-page">
