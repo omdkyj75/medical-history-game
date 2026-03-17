@@ -45,6 +45,7 @@ export function useGameState() {
   }
 
   function goToProgress() {
+    setIsResultModalOpen(false);
     setScreen("progress");
   }
 

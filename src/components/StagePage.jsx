@@ -3,14 +3,14 @@ import ChoiceCard from "./ChoiceCard";
 import ScorePanel from "./ScorePanel";
 
 export default function StagePage({ game }) {
-  const { currentStage, currentStageIndex, gameMeta, scores, selectChoice } = game;
+  const { currentStage, currentStageIndex, stages, gameMeta, scores, selectChoice } = game;
 
   if (!currentStage) return null;
 
   return (
     <main className="page stage-page">
       <header className="stage-header">
-        <div>진행률 {currentStageIndex + 1}/{gameMeta.totalStages}</div>
+        <div>진행률 {currentStageIndex + 1}/{stages.length}</div>
         <h2>{currentStage.title}</h2>
       </header>
 

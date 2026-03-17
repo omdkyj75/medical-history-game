@@ -4,6 +4,7 @@ import StartPage from "./components/StartPage";
 import HowToPlayPage from "./components/HowToPlayPage";
 import StagePage from "./components/StagePage";
 import FinalResultPage from "./components/FinalResultPage";
+import ProgressPage from "./components/ProgressPage";
 import ResultModal from "./components/ResultModal";
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
       {game.screen === "howToPlay" && <HowToPlayPage game={game} />}
       {game.screen === "stage" && <StagePage game={game} />}
       {game.screen === "final" && <FinalResultPage game={game} />}
+      {game.screen === "progress" && <ProgressPage game={game} />}
 
       {game.isResultModalOpen && (
         <ResultModal
