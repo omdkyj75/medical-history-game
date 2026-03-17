@@ -48,6 +48,10 @@ export default function FinalResultPage({ game }) {
 
   return (
     <main className="page final-page">
+      <nav className="page-top-nav">
+        <button className="btn-home" onClick={goToStart}>홈</button>
+      </nav>
+
       {/* 상단: 결과 비주얼 */}
       <div className="final-result-header">
         <p className="final-label">당신의 의원 유형은</p>

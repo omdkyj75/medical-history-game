@@ -14,7 +14,8 @@ const SCREEN_TO_HASH = {
   progress: "#/progress",
   final: "#/final",
   history: "#/history",
-  achievements: "#/achievements"
+  achievements: "#/achievements",
+  quiz: "#/quiz"
 };
 
 const HASH_TO_SCREEN = Object.fromEntries(
@@ -137,6 +138,10 @@ export function useGameState() {
 
   function goToAchievements() {
     navigate("achievements");
+  }
+
+  function goToQuiz() {
+    navigate("quiz");
   }
 
   function closeProgress() {
@@ -264,6 +269,7 @@ export function useGameState() {
     goToProgress,
     goToHistory,
     goToAchievements,
+    goToQuiz,
     closeProgress,
     selectChoice,
     goToNextStage,

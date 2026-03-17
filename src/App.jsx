@@ -9,6 +9,7 @@ import ResultModal from "./components/ResultModal";
 import HistoryPage from "./components/HistoryPage";
 import AchievementPage from "./components/AchievementPage";
 import AchievementToast from "./components/AchievementToast";
+import QuizPage from "./components/QuizPage";
 
 export default function App() {
   const game = useGameState();
@@ -22,6 +23,7 @@ export default function App() {
       {game.screen === "progress" && <ProgressPage game={game} />}
       {game.screen === "history" && <HistoryPage game={game} />}
       {game.screen === "achievements" && <AchievementPage game={game} />}
+      {game.screen === "quiz" && <QuizPage game={game} />}
 
       {game.isResultModalOpen && (
         <ResultModal
