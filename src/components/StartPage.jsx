@@ -1,3 +1,4 @@
+import React from "react";
 export default function StartPage({ game }) {
   return (
     <main className="page start-page">
