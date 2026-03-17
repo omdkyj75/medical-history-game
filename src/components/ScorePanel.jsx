@@ -1,3 +1,4 @@
+import React from "react";
 export default function ScorePanel({ scores, labels }) {
   return (
     <section className="score-panel">
