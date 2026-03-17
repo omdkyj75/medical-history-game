@@ -1,3 +1,4 @@
+import React from "react";
 export default function ResultModal({ result, onNext, onViewProgress }) {
   if (!result) return null;
 
