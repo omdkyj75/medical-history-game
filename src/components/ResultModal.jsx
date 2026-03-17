@@ -75,6 +75,11 @@ export default function ResultModal({ result, onNext, onViewProgress, gameMeta }
         {/* 해설 */}
         <p className="commentary-text">{result.resultComment}</p>
 
+        {/* 의학사적 의미 */}
+        {result.historicalSignificance && (
+          <p className="historical-significance">{result.historicalSignificance}</p>
+        )}
+
         {/* 버튼 */}
         <div className="button-group">
           <button onClick={onNext}>다음 시대로</button>

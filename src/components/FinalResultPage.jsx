@@ -15,8 +15,15 @@ const SCORE_COLORS = {
   publicFavor: "var(--score-public)"
 };
 
+const TENDENCY_NAMES = {
+  academicReputation: "이론 탐구",
+  clinicalTrust: "현장 임상",
+  textUnderstanding: "문헌 탐독",
+  publicFavor: "백성 구휼"
+};
+
 export default function FinalResultPage({ game }) {
-  const { finalResult, scores, history, restartGame, goToStart, goToHistory } = game;
+  const { finalResult, scores, history, stages, gameMeta, restartGame, goToStart, goToHistory } = game;
   const cardRef = useRef(null);
 
   const handleSaveCard = useCallback(async () => {
@@ -111,11 +118,57 @@ export default function FinalResultPage({ game }) {
         </button>
       </section>
 
-      {/* 안내 */}
+      {/* 복습 섹션 */}
+      <section className="review-section">
+        <h2>학습 복습</h2>
+        {(() => {
+          const topKey = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+          const topStage = history.reduce((best, item) => {
+            const delta = item.delta?.[topKey] || 0;
+            return delta > (best.delta || 0) ? { title: item.stageTitle, delta } : best;
+          }, { title: "", delta: 0 });
+          return (
+            <div className="review-content">
+              <p>당신은 <strong>{TENDENCY_NAMES[topKey]}</strong>을(를) 가장 자주 택했습니다.</p>
+              {topStage.title && (
+                <p>특히 <strong>{topStage.title}</strong> 단계의 선택이 이 성향을 강화했습니다.</p>
+              )}
+              {finalResult.reviewKeywords && (
+                <div className="review-keywords">
+                  <p className="review-keywords-label">복습 키워드</p>
+                  <div className="review-keywords-list">
+                    {finalResult.reviewKeywords.map((kw) => (
+                      <span key={kw} className="review-keyword-tag">{kw}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })()}
+      </section>
+
+      {/* 토론 질문 */}
+      {gameMeta?.discussionQuestions && (
+        <section className="discussion-section">
+          <h2>수업에서 함께 이야기해 보세요</h2>
+          <ul className="discussion-list">
+            {gameMeta.discussionQuestions.map((q, i) => (
+              <li key={i}>{q}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* 안내 · 오해 방지 */}
       <section className="final-learning">
         <p>
           이 결과는 정답이 아니라, 당신이 어떤 역사적 선택을 더 중시했는지를 보여 줍니다.
           다시 플레이하면 완전히 다른 유형의 의원이 될 수도 있습니다.
+        </p>
+        <p className="disclaimer-text">
+          이 게임의 선택은 역사적 경향을 학습하기 위한 단순화된 구성입니다.
+          실제 의학사는 여러 사조와 지역, 문헌이 복합적으로 전개되었습니다.
         </p>
       </section>
 

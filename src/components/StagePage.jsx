@@ -32,6 +32,14 @@ export default function StagePage({ game }) {
         <h2>{currentStage.title}</h2>
       </header>
 
+      {/* 핵심 학습 포인트 */}
+      {currentStage.learningPoint && (
+        <div className="stage-learning-point">
+          <span className="learning-point-label">이 시대에서 꼭 기억할 것</span>
+          <p className="learning-point-text">{currentStage.learningPoint}</p>
+        </div>
+      )}
+
       {/* 키워드 태그 */}
       <div className="stage-keywords">
         {currentStage.keywords.map((kw) => (

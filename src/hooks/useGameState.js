@@ -192,7 +192,8 @@ export function useGameState() {
       baseDelta: choice.delta,
       eventTitle: activeEvent?.title || null,
       eventModifier: activeEvent?.modifier || null,
-      resultComment: choice.resultComment
+      resultComment: choice.resultComment,
+      historicalSignificance: choice.historicalSignificance || null
     });
     setIsResultModalOpen(true);
 

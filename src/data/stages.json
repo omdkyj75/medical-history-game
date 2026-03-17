@@ -22,7 +22,12 @@
       "textUnderstanding": 1,
       "publicFavor": 1
     },
-    "totalStages": 7
+    "totalStages": 7,
+    "discussionQuestions": [
+      "왜 같은 의학이라도 시대마다 중요하게 여긴 가치가 달라졌을까?",
+      "의학은 이론, 임상, 문헌, 민생 중 하나만으로 설명할 수 있을까?",
+      "조선 의학은 중국 의학의 단순한 수용인가, 주체적 재구성인가?"
+    ]
   },
   "stages": [
     {
@@ -30,6 +35,7 @@
       "order": 1,
       "title": "춘추전국(春秋戰國)",
       "progressLabel": "1/7",
+      "learningPoint": "의학이 경험에서 이론 체계로 넘어가기 시작한 시기",
       "description": "의학은 단순한 경험을 넘어, 자연과 인체를 하나의 질서 속에서 이해하려는 방향으로 발전하기 시작합니다. 후대 한의학의 기초가 되는 사유가 이 시기에 형성됩니다.",
       "keywords": [
         "음양(陰陽)",
@@ -71,7 +77,8 @@
             "textUnderstanding": 1,
             "publicFavor": -1
           },
-          "resultComment": "이론의 깊이를 택했습니다. 현장 경험은 부족하지만, 후대 의학 체계의 뿌리를 세우는 길입니다."
+          "resultComment": "이론의 깊이를 택했습니다. 현장 경험은 부족하지만, 후대 의학 체계의 뿌리를 세우는 길입니다.",
+          "historicalSignificance": "음양오행 이론이 의학에 도입되면서 경험 의학이 체계적 이론 의학으로 전환되는 흐름을 보여줍니다."
         },
         {
           "id": "saw-2",
@@ -85,7 +92,8 @@
             "textUnderstanding": 3,
             "publicFavor": 0
           },
-          "resultComment": "기록이 없으면 의학도 없습니다. 현장보다 서재를 택한 당신 덕에 후대가 배울 수 있습니다."
+          "resultComment": "기록이 없으면 의학도 없습니다. 현장보다 서재를 택한 당신 덕에 후대가 배울 수 있습니다.",
+          "historicalSignificance": "구전 지식을 문자로 기록하려는 노력이 후대 의서 편찬 전통의 출발점이 됩니다."
         },
         {
           "id": "saw-3",
@@ -99,7 +107,8 @@
             "textUnderstanding": -1,
             "publicFavor": 1
           },
-          "resultComment": "책 대신 발로 뛴 선택입니다. 문헌 지식은 약하지만, 살아 있는 임상 감각을 쌓았습니다."
+          "resultComment": "책 대신 발로 뛴 선택입니다. 문헌 지식은 약하지만, 살아 있는 임상 감각을 쌓았습니다.",
+          "historicalSignificance": "편작(扁鵲)으로 대표되는 유의(遊醫) 전통은 진단 기술 발전의 토대가 되었습니다."
         },
         {
           "id": "saw-4",
@@ -113,7 +122,8 @@
             "textUnderstanding": 0,
             "publicFavor": 3
           },
-          "resultComment": "학문적 명성은 멀어졌지만, 백성이 가장 먼저 찾는 의원이 되었습니다."
+          "resultComment": "학문적 명성은 멀어졌지만, 백성이 가장 먼저 찾는 의원이 되었습니다.",
+          "historicalSignificance": "의학이 지배층 전유물에서 벗어나 민간으로 확산되는 흐름과 연결됩니다."
         },
         {
           "id": "saw-5",
@@ -127,7 +137,8 @@
             "textUnderstanding": 2,
             "publicFavor": -1
           },
-          "resultComment": "주술에서 벗어나 이치로 병을 설명하려 한 선택입니다. 의학이 독립된 학문으로 서는 첫걸음이었습니다."
+          "resultComment": "주술에서 벗어나 이치로 병을 설명하려 한 선택입니다. 의학이 독립된 학문으로 서는 첫걸음이었습니다.",
+          "historicalSignificance": "무의분리(巫醫分離)는 의학이 합리적 학문으로 독립한 결정적 전환점입니다."
         },
         {
           "id": "saw-6",
@@ -141,7 +152,8 @@
             "textUnderstanding": 0,
             "publicFavor": 0
           },
-          "resultComment": "돌침에서 금속침으로의 도약을 이끈 선택입니다. 손끝의 기술이 후대 침구의학의 기초가 됩니다."
+          "resultComment": "돌침에서 금속침으로의 도약을 이끈 선택입니다. 손끝의 기술이 후대 침구의학의 기초가 됩니다.",
+          "historicalSignificance": "폄석에서 금속침으로의 발전은 치료 도구의 정밀화를 보여주는 기술사적 전환입니다."
         },
         {
           "id": "saw-7",
@@ -155,7 +167,8 @@
             "textUnderstanding": -1,
             "publicFavor": 3
           },
-          "resultComment": "치료보다 예방을 택한 선택입니다. 화려한 학문과는 거리가 있지만, 백성의 일상에 스며드는 의술입니다."
+          "resultComment": "치료보다 예방을 택한 선택입니다. 화려한 학문과는 거리가 있지만, 백성의 일상에 스며드는 의술입니다.",
+          "historicalSignificance": "치미병(治未病) 사상은 예방 의학의 원형으로, 양생 전통의 기원입니다."
         }
       ]
     },
@@ -164,6 +177,7 @@
       "order": 2,
       "title": "진한(秦漢)",
       "progressLabel": "2/7",
+      "learningPoint": "黃帝內經과 傷寒論을 중심으로 고전 의학의 기본 언어가 정리된 시기",
       "description": "의학 지식은 더욱 체계화되며, 인체와 질병을 설명하는 기본 틀이 정리됩니다. 고전 의학의 언어가 이 시기에 본격적으로 자리를 잡습니다.",
       "keywords": [
         "황제내경(黃帝內經)",
@@ -205,7 +219,8 @@
             "textUnderstanding": 2,
             "publicFavor": 0
           },
-          "resultComment": "의학의 기초 언어를 완벽히 익혔습니다. 다만 환자보다 책상 앞에 더 오래 앉아 있었습니다."
+          "resultComment": "의학의 기초 언어를 완벽히 익혔습니다. 다만 환자보다 책상 앞에 더 오래 앉아 있었습니다.",
+          "historicalSignificance": "황제내경은 한의학 이론의 근간으로, 이후 모든 의학 논의의 출발점이 됩니다."
         },
         {
           "id": "qh-2",
@@ -219,7 +234,8 @@
             "textUnderstanding": 1,
             "publicFavor": 0
           },
-          "resultComment": "이론을 환자 앞에서 시험한 선택입니다. 진찰 실력은 후대 변증(辨證)의 기반이 됩니다."
+          "resultComment": "이론을 환자 앞에서 시험한 선택입니다. 진찰 실력은 후대 변증(辨證)의 기반이 됩니다.",
+          "historicalSignificance": "망문문절(望聞問切) 사진법은 진한 시기에 체계화되어 임상의 기본 틀이 되었습니다."
         },
         {
           "id": "qh-3",
@@ -233,7 +249,8 @@
             "textUnderstanding": 2,
             "publicFavor": 0
           },
-          "resultComment": "지식을 다음 세대로 넘기는 일을 택했습니다. 임상 경험은 부족하지만, 의학의 전승자가 되었습니다."
+          "resultComment": "지식을 다음 세대로 넘기는 일을 택했습니다. 임상 경험은 부족하지만, 의학의 전승자가 되었습니다.",
+          "historicalSignificance": "의학 지식의 정리와 전승은 후대 의서 편찬 전통으로 이어지는 중요한 흐름입니다."
         },
         {
           "id": "qh-4",
@@ -247,7 +264,8 @@
             "textUnderstanding": 0,
             "publicFavor": 2
           },
-          "resultComment": "학계의 인정보다 백성의 신뢰를 택했습니다. 현장에서 다져진 실력은 쉽게 흔들리지 않습니다."
+          "resultComment": "학계의 인정보다 백성의 신뢰를 택했습니다. 현장에서 다져진 실력은 쉽게 흔들리지 않습니다.",
+          "historicalSignificance": "국가 의료 체계가 형성되기 전, 민간 의료가 백성의 건강을 책임진 현실을 반영합니다."
         },
         {
           "id": "qh-5",
@@ -261,7 +279,8 @@
             "textUnderstanding": 0,
             "publicFavor": -1
           },
-          "resultComment": "증상을 변별하고 치법을 세우는 체계를 익혔습니다. 후대 한의학 전체를 관통하는 핵심 방법론의 시작입니다."
+          "resultComment": "증상을 변별하고 치법을 세우는 체계를 익혔습니다. 후대 한의학 전체를 관통하는 핵심 방법론의 시작입니다.",
+          "historicalSignificance": "장중경의 변증논치(辨證論治)는 증상에 따른 체계적 치료 원칙의 확립을 의미합니다."
         },
         {
           "id": "qh-6",
@@ -275,7 +294,8 @@
             "textUnderstanding": -1,
             "publicFavor": 2
           },
-          "resultComment": "칼을 드는 용기를 택한 선택입니다. 문헌 공부는 뒤로했지만, 아무도 시도하지 못한 치료를 해냈습니다."
+          "resultComment": "칼을 드는 용기를 택한 선택입니다. 문헌 공부는 뒤로했지만, 아무도 시도하지 못한 치료를 해냈습니다.",
+          "historicalSignificance": "화타의 외과적 시도는 한의학에서 외과 영역이 존재했음을 보여주는 중요한 사례입니다."
         },
         {
           "id": "qh-7",
@@ -289,7 +309,8 @@
             "textUnderstanding": 3,
             "publicFavor": 0
           },
-          "resultComment": "365종 약물을 하나하나 분류한 선택입니다. 임상은 뒤로했지만, 본초학의 뿌리를 세웠습니다."
+          "resultComment": "365종 약물을 하나하나 분류한 선택입니다. 임상은 뒤로했지만, 본초학의 뿌리를 세웠습니다.",
+          "historicalSignificance": "신농본초경의 약물 분류 체계(상·중·하품)는 이후 본초학 발전의 기준이 됩니다."
         },
         {
           "id": "qh-8",
@@ -303,7 +324,8 @@
             "textUnderstanding": 3,
             "publicFavor": -1
           },
-          "resultComment": "황제내경이 열어놓은 물음을 더 깊이 파고든 선택입니다. 맥과 경락의 세밀한 이해가 한층 깊어졌습니다."
+          "resultComment": "황제내경이 열어놓은 물음을 더 깊이 파고든 선택입니다. 맥과 경락의 세밀한 이해가 한층 깊어졌습니다.",
+          "historicalSignificance": "난경의 81난은 맥진과 경락 이론을 심화시켜 황제내경을 보완한 저술입니다."
         }
       ]
     },
@@ -312,6 +334,7 @@
       "order": 3,
       "title": "수당(隋唐)",
       "progressLabel": "3/7",
+      "learningPoint": "의학 지식의 집대성과 함께 의덕(醫德)이 강조되기 시작한 시기",
       "description": "국가적 의료 체계가 정비되고, 의학 지식과 함께 의덕(醫德)이 중시됩니다. 의학은 학문일 뿐 아니라 사람을 살리는 실천이라는 점이 강조됩니다.",
       "keywords": [
         "손사막(孫思邈)",
@@ -353,7 +376,8 @@
             "textUnderstanding": 0,
             "publicFavor": 0
           },
-          "resultComment": "지식과 인품을 모두 갖추려 한 선택입니다. 손사막(孫思邈)처럼 학문과 인술의 결합을 추구합니다."
+          "resultComment": "지식과 인품을 모두 갖추려 한 선택입니다. 손사막(孫思邈)처럼 학문과 인술의 결합을 추구합니다.",
+          "historicalSignificance": "손사막의 '대의정성(大醫精誠)'은 의료 윤리의 고전적 기준을 제시했습니다."
         },
         {
           "id": "st-2",
@@ -367,7 +391,8 @@
             "textUnderstanding": 3,
             "publicFavor": -1
           },
-          "resultComment": "처방 하나하나를 외우는 고된 길을 택했습니다. 세상과 멀어졌지만 문헌 실력은 누구보다 깊어졌습니다."
+          "resultComment": "처방 하나하나를 외우는 고된 길을 택했습니다. 세상과 멀어졌지만 문헌 실력은 누구보다 깊어졌습니다.",
+          "historicalSignificance": "천금요방은 기존 처방을 집대성한 종합 의서로, 임상 실용서의 모범입니다."
         },
         {
           "id": "st-3",
@@ -381,7 +406,8 @@
             "textUnderstanding": 0,
             "publicFavor": 2
           },
-          "resultComment": "위험을 무릅쓰고 현장에 뛰어든 선택입니다. 학계의 인정은 못 받았지만, 백성의 생명을 직접 구했습니다."
+          "resultComment": "위험을 무릅쓰고 현장에 뛰어든 선택입니다. 학계의 인정은 못 받았지만, 백성의 생명을 직접 구했습니다.",
+          "historicalSignificance": "수당 시기의 전염병 대응 경험은 후대 온병학 발전의 임상적 토대가 됩니다."
         },
         {
           "id": "st-4",
@@ -395,7 +421,8 @@
             "textUnderstanding": -1,
             "publicFavor": 3
           },
-          "resultComment": "돈도 명예도 뒤로하고 백성을 택했습니다. 대의정성(大醫精誠)의 정신 그 자체입니다."
+          "resultComment": "돈도 명예도 뒤로하고 백성을 택했습니다. 대의정성(大醫精誠)의 정신 그 자체입니다.",
+          "historicalSignificance": "의술을 인술로 보는 관점은 수당 시기 의덕론의 핵심 정신입니다."
         },
         {
           "id": "st-5",
@@ -409,7 +436,8 @@
             "textUnderstanding": 2,
             "publicFavor": -1
           },
-          "resultComment": "1,720가지 증후를 정리한 고된 작업을 택했습니다. 병의 원인을 체계적으로 분류한 최초의 시도입니다."
+          "resultComment": "1,720가지 증후를 정리한 고된 작업을 택했습니다. 병의 원인을 체계적으로 분류한 최초의 시도입니다.",
+          "historicalSignificance": "제병원후론은 최초의 병인병리 전문서로, 1720가지 증후를 체계적으로 분류했습니다."
         },
         {
           "id": "st-6",
@@ -423,7 +451,8 @@
             "textUnderstanding": 3,
             "publicFavor": 0
           },
-          "resultComment": "12년간 내경을 다시 편집하고 주석을 단 선택입니다. 이 작업이 없었다면 황제내경은 지금의 형태로 전해지지 못했을 것입니다."
+          "resultComment": "12년간 내경을 다시 편집하고 주석을 단 선택입니다. 이 작업이 없었다면 황제내경은 지금의 형태로 전해지지 못했을 것입니다.",
+          "historicalSignificance": "왕빙의 황제내경 주석 작업은 운기칠편을 포함시켜 고전 보존에 결정적 역할을 했습니다."
         },
         {
           "id": "st-7",
@@ -437,7 +466,8 @@
             "textUnderstanding": 2,
             "publicFavor": 1
           },
-          "resultComment": "세계 최초의 국가 편찬 본초서 작업에 참여한 선택입니다. 약물 지식이 국가 차원에서 정리된 역사적 순간입니다."
+          "resultComment": "세계 최초의 국가 편찬 본초서 작업에 참여한 선택입니다. 약물 지식이 국가 차원에서 정리된 역사적 순간입니다.",
+          "historicalSignificance": "당본초(신수본초)는 세계 최초의 국가 편찬 본초서로, 약물학의 공적 표준화를 보여줍니다."
         }
       ]
     },
@@ -446,6 +476,7 @@
       "order": 4,
       "title": "송(宋)",
       "progressLabel": "4/7",
+      "learningPoint": "인쇄술과 국가 편찬 사업으로 의학 지식이 표준화된 시기",
       "description": "인쇄와 간행이 확대되면서 의학 지식이 표준화되고 널리 보급됩니다. 의학은 더 많은 사람에게 전달되는 체계적 지식으로 변모합니다.",
       "keywords": [
         "의서 간행",
@@ -487,7 +518,8 @@
             "textUnderstanding": 3,
             "publicFavor": 0
           },
-          "resultComment": "활자 냄새 나는 서재에서 살다시피 한 선택입니다. 임상은 약하지만 문헌 지식은 압도적입니다."
+          "resultComment": "활자 냄새 나는 서재에서 살다시피 한 선택입니다. 임상은 약하지만 문헌 지식은 압도적입니다.",
+          "historicalSignificance": "인쇄술 발전으로 의서 접근성이 급격히 높아지며 의학 지식의 대중화가 시작됩니다."
         },
         {
           "id": "so-2",
@@ -501,7 +533,8 @@
             "textUnderstanding": 1,
             "publicFavor": -1
           },
-          "resultComment": "의학의 표준을 세우는 역사적 작업에 참여했습니다. 백성과는 멀어졌지만, 의학사에 이름을 남깁니다."
+          "resultComment": "의학의 표준을 세우는 역사적 작업에 참여했습니다. 백성과는 멀어졌지만, 의학사에 이름을 남깁니다.",
+          "historicalSignificance": "송대 국가 주도 의서 편찬 사업은 의학 지식의 공적 표준화를 이룬 전환점입니다."
         },
         {
           "id": "so-3",
@@ -515,7 +548,8 @@
             "textUnderstanding": 1,
             "publicFavor": 0
           },
-          "resultComment": "책 속 처방이 진짜 통하는지 몸으로 확인한 선택입니다. 이론과 현장을 잇는 다리가 되었습니다."
+          "resultComment": "책 속 처방이 진짜 통하는지 몸으로 확인한 선택입니다. 이론과 현장을 잇는 다리가 되었습니다.",
+          "historicalSignificance": "표준 처방의 임상 검증은 이론과 실천을 연결하는 의학 발전의 핵심 과정입니다."
         },
         {
           "id": "so-4",
@@ -529,7 +563,8 @@
             "textUnderstanding": 0,
             "publicFavor": 3
           },
-          "resultComment": "학자들의 눈총을 받았지만, 의학 지식이 처음으로 백성의 손에 닿기 시작했습니다."
+          "resultComment": "학자들의 눈총을 받았지만, 의학 지식이 처음으로 백성의 손에 닿기 시작했습니다.",
+          "historicalSignificance": "의학 지식의 대중 보급은 전문 지식이 민간으로 확산되는 역사적 흐름을 보여줍니다."
         },
         {
           "id": "so-5",
@@ -543,7 +578,8 @@
             "textUnderstanding": 3,
             "publicFavor": 0
           },
-          "resultComment": "고전이 사라질 위기에서 바로잡고 다시 세상에 내놓은 선택입니다. 이 작업이 없었다면 상한론도 내경도 지금처럼 전해지지 못했습니다."
+          "resultComment": "고전이 사라질 위기에서 바로잡고 다시 세상에 내놓은 선택입니다. 이 작업이 없었다면 상한론도 내경도 지금처럼 전해지지 못했습니다.",
+          "historicalSignificance": "교정의서국의 고전 교정 사업은 상한론·금궤요략 등 핵심 의서의 보존에 결정적이었습니다."
         },
         {
           "id": "so-6",
@@ -557,7 +593,8 @@
             "textUnderstanding": 0,
             "publicFavor": 0
           },
-          "resultComment": "인체 모형에 혈자리를 새겨 표준을 세운 선택입니다. 이론과 실기를 동시에 잡은 침구의학의 이정표입니다."
+          "resultComment": "인체 모형에 혈자리를 새겨 표준을 세운 선택입니다. 이론과 실기를 동시에 잡은 침구의학의 이정표입니다.",
+          "historicalSignificance": "침구동인은 혈자리를 시각적으로 표준화한 최초의 교육 도구로, 침구 교육의 전환점입니다."
         },
         {
           "id": "so-7",
@@ -571,7 +608,8 @@
             "textUnderstanding": 1,
             "publicFavor": 3
           },
-          "resultComment": "표준 처방을 정해 누구나 같은 약을 받을 수 있게 한 선택입니다. 의료의 형평성을 높인 제도적 혁신입니다."
+          "resultComment": "표준 처방을 정해 누구나 같은 약을 받을 수 있게 한 선택입니다. 의료의 형평성을 높인 제도적 혁신입니다.",
+          "historicalSignificance": "화제국방은 국가 차원의 처방 표준화와 약국 제도를 통해 의료 형평성을 높인 제도적 혁신입니다."
         }
       ]
     },
@@ -580,6 +618,7 @@
       "order": 5,
       "title": "금원(金元)",
       "progressLabel": "5/7",
+      "learningPoint": "다양한 학파가 병기(病機) 해석을 두고 경쟁한 시기",
       "description": "혼란한 시대 속에서 다양한 학파가 등장하고, 병기와 치료 원리에 대한 해석이 분화됩니다. 이 시기의 핵심은 하나의 정답이 아니라 다양한 의학적 시각입니다.",
       "keywords": [
         "금원사대가(金元四大家)",
@@ -622,7 +661,8 @@
             "textUnderstanding": 0,
             "publicFavor": -1
           },
-          "resultComment": "기존 통념에 정면으로 도전한 선택입니다. 논쟁의 중심에 섰지만, 의학의 지평을 넓혔습니다."
+          "resultComment": "기존 통념에 정면으로 도전한 선택입니다. 논쟁의 중심에 섰지만, 의학의 지평을 넓혔습니다.",
+          "historicalSignificance": "유완소의 화열론은 상한론 중심 치료에서 벗어나 한량(寒凉) 치법의 새 길을 열었습니다."
         },
         {
           "id": "jy-2",
@@ -636,7 +676,8 @@
             "textUnderstanding": -1,
             "publicFavor": 1
           },
-          "resultComment": "거침없는 치료법으로 현장을 장악한 선택입니다. 문헌보다 환자 앞에서의 결단력이 빛납니다."
+          "resultComment": "거침없는 치료법으로 현장을 장악한 선택입니다. 문헌보다 환자 앞에서의 결단력이 빛납니다.",
+          "historicalSignificance": "장종정의 공사론(攻邪論)은 한(汗)·토(吐)·하(下) 삼법을 통해 적극적 치료를 강조한 흐름입니다."
         },
         {
           "id": "jy-3",
@@ -650,7 +691,8 @@
             "textUnderstanding": 0,
             "publicFavor": 0
           },
-          "resultComment": "이론과 임상 모두 놓치지 않으려 한 선택입니다. 비위론(脾胃論)은 학설과 실전의 균형을 보여줍니다."
+          "resultComment": "이론과 임상 모두 놓치지 않으려 한 선택입니다. 비위론(脾胃論)은 학설과 실전의 균형을 보여줍니다.",
+          "historicalSignificance": "이고의 비위론은 내상(內傷)을 중시하며 보토파(補土派)의 이론적 기반을 세웠습니다."
         },
         {
           "id": "jy-4",
@@ -664,7 +706,8 @@
             "textUnderstanding": 2,
             "publicFavor": -1
           },
-          "resultComment": "인체의 숨겨진 원리를 탐구하는 학자의 길입니다. 현장보다 깊은 사색을 택했습니다."
+          "resultComment": "인체의 숨겨진 원리를 탐구하는 학자의 길입니다. 현장보다 깊은 사색을 택했습니다.",
+          "historicalSignificance": "주진형의 양음론(養陰論)은 자음(滋陰) 치법의 기반으로, 후대 의학에 큰 영향을 미쳤습니다."
         },
         {
           "id": "jy-5",
@@ -678,7 +721,8 @@
             "textUnderstanding": 3,
             "publicFavor": 0
           },
-          "resultComment": "개별 학파가 아닌 전체 흐름을 조감한 선택입니다. 임상은 약하지만, 의학사의 맥을 꿰뚫는 시야를 얻었습니다."
+          "resultComment": "개별 학파가 아닌 전체 흐름을 조감한 선택입니다. 임상은 약하지만, 의학사의 맥을 꿰뚫는 시야를 얻었습니다.",
+          "historicalSignificance": "금원사대가의 학파 비교는 병기(病機) 해석의 다양성이 의학 발전을 이끈다는 점을 보여줍니다."
         },
         {
           "id": "jy-6",
@@ -692,7 +736,8 @@
             "textUnderstanding": 1,
             "publicFavor": -1
           },
-          "resultComment": "기존 상한론 체계에 의문을 제기한 선택입니다. 이 논쟁이 후대 온병학의 씨앗이 됩니다."
+          "resultComment": "기존 상한론 체계에 의문을 제기한 선택입니다. 이 논쟁이 후대 온병학의 씨앗이 됩니다.",
+          "historicalSignificance": "상한-온병 논쟁은 질병 분류와 치법 체계를 둘러싼 가장 중요한 의학사적 논쟁 중 하나입니다."
         }
       ]
     },
@@ -701,6 +746,7 @@
       "order": 6,
       "title": "명청민국(明淸民國)",
       "progressLabel": "6/7",
+      "learningPoint": "본초와 온병학이 발전하고 전통 의학의 재정립이 이루어진 시기",
       "description": "본초 지식이 집대성되고, 열성 질환에 대한 새로운 이해가 발전합니다. 후기로 갈수록 전통 의학은 변화하는 시대 속에서 자기 위치를 다시 설명해야 합니다.",
       "keywords": [
         "이시진(李時珍)",
@@ -742,7 +788,8 @@
             "textUnderstanding": 3,
             "publicFavor": -1
           },
-          "resultComment": "27년간 800종의 문헌을 섭렵한 집념의 선택입니다. 세상과 동떨어졌지만, 역사에 남을 작업입니다."
+          "resultComment": "27년간 800종의 문헌을 섭렵한 집념의 선택입니다. 세상과 동떨어졌지만, 역사에 남을 작업입니다.",
+          "historicalSignificance": "본초강목은 약물 1,892종을 망라한 본초학의 집대성으로, 동아시아 약학의 기준이 되었습니다."
         },
         {
           "id": "mqr-2",
@@ -756,7 +803,8 @@
             "textUnderstanding": 0,
             "publicFavor": 0
           },
-          "resultComment": "기존 상한(傷寒) 체계의 한계를 돌파한 선택입니다. 이론 혁신과 임상 실력을 동시에 인정받았습니다."
+          "resultComment": "기존 상한(傷寒) 체계의 한계를 돌파한 선택입니다. 이론 혁신과 임상 실력을 동시에 인정받았습니다.",
+          "historicalSignificance": "온병학은 상한론만으로 설명되지 않는 열성 질환에 대한 새로운 이론적 틀을 제공했습니다."
         },
         {
           "id": "mqr-3",
@@ -770,7 +818,8 @@
             "textUnderstanding": 0,
             "publicFavor": 2
           },
-          "resultComment": "이론 없이 몸으로 부딪힌 선택입니다. 명성은 낮지만, 현장에서 가장 먼저 답을 찾는 의원이 되었습니다."
+          "resultComment": "이론 없이 몸으로 부딪힌 선택입니다. 명성은 낮지만, 현장에서 가장 먼저 답을 찾는 의원이 되었습니다.",
+          "historicalSignificance": "새로운 질병에 대한 현장 대응 경험은 의학 이론을 수정하고 발전시키는 원동력이 됩니다."
         },
         {
           "id": "mqr-4",
@@ -784,7 +833,8 @@
             "textUnderstanding": 1,
             "publicFavor": 1
           },
-          "resultComment": "시대의 거센 파도 앞에서 전통을 지키려 한 선택입니다. 임상은 뒷전이었지만, 의학의 정체성을 지켰습니다."
+          "resultComment": "시대의 거센 파도 앞에서 전통을 지키려 한 선택입니다. 임상은 뒷전이었지만, 의학의 정체성을 지켰습니다.",
+          "historicalSignificance": "서양 의학과의 만남 속에서 전통 의학의 정체성을 재정립하는 과정은 현대까지 이어지는 과제입니다."
         },
         {
           "id": "mqr-5",
@@ -798,7 +848,8 @@
             "textUnderstanding": 0,
             "publicFavor": -1
           },
-          "resultComment": "육음(六淫)이 아닌 특수한 병인을 주장한 혁명적 선택입니다. 전염병을 독립적으로 이해하려는 시도의 선구자가 되었습니다."
+          "resultComment": "육음(六淫)이 아닌 특수한 병인을 주장한 혁명적 선택입니다. 전염병을 독립적으로 이해하려는 시도의 선구자가 되었습니다.",
+          "historicalSignificance": "오유가의 여기설(戾氣說)은 전염병의 독립적 병인을 주장한 선구적 학설입니다."
         },
         {
           "id": "mqr-6",
@@ -812,7 +863,8 @@
             "textUnderstanding": 0,
             "publicFavor": 0
           },
-          "resultComment": "42년간 시신을 관찰하며 고전의 오류를 바로잡은 선택입니다. 경험과 관찰을 학설보다 앞세운 용기 있는 길입니다."
+          "resultComment": "42년간 시신을 관찰하며 고전의 오류를 바로잡은 선택입니다. 경험과 관찰을 학설보다 앞세운 용기 있는 길입니다.",
+          "historicalSignificance": "왕청임의 해부 관찰은 경전의 권위보다 실증을 앞세운 드문 시도로, 의학 교정의 용기를 보여줍니다."
         },
         {
           "id": "mqr-7",
@@ -826,7 +878,8 @@
             "textUnderstanding": 3,
             "publicFavor": -1
           },
-          "resultComment": "내경을 주제별로 다시 분류한 방대한 작업을 택했습니다. 온보의 이론적 기반을 세운 학자의 길입니다."
+          "resultComment": "내경을 주제별로 다시 분류한 방대한 작업을 택했습니다. 온보의 이론적 기반을 세운 학자의 길입니다.",
+          "historicalSignificance": "장경악의 유경(類經)은 황제내경을 주제별로 재편한 독창적 작업으로, 온보파의 이론적 토대입니다."
         }
       ]
     },
@@ -835,6 +888,7 @@
       "order": 7,
       "title": "조선",
       "progressLabel": "7/7",
+      "learningPoint": "중국 의학 수용을 넘어 조선 현실에 맞게 재구성한 시기",
       "description": "조선은 중국 의학을 단순히 받아들이는 데 그치지 않고, 자국의 현실에 맞게 재편하고 집대성합니다. 향약과 민생 중심 의료 또한 중요한 특징으로 나타납니다.",
       "keywords": [
         "허준(許浚)",
@@ -876,7 +930,8 @@
             "textUnderstanding": 3,
             "publicFavor": -1
           },
-          "resultComment": "조선 의학의 정수를 학습한 선택입니다. 집대성의 무게를 온몸으로 받아들였습니다."
+          "resultComment": "조선 의학의 정수를 학습한 선택입니다. 집대성의 무게를 온몸으로 받아들였습니다.",
+          "historicalSignificance": "동의보감은 중국 의학을 조선 현실에 맞게 재구성한 집대성 의서로, 유네스코 세계기록유산입니다."
         },
         {
           "id": "jo-2",
@@ -890,7 +945,8 @@
             "textUnderstanding": 2,
             "publicFavor": 0
           },
-          "resultComment": "답습이 아닌 재구성을 택한 선택입니다. 임상은 약하지만, 조선 의학의 독자성을 세웠습니다."
+          "resultComment": "답습이 아닌 재구성을 택한 선택입니다. 임상은 약하지만, 조선 의학의 독자성을 세웠습니다.",
+          "historicalSignificance": "조선 의학은 중국 의학의 단순 수용이 아닌 주체적 재구성이라는 점에서 의학사적 의의가 큽니다."
         },
         {
           "id": "jo-3",
@@ -904,7 +960,8 @@
             "textUnderstanding": -1,
             "publicFavor": 2
           },
-          "resultComment": "비싼 중국 약재 대신 우리 약초로 치료한 선택입니다. 문헌보다 현장, 이론보다 실전을 택했습니다."
+          "resultComment": "비싼 중국 약재 대신 우리 약초로 치료한 선택입니다. 문헌보다 현장, 이론보다 실전을 택했습니다.",
+          "historicalSignificance": "향약(鄕藥) 활용은 중국 약재 의존에서 벗어나 의약 자주를 실현하려는 조선 의학의 핵심 흐름입니다."
         },
         {
           "id": "jo-4",
@@ -918,7 +975,8 @@
             "textUnderstanding": 0,
             "publicFavor": 3
           },
-          "resultComment": "의술 전에 밥 한 끼가 먼저라고 믿은 선택입니다. 학문의 길과는 멀어졌지만, 진정한 인술입니다."
+          "resultComment": "의술 전에 밥 한 끼가 먼저라고 믿은 선택입니다. 학문의 길과는 멀어졌지만, 진정한 인술입니다.",
+          "historicalSignificance": "조선의 구휼 의료 전통은 의술이 단순한 기술이 아닌 민생 복지의 일환이라는 인식을 보여줍니다."
         },
         {
           "id": "jo-5",
@@ -932,7 +990,8 @@
             "textUnderstanding": 0,
             "publicFavor": 0
           },
-          "resultComment": "태양·태음·소양·소음, 사람마다 다른 체질을 의학의 중심에 놓은 선택입니다. 조선만의 독창적 의학 체계를 열었습니다."
+          "resultComment": "태양·태음·소양·소음, 사람마다 다른 체질을 의학의 중심에 놓은 선택입니다. 조선만의 독창적 의학 체계를 열었습니다.",
+          "historicalSignificance": "이제마의 사상의학(四象醫學)은 체질 개념을 의학의 중심에 놓은 조선 고유의 독창적 이론입니다."
         },
         {
           "id": "jo-6",
@@ -946,7 +1005,8 @@
             "textUnderstanding": 3,
             "publicFavor": 0
           },
-          "resultComment": "266권에 달하는 방대한 의학백과 편찬에 참여한 선택입니다. 현장과는 멀어졌지만, 동아시아 의학 지식을 총정리했습니다."
+          "resultComment": "266권에 달하는 방대한 의학백과 편찬에 참여한 선택입니다. 현장과는 멀어졌지만, 동아시아 의학 지식을 총정리했습니다.",
+          "historicalSignificance": "의방유취(266권)는 동아시아 최대 규모의 의학백과사전으로, 세종대 학문적 역량을 보여줍니다."
         },
         {
           "id": "jo-7",
@@ -960,7 +1020,8 @@
             "textUnderstanding": 2,
             "publicFavor": 2
           },
-          "resultComment": "중국 약재에 의존하지 않고 조선 땅의 약초를 정리한 선택입니다. 학문과 민생 모두에 기여한 균형 잡힌 길입니다."
+          "resultComment": "중국 약재에 의존하지 않고 조선 땅의 약초를 정리한 선택입니다. 학문과 민생 모두에 기여한 균형 잡힌 길입니다.",
+          "historicalSignificance": "향약집성방은 조선 자생 약재를 체계적으로 정리하여 의약 자주의 기반을 마련한 편찬 사업입니다."
         }
       ]
     }
