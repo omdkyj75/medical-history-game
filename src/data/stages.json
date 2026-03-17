@@ -1,1 +1,534 @@
-
+{
+  "gameMeta": {
+    "id": "medical-history-simulator",
+    "title": "名醫의 길",
+    "subtitle": "7개 시대를 거치며 성장하는 한의학사 시뮬레이션",
+    "description": "당신은 시대를 건너며 수련하는 의원입니다. 春秋戰國에서 조선에 이르는 7개 시대를 통과하며, 각 시대마다 하나의 선택을 통해 자신의 의학적 길을 완성하십시오.",
+    "scoreKeys": [
+      "academicReputation",
+      "clinicalTrust",
+      "textUnderstanding",
+      "publicFavor"
+    ],
+    "scoreLabels": {
+      "academicReputation": "學術名聲",
+      "clinicalTrust": "臨床信賴度",
+      "textUnderstanding": "文獻理解度",
+      "publicFavor": "百姓好感度"
+    },
+    "initialScores": {
+      "academicReputation": 1,
+      "clinicalTrust": 1,
+      "textUnderstanding": 1,
+      "publicFavor": 1
+    },
+    "totalStages": 7
+  },
+  "stages": [
+    {
+      "id": "spring-autumn-warring",
+      "order": 1,
+      "title": "春秋戰國",
+      "progressLabel": "1/7",
+      "description": "의학은 단순한 경험을 넘어, 자연과 인체를 하나의 질서 속에서 이해하려는 방향으로 발전하기 시작합니다. 후대 한의학의 기초가 되는 사유가 이 시기에 형성됩니다.",
+      "keywords": [
+        "陰陽",
+        "五行",
+        "經脈",
+        "의학 사유의 형성"
+      ],
+      "prompt": "당신은 이 시대에서 어떤 길을 택하겠습니까?",
+      "choices": [
+        {
+          "id": "saw-1",
+          "title": "陰陽과 五行의 원리를 깊이 탐구한다",
+          "figure": "扁鵲 계열의 고대 의가",
+          "book": "黃帝內經 계통의 사유 전통",
+          "concept": "陰陽五行",
+          "delta": {
+            "academicReputation": 2,
+            "clinicalTrust": 0,
+            "textUnderstanding": 1,
+            "publicFavor": 0
+          },
+          "resultComment": "이 선택은 한의학의 철학적 기초를 중시하는 길입니다. 자연과 인체를 함께 이해하는 사고는 후대 의학 체계의 바탕이 됩니다."
+        },
+        {
+          "id": "saw-2",
+          "title": "전해 내려오는 의료 기록과 지식을 정리한다",
+          "figure": "고대 의지 정리자들",
+          "book": "초기 의학 전승 자료",
+          "concept": "지식의 축적과 전승",
+          "delta": {
+            "academicReputation": 1,
+            "clinicalTrust": 0,
+            "textUnderstanding": 2,
+            "publicFavor": 0
+          },
+          "resultComment": "이 선택은 흩어진 의료 지식을 모아 후대의 기반을 만드는 길입니다. 의학은 경험만이 아니라 기록과 정리를 통해 전승됩니다."
+        },
+        {
+          "id": "saw-3",
+          "title": "여러 지역을 다니며 질병 양상을 관찰한다",
+          "figure": "遊醫 전통의 의가",
+          "book": "후대 診法 전통의 기반",
+          "concept": "질병 관찰과 경험 축적",
+          "delta": {
+            "academicReputation": 1,
+            "clinicalTrust": 2,
+            "textUnderstanding": 0,
+            "publicFavor": 0
+          },
+          "resultComment": "이 선택은 현장에서 질병을 관찰하며 의학을 쌓아 가는 길입니다. 후대 임상 지식의 많은 부분은 이런 경험적 축적 위에서 자라납니다."
+        },
+        {
+          "id": "saw-4",
+          "title": "백성 사이에서 실제 치료 경험을 쌓는다",
+          "figure": "민간 의원 전통",
+          "book": "민간 치료 경험의 누적",
+          "concept": "생활 의료와 실천",
+          "delta": {
+            "academicReputation": 0,
+            "clinicalTrust": 1,
+            "textUnderstanding": 0,
+            "publicFavor": 2
+          },
+          "resultComment": "이 선택은 의학을 백성의 삶 가까이에서 실천하는 길입니다. 초기 의학은 생활 속 치료 경험과 분리될 수 없었습니다."
+        }
+      ]
+    },
+    {
+      "id": "qin-han",
+      "order": 2,
+      "title": "秦漢",
+      "progressLabel": "2/7",
+      "description": "의학 지식은 더욱 체계화되며, 인체와 질병을 설명하는 기본 틀이 정리됩니다. 고전 의학의 언어가 이 시기에 본격적으로 자리를 잡습니다.",
+      "keywords": [
+        "黃帝內經",
+        "臟腑",
+        "經絡",
+        "診法"
+      ],
+      "prompt": "당신은 이 시대에서 어떤 길을 택하겠습니까?",
+      "choices": [
+        {
+          "id": "qh-1",
+          "title": "黃帝內經 계통의 이론을 깊이 익힌다",
+          "figure": "黃帝 · 岐伯의 상징적 전통",
+          "book": "黃帝內經",
+          "concept": "臟腑經絡 이론",
+          "delta": {
+            "academicReputation": 2,
+            "clinicalTrust": 0,
+            "textUnderstanding": 2,
+            "publicFavor": 0
+          },
+          "resultComment": "이 선택은 한의학의 기초 언어를 익히는 길입니다. 黃帝內經은 후대 의학이 인체와 질병을 설명하는 기준을 제시합니다."
+        },
+        {
+          "id": "qh-2",
+          "title": "진찰과 증후 관찰법을 집중 연습한다",
+          "figure": "秦漢 시기 임상가들",
+          "book": "內經의 診法 전통",
+          "concept": "望聞問切의 기초",
+          "delta": {
+            "academicReputation": 1,
+            "clinicalTrust": 2,
+            "textUnderstanding": 1,
+            "publicFavor": 0
+          },
+          "resultComment": "이 선택은 이론을 실제 환자 판단으로 연결하는 길입니다. 진찰과 증후 관찰은 후대 辨證 체계의 기반이 됩니다."
+        },
+        {
+          "id": "qh-3",
+          "title": "고전 지식을 정리하여 후학에게 전하려 한다",
+          "figure": "의학 지식 정리자들",
+          "book": "黃帝內經 계통 편찬 전통",
+          "concept": "체계화와 교육",
+          "delta": {
+            "academicReputation": 2,
+            "clinicalTrust": 0,
+            "textUnderstanding": 1,
+            "publicFavor": 0
+          },
+          "resultComment": "이 선택은 의학을 한 세대의 경험으로 끝내지 않고 후대로 넘기는 길입니다. 체계화는 의학사를 움직이는 중요한 힘입니다."
+        },
+        {
+          "id": "qh-4",
+          "title": "백성 진료를 통해 기초 의료 경험을 넓힌다",
+          "figure": "지역 의원들",
+          "book": "실용적 의료 전승",
+          "concept": "기초 진료 경험",
+          "delta": {
+            "academicReputation": 0,
+            "clinicalTrust": 2,
+            "textUnderstanding": 0,
+            "publicFavor": 1
+          },
+          "resultComment": "이 선택은 실제 환자와 만나며 의술을 다듬는 길입니다. 의학의 체계화는 결국 임상 현장과 분리되어 성립할 수 없습니다."
+        }
+      ]
+    },
+    {
+      "id": "sui-tang",
+      "order": 3,
+      "title": "隋唐",
+      "progressLabel": "3/7",
+      "description": "국가적 의료 체계가 정비되고, 의학 지식과 함께 醫德이 중시됩니다. 의학은 학문일 뿐 아니라 사람을 살리는 실천이라는 점이 강조됩니다.",
+      "keywords": [
+        "孫思邈",
+        "備急千金要方",
+        "醫德",
+        "응급 대응"
+      ],
+      "prompt": "당신은 이 시대에서 어떤 길을 택하겠습니까?",
+      "choices": [
+        {
+          "id": "st-1",
+          "title": "孫思邈의 저술을 배우며 의학 이론을 익힌다",
+          "figure": "孫思邈",
+          "book": "備急千金要方, 千金翼方",
+          "concept": "醫德과 의학 통합",
+          "delta": {
+            "academicReputation": 2,
+            "clinicalTrust": 1,
+            "textUnderstanding": 1,
+            "publicFavor": 0
+          },
+          "resultComment": "孫思邈는 지식과 실천, 의덕을 함께 강조한 대표 의가입니다. 이 선택은 의학을 학문과 인술의 결합으로 배우는 길입니다."
+        },
+        {
+          "id": "st-2",
+          "title": "備急千金要方을 통해 문헌 지식을 넓힌다",
+          "figure": "孫思邈",
+          "book": "備急千金要方",
+          "concept": "처방 지식의 집성",
+          "delta": {
+            "academicReputation": 1,
+            "clinicalTrust": 1,
+            "textUnderstanding": 2,
+            "publicFavor": 0
+          },
+          "resultComment": "이 선택은 문헌을 통해 의학 지식을 폭넓게 축적하는 길입니다. 隋唐의 의학은 문헌 편찬을 통해 더욱 체계화됩니다."
+        },
+        {
+          "id": "st-3",
+          "title": "위급 환자를 돌보며 응급 대응 경험을 쌓는다",
+          "figure": "응급 치료에 능한 唐代 의가들",
+          "book": "備急千金要方의 응급 관련 내용",
+          "concept": "備急",
+          "delta": {
+            "academicReputation": 0,
+            "clinicalTrust": 2,
+            "textUnderstanding": 0,
+            "publicFavor": 1
+          },
+          "resultComment": "이 선택은 사람을 살리는 현장의 긴박함을 배우는 길입니다. 隋唐 의학은 응급성과 실천성을 매우 중요하게 보았습니다."
+        },
+        {
+          "id": "st-4",
+          "title": "빈민과 약자를 우선 구휼한다",
+          "figure": "孫思邈의 醫者像",
+          "book": "大醫精誠의 정신",
+          "concept": "醫德",
+          "delta": {
+            "academicReputation": 0,
+            "clinicalTrust": 1,
+            "textUnderstanding": 0,
+            "publicFavor": 2
+          },
+          "resultComment": "이 선택은 의학의 공공성과 윤리성을 중시하는 길입니다. 의술은 단지 기술이 아니라 사람을 향한 책임이라는 점을 보여 줍니다."
+        }
+      ]
+    },
+    {
+      "id": "song",
+      "order": 4,
+      "title": "宋",
+      "progressLabel": "4/7",
+      "description": "인쇄와 간행이 확대되면서 의학 지식이 표준화되고 널리 보급됩니다. 의학은 더 많은 사람에게 전달되는 체계적 지식으로 변모합니다.",
+      "keywords": [
+        "의서 간행",
+        "지식 표준화",
+        "보급",
+        "관학 의학"
+      ],
+      "prompt": "당신은 이 시대에서 어떤 길을 택하겠습니까?",
+      "choices": [
+        {
+          "id": "so-1",
+          "title": "새롭게 간행된 의서를 집중적으로 탐독한다",
+          "figure": "宋代 관학 의가들",
+          "book": "太平聖惠方 등 宋代 편찬 의서",
+          "concept": "의서 보급",
+          "delta": {
+            "academicReputation": 1,
+            "clinicalTrust": 0,
+            "textUnderstanding": 2,
+            "publicFavor": 0
+          },
+          "resultComment": "이 선택은 인쇄와 간행의 시대가 만든 지식 확산의 길입니다. 宋은 의학을 보다 넓게 보급 가능한 체계로 바꾸었습니다."
+        },
+        {
+          "id": "so-2",
+          "title": "의학 지식을 요약하고 체계적으로 정리한다",
+          "figure": "국가 편찬 참여 의가들",
+          "book": "宋代 국가 편찬 의서",
+          "concept": "표준화",
+          "delta": {
+            "academicReputation": 2,
+            "clinicalTrust": 0,
+            "textUnderstanding": 2,
+            "publicFavor": 0
+          },
+          "resultComment": "이 선택은 지식을 정리하고 기준을 세우는 길입니다. 宋代 의학의 특징은 바로 이런 표준화와 체계화에 있습니다."
+        },
+        {
+          "id": "so-3",
+          "title": "표준화된 지식을 바탕으로 환자를 진료한다",
+          "figure": "宋代 임상가들",
+          "book": "표준 처방 의서",
+          "concept": "표준 지식의 임상 적용",
+          "delta": {
+            "academicReputation": 1,
+            "clinicalTrust": 2,
+            "textUnderstanding": 1,
+            "publicFavor": 0
+          },
+          "resultComment": "이 선택은 문헌 지식을 실제 진료로 연결하는 길입니다. 표준화는 단지 책에 머무르지 않고 임상 현장으로 이어져야 합니다."
+        },
+        {
+          "id": "so-4",
+          "title": "더 많은 백성이 의학 지식을 접하도록 실용화한다",
+          "figure": "실용 지향 의가들",
+          "book": "널리 유통된 宋代 의서",
+          "concept": "보급과 실용",
+          "delta": {
+            "academicReputation": 0,
+            "clinicalTrust": 1,
+            "textUnderstanding": 1,
+            "publicFavor": 2
+          },
+          "resultComment": "이 선택은 의학 지식을 소수의 전유물이 아니라 더 넓은 사회로 퍼뜨리는 길입니다. 宋의 보급성은 후대 의학 발전에 큰 영향을 줍니다."
+        }
+      ]
+    },
+    {
+      "id": "jin-yuan",
+      "order": 5,
+      "title": "金元",
+      "progressLabel": "5/7",
+      "description": "혼란한 시대 속에서 다양한 학파가 등장하고, 병기와 치료 원리에 대한 해석이 분화됩니다. 이 시기의 핵심은 하나의 정답이 아니라 다양한 의학적 시각입니다.",
+      "keywords": [
+        "金元四大家",
+        "劉完素",
+        "張從正",
+        "李杲",
+        "朱震亨"
+      ],
+      "prompt": "당신은 이 시대에서 어떤 길을 택하겠습니까?",
+      "choices": [
+        {
+          "id": "jy-1",
+          "title": "劉完素의 火熱 중심 해석을 따른다",
+          "figure": "劉完素",
+          "book": "河間學說 계통 의론",
+          "concept": "火熱病機",
+          "delta": {
+            "academicReputation": 2,
+            "clinicalTrust": 1,
+            "textUnderstanding": 1,
+            "publicFavor": 0
+          },
+          "resultComment": "이 선택은 병기의 원인을 火熱로 해석하며 질병을 새롭게 보는 길입니다. 劉完素는 이론 혁신과 임상적 영향력을 함께 지닌 대표 의가입니다."
+        },
+        {
+          "id": "jy-2",
+          "title": "張從正의 攻邪 중심 실천을 따른다",
+          "figure": "張從正",
+          "book": "儒門事親",
+          "concept": "攻邪論",
+          "delta": {
+            "academicReputation": 1,
+            "clinicalTrust": 2,
+            "textUnderstanding": 0,
+            "publicFavor": 1
+          },
+          "resultComment": "이 선택은 邪氣를 적극적으로 제거하는 실천의 길입니다. 張從正은 강한 임상성과 뚜렷한 학설을 함께 보여 주는 인물입니다."
+        },
+        {
+          "id": "jy-3",
+          "title": "李杲의 脾胃 중심 학설을 익힌다",
+          "figure": "李杲",
+          "book": "脾胃論",
+          "concept": "內傷脾胃",
+          "delta": {
+            "academicReputation": 2,
+            "clinicalTrust": 2,
+            "textUnderstanding": 1,
+            "publicFavor": 0
+          },
+          "resultComment": "이 선택은 인체 내부의 허손과 脾胃의 중요성을 중시하는 길입니다. 李杲는 학설의 완성도와 임상 적용 폭이 모두 큰 대표 의가입니다."
+        },
+        {
+          "id": "jy-4",
+          "title": "朱震亨의 滋陰 중심 학설을 익힌다",
+          "figure": "朱震亨",
+          "book": "丹溪心法 계통",
+          "concept": "陰虛와 相火",
+          "delta": {
+            "academicReputation": 2,
+            "clinicalTrust": 1,
+            "textUnderstanding": 1,
+            "publicFavor": 0
+          },
+          "resultComment": "이 선택은 陰虛와 相火를 중시하며 인체 소모의 문제를 깊이 보는 길입니다. 朱震亨은 후대 의학에 매우 큰 영향을 끼친 학설의 대가입니다."
+        }
+      ]
+    },
+    {
+      "id": "ming-qing-republic",
+      "order": 6,
+      "title": "明淸民國",
+      "progressLabel": "6/7",
+      "description": "본초 지식이 집대성되고, 열성 질환에 대한 새로운 이해가 발전합니다. 후기로 갈수록 전통 의학은 변화하는 시대 속에서 자기 위치를 다시 설명해야 합니다.",
+      "keywords": [
+        "李時珍",
+        "本草綱目",
+        "溫病",
+        "시대 전환"
+      ],
+      "prompt": "당신은 이 시대에서 어떤 길을 택하겠습니까?",
+      "choices": [
+        {
+          "id": "mqr-1",
+          "title": "本草綱目을 중심으로 약물 지식을 연구한다",
+          "figure": "李時珍",
+          "book": "本草綱目",
+          "concept": "본초 집대성",
+          "delta": {
+            "academicReputation": 2,
+            "clinicalTrust": 1,
+            "textUnderstanding": 2,
+            "publicFavor": 0
+          },
+          "resultComment": "이 선택은 약물 지식을 집대성하고 분류하는 길입니다. 本草綱目은 본초학의 정리와 확대를 상징하는 대표 문헌입니다."
+        },
+        {
+          "id": "mqr-2",
+          "title": "溫病 계통의 열성 질환 해석을 익힌다",
+          "figure": "葉天士 등 溫病醫家",
+          "book": "溫病學 계통 저술",
+          "concept": "溫病",
+          "delta": {
+            "academicReputation": 2,
+            "clinicalTrust": 2,
+            "textUnderstanding": 1,
+            "publicFavor": 0
+          },
+          "resultComment": "이 선택은 열성 질환에 대한 새로운 임상 해석을 배우는 길입니다. 溫病學은 기존 傷寒 중심 이해를 보완하며 발전했습니다."
+        },
+        {
+          "id": "mqr-3",
+          "title": "임상 현장에서 새로운 질병 양상에 대응한다",
+          "figure": "明淸 이후 임상가들",
+          "book": "임상 의안과 실전 기록",
+          "concept": "변화하는 질병 대응",
+          "delta": {
+            "academicReputation": 1,
+            "clinicalTrust": 2,
+            "textUnderstanding": 0,
+            "publicFavor": 1
+          },
+          "resultComment": "이 선택은 책 속 이론에만 머물지 않고 새로운 질병 현실에 맞서는 길입니다. 시대가 바뀌면 의학도 새로운 대응을 요구받습니다."
+        },
+        {
+          "id": "mqr-4",
+          "title": "전통 지식을 정리하여 변화하는 시대에 맞게 설명한다",
+          "figure": "民國 전환기 전통 의가들",
+          "book": "근대기 전통 의학 논설",
+          "concept": "전통의 재해석",
+          "delta": {
+            "academicReputation": 2,
+            "clinicalTrust": 0,
+            "textUnderstanding": 1,
+            "publicFavor": 1
+          },
+          "resultComment": "이 선택은 전통 의학을 새 시대 속에서 다시 설명하고 정당화하는 길입니다. 民國 전환기는 전통 의학이 자기 언어를 새롭게 다듬어야 했던 시기입니다."
+        }
+      ]
+    },
+    {
+      "id": "joseon",
+      "order": 7,
+      "title": "조선",
+      "progressLabel": "7/7",
+      "description": "조선은 중국 의학을 단순히 받아들이는 데 그치지 않고, 자국의 현실에 맞게 재편하고 집대성합니다. 향약과 민생 중심 의료 또한 중요한 특징으로 나타납니다.",
+      "keywords": [
+        "許浚",
+        "東醫寶鑑",
+        "향약",
+        "민생 의료"
+      ],
+      "prompt": "당신은 이 시대에서 어떤 길을 택하겠습니까?",
+      "choices": [
+        {
+          "id": "jo-1",
+          "title": "許浚의 체계 정리를 따라 東醫寶鑑을 깊이 학습한다",
+          "figure": "許浚",
+          "book": "東醫寶鑑",
+          "concept": "의학의 집대성",
+          "delta": {
+            "academicReputation": 2,
+            "clinicalTrust": 1,
+            "textUnderstanding": 2,
+            "publicFavor": 0
+          },
+          "resultComment": "이 선택은 조선 의학의 집대성과 체계화를 배우는 길입니다. 東醫寶鑑은 조선 한의학의 대표적 결실로 평가됩니다."
+        },
+        {
+          "id": "jo-2",
+          "title": "여러 의서를 비교하며 조선 현실에 맞는 체계를 정리한다",
+          "figure": "조선의 의서 편찬자들",
+          "book": "東醫寶鑑 및 관련 조선 의서",
+          "concept": "수용과 재구성",
+          "delta": {
+            "academicReputation": 2,
+            "clinicalTrust": 0,
+            "textUnderstanding": 2,
+            "publicFavor": 0
+          },
+          "resultComment": "이 선택은 중국 의학을 그대로 답습하지 않고 조선 현실에 맞게 재구성하는 길입니다. 조선 의학의 중요한 특징은 바로 이러한 선택적 수용과 정리입니다."
+        },
+        {
+          "id": "jo-3",
+          "title": "향약과 실용 方藥을 활용해 실제 진료 능력을 높인다",
+          "figure": "향약 활용 의가들",
+          "book": "鄕藥 관련 전통",
+          "concept": "향약과 실용 진료",
+          "delta": {
+            "academicReputation": 1,
+            "clinicalTrust": 2,
+            "textUnderstanding": 0,
+            "publicFavor": 1
+          },
+          "resultComment": "이 선택은 지역 현실에 맞는 약재와 처방을 활용하는 길입니다. 향약 전통은 조선 의학의 실용성과 생활 밀착성을 잘 보여 줍니다."
+        },
+        {
+          "id": "jo-4",
+          "title": "백성에게 가까운 생활 의료와 구휼을 우선한다",
+          "figure": "민생 의료 실천자들",
+          "book": "구휼과 생활 의료 전통",
+          "concept": "민생 중심 의술",
+          "delta": {
+            "academicReputation": 0,
+            "clinicalTrust": 1,
+            "textUnderstanding": 0,
+            "publicFavor": 2
+          },
+          "resultComment": "이 선택은 의학을 백성의 삶과 가장 가까운 곳에서 실천하는 길입니다. 조선 의학은 집대성뿐 아니라 민생 의료의 성격도 함께 지니고 있습니다."
+        }
+      ]
+    }
+  ]
+}
