@@ -1,3 +1,4 @@
+import React from "react";
 export default function ChoiceCard({ choice, onSelect }) {
   return (
     <article className="choice-card">
