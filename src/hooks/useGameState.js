@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import stagesData from "../data/stages.json";
 import resultTypesData from "../data/resultTypes.json";
 import { evaluateResultType } from "../utils/evaluateResultType";
@@ -6,6 +6,30 @@ import { saveResult, getResults } from "../utils/resultStorage";
 import { checkNewAchievements } from "../utils/checkAchievements";
 
 const { gameMeta, stages } = stagesData;
+
+const SCREEN_TO_HASH = {
+  start: "#/",
+  howToPlay: "#/how-to-play",
+  stage: "#/stage",
+  progress: "#/progress",
+  final: "#/final",
+  history: "#/history",
+  achievements: "#/achievements"
+};
+
+const HASH_TO_SCREEN = Object.fromEntries(
+  Object.entries(SCREEN_TO_HASH).map(([k, v]) => [v, k])
+);
+
+// 게임 상태가 필요해서 hash 직접 진입 불가한 화면
+const GUARDED_SCREENS = new Set(["stage", "progress", "final"]);
+
+function screenFromHash() {
+  const hash = window.location.hash || "#/";
+  const screen = HASH_TO_SCREEN[hash];
+  if (!screen || GUARDED_SCREENS.has(screen)) return "start";
+  return screen;
+}
 
 function cloneInitialScores() {
   return { ...gameMeta.initialScores };
@@ -22,7 +46,7 @@ function pickRandomChoices(stage, count = 4) {
 
 export function useGameState() {
   const [playerName, setPlayerName] = useState("");
-  const [screen, setScreen] = useState("start");
+  const [screen, setScreenRaw] = useState(screenFromHash);
   const [currentStageIndex, setCurrentStageIndex] = useState(0);
   const [scores, setScores] = useState(cloneInitialScores);
   const [history, setHistory] = useState([]);
@@ -33,6 +57,37 @@ export function useGameState() {
   const [currentChoices, setCurrentChoices] = useState([]);
   const [newAchievements, setNewAchievements] = useState([]);
   const [savedResults, setSavedResults] = useState(() => getResults());
+
+  const navigate = useCallback((screenName) => {
+    setScreenRaw(screenName);
+    const hash = SCREEN_TO_HASH[screenName] || "#/";
+    if (window.location.hash !== hash) {
+      window.location.hash = hash;
+    }
+  }, []);
+
+  // 뒤로가기/앞으로가기 지원
+  useEffect(() => {
+    function onHashChange() {
+      const hash = window.location.hash || "#/";
+      const target = HASH_TO_SCREEN[hash];
+      if (!target) {
+        navigate("start");
+        return;
+      }
+      setScreenRaw(target);
+    }
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, [navigate]);
+
+  // 초기 hash 동기화
+  useEffect(() => {
+    const hash = SCREEN_TO_HASH[screen];
+    if (hash && window.location.hash !== hash) {
+      window.location.hash = hash;
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const currentStage = useMemo(() => {
     return stages[currentStageIndex] ?? null;
@@ -50,7 +105,7 @@ export function useGameState() {
 
   function startGame(name = "") {
     setPlayerName(name.trim());
-    setScreen("stage");
+    navigate("stage");
     setCurrentStageIndex(0);
     setScores(cloneInitialScores());
     setHistory([]);
@@ -63,29 +118,29 @@ export function useGameState() {
   }
 
   function goToHowToPlay() {
-    setScreen("howToPlay");
+    navigate("howToPlay");
   }
 
   function goToStart() {
-    setScreen("start");
+    navigate("start");
   }
 
   function goToProgress() {
     setIsResultModalOpen(false);
-    setScreen("progress");
+    navigate("progress");
   }
 
   function goToHistory() {
     setSavedResults(getResults());
-    setScreen("history");
+    navigate("history");
   }
 
   function goToAchievements() {
-    setScreen("achievements");
+    navigate("achievements");
   }
 
   function closeProgress() {
-    setScreen("stage");
+    navigate("stage");
   }
 
   function selectChoice(choice) {
@@ -165,7 +220,7 @@ export function useGameState() {
     setIsResultModalOpen(false);
 
     if (isLastStage) {
-      setScreen("final");
+      navigate("final");
       return;
     }
 
