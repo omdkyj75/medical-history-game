@@ -160,9 +160,9 @@ input:focus {
   gap: 4px;
 }
 .app-footer a:hover { color: var(--primary, #00ff88); }
-.app-footer-dot {
+.app-footer-label {
   color: var(--text-secondary, #888);
-  font-size: 0.6rem;
+  font-size: 0.75rem;
 }
 
 .page {
