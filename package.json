@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "serve dist -s -l tcp://0.0.0.0:$PORT"
+    "start": "npx serve dist -s -p ${PORT:-3000}"
   },
   "dependencies": {
     "html2canvas": "^1.4.1",
