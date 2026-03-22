@@ -158,7 +158,9 @@ export function useRaisingGameState() {
   const [phase, setPhase] = useState("activity-select");
   const [minigameType, setMinigameType] = useState(null);
   const [playerStats, setPlayerStats] = useState(cloneInitialStats);
+  const statsRef = useRef(playerStats);
   const [turnHistory, setTurnHistory] = useState([]);
+  const turnHistoryRef = useRef(turnHistory);
   const [activityCounts, setActivityCounts] = useState({});
 
   // NPC affinity
@@ -280,8 +282,11 @@ export function useRaisingGameState() {
     setEraIndex(0);
     setTurnIndex(0);
     setPhase("activity-select");
-    setPlayerStats(cloneInitialStats());
+    const initStats = cloneInitialStats();
+    setPlayerStats(initStats);
+    statsRef.current = initStats;
     setTurnHistory([]);
+    turnHistoryRef.current = [];
     setActivityCounts({});
     setSelectedActivity(null);
     setLastDelta(null);
@@ -292,6 +297,7 @@ export function useRaisingGameState() {
     setFinalResult(null);
     setNewAchievements([]);
     setSeenEventIds(new Set());
+    setStaminaSaveUsed(false);
     setCollectedTexts([]);
     setEncounteredScholars([]);
     navigate("raising");
@@ -333,6 +339,7 @@ export function useRaisingGameState() {
       } else {
         newStats.stamina = 0;
         setPlayerStats(newStats);
+        statsRef.current = newStats;
         setSelectedActivity(activityId);
         setLastDelta(delta);
         setPhase("dead");
@@ -343,23 +350,26 @@ export function useRaisingGameState() {
     setSelectedActivity(activityId);
     setLastDelta(delta);
     setPlayerStats(newStats);
+    statsRef.current = newStats;
     setActivityCounts((prev) => ({
       ...prev,
       [activityId]: (prev[activityId] || 0) + 1
     }));
 
-    setTurnHistory((prev) => [
-      ...prev,
-      {
-        eraId: currentEra.id,
-        eraTitle: currentEra.title,
-        turn: turnIndex + 1,
-        activityId,
-        activityTitle: (activities.find((a) => a.id === activityId) || currentEra?.eraActivities?.find((a) => a.id === activityId))?.title || activityId,
-        delta,
-        statsAfter: newStats
-      }
-    ]);
+    const newHistoryEntry = {
+      eraId: currentEra.id,
+      eraTitle: currentEra.title,
+      turn: turnIndex + 1,
+      activityId,
+      activityTitle: (activities.find((a) => a.id === activityId) || currentEra?.eraActivities?.find((a) => a.id === activityId))?.title || activityId,
+      delta,
+      statsAfter: newStats
+    };
+    setTurnHistory((prev) => {
+      const updated = [...prev, newHistoryEntry];
+      turnHistoryRef.current = updated;
+      return updated;
+    });
 
     // Update NPC affinities
     setNpcAffinities((prev) => {
@@ -389,6 +399,7 @@ export function useRaisingGameState() {
     const { label, ...delta } = result;
     const newStats = applyDelta(playerStats, delta);
     setPlayerStats(newStats);
+    statsRef.current = newStats;
     setMinigameType(null);
 
     // Record minigame result in turn history
@@ -399,6 +410,7 @@ export function useRaisingGameState() {
       last.minigameDelta = delta;
       last.statsAfter = newStats;
       updated[updated.length - 1] = last;
+      turnHistoryRef.current = updated;
       return updated;
     });
 
@@ -435,6 +447,7 @@ export function useRaisingGameState() {
   function completePressure(delta) {
     const newStats = applyDelta(playerStats, delta);
     setPlayerStats(newStats);
+    statsRef.current = newStats;
     setCurrentPressure(null);
 
     setTurnHistory((prev) => {
@@ -444,6 +457,7 @@ export function useRaisingGameState() {
       last.pressureDelta = delta;
       last.statsAfter = newStats;
       updated[updated.length - 1] = last;
+      turnHistoryRef.current = updated;
       return updated;
     });
 
@@ -477,6 +491,7 @@ export function useRaisingGameState() {
       const { npc, event } = pendingNpcEvent;
       const newStats = applyDelta(playerStats, event.delta);
       setPlayerStats(newStats);
+      statsRef.current = newStats;
 
       // Mark this NPC event as triggered in history with delta and updated stats
       setTurnHistory((prev) => {
@@ -487,6 +502,7 @@ export function useRaisingGameState() {
         last.npcEventDelta = event.delta;
         last.statsAfter = newStats;
         updated[updated.length - 1] = last;
+        turnHistoryRef.current = updated;
         return updated;
       });
 
@@ -512,6 +528,7 @@ export function useRaisingGameState() {
     setSelectedEventChoice(choice);
     const newStats = applyDelta(playerStats, actualDelta);
     setPlayerStats(newStats);
+    statsRef.current = newStats;
 
     setTurnHistory((prev) => {
       const updated = [...prev];
@@ -521,6 +538,7 @@ export function useRaisingGameState() {
       last.eventDelta = actualDelta;
       last.statsAfter = newStats;
       updated[updated.length - 1] = last;
+      turnHistoryRef.current = updated;
       return updated;
     });
 
@@ -534,6 +552,7 @@ export function useRaisingGameState() {
     setSelectedEventChoice(choice);
     const newStats = applyDelta(playerStats, choice.delta);
     setPlayerStats(newStats);
+    statsRef.current = newStats;
 
     setTurnHistory((prev) => {
       const updated = [...prev];
@@ -543,6 +562,7 @@ export function useRaisingGameState() {
       last.eventDelta = choice.delta;
       last.statsAfter = newStats;
       updated[updated.length - 1] = last;
+      turnHistoryRef.current = updated;
       return updated;
     });
 
@@ -553,6 +573,7 @@ export function useRaisingGameState() {
   function completeBossEvent(delta) {
     const newStats = applyDelta(playerStats, delta);
     setPlayerStats(newStats);
+    statsRef.current = newStats;
     setCurrentBossEvent(null);
 
     // Record in history
@@ -563,6 +584,7 @@ export function useRaisingGameState() {
       last.bossEventDelta = delta;
       last.statsAfter = newStats;
       updated[updated.length - 1] = last;
+      turnHistoryRef.current = updated;
       return updated;
     });
 
@@ -604,6 +626,7 @@ export function useRaisingGameState() {
     if (quizBonus) {
       const newStats = applyDelta(playerStats, quizBonus);
       setPlayerStats(newStats);
+      statsRef.current = newStats;
     }
 
     // Collect medical texts and scholars for completed era
@@ -639,14 +662,22 @@ export function useRaisingGameState() {
   }
 
   function finishGame() {
-    const result = evaluateResultType(playerStats);
+    // Bug 3 fix: Collect final era's academic data before evaluating result
+    collectEraAcademicData(currentEra?.id);
+
+    // Bug 1 fix: Use refs to read the latest stats/history,
+    // since React state may not have flushed yet after setPlayerStats
+    const finalStats = statsRef.current;
+    const finalHistory = turnHistoryRef.current;
+
+    const result = evaluateResultType(finalStats);
     setFinalResult(result);
 
     const saved = saveResult({
       playerName,
       finalResult: result,
-      scores: playerStats,
-      history: turnHistory
+      scores: finalStats,
+      history: finalHistory
     });
 
     const allResults = [saved, ...savedResults];

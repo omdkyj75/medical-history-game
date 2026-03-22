@@ -78,7 +78,7 @@
       "definition": "온병(溫病)의 진행을 위(衛)·기(氣)·영(營)·혈(血) 4단계로 나누는 변증 체계.",
       "detail": "엽천사가 확립. 위분(衛分)은 표증, 기분(氣分)은 이열(裏熱), 영분(營分)은 열입심포, 혈분(血分)은 동혈(動血)·출혈을 특징으로 한다.",
       "relatedTexts": ["wenre-lun"],
-      "era": "qing"
+      "era": "qing-dynasty"
     },
     {
       "id": "siqi-wuwei",
@@ -118,7 +118,7 @@
       "definition": "온열(溫熱)성 외감병의 총칭. 상한과 구분되는 별도의 질병 범주.",
       "detail": "명·청대에 온병학파가 형성되면서 체계화. 오유성의 여기설, 엽천사의 위기영혈변증이 핵심 이론.",
       "relatedTexts": ["wenyi-lun", "wenre-lun"],
-      "era": "ming"
+      "era": "ming-dynasty"
     },
     {
       "id": "liqi",
@@ -128,7 +128,7 @@
       "definition": "전염병의 원인이 되는 특수한 물질적 병인. 오유성이 제시한 혁신적 개념.",
       "detail": "입과 코를 통해 침입하고(口鼻道始), 각기 다른 여기가 각기 다른 질병을 일으킨다고 설명. 세균설 이전의 선구적 물질적 병인론.",
       "relatedTexts": ["wenyi-lun"],
-      "era": "ming"
+      "era": "ming-dynasty"
     },
     {
       "id": "jinyuan-sidajia",
@@ -198,7 +198,7 @@
       "definition": "조선(한국) 자국에서 나는 약재. 중국산 당약(唐藥)과 구분되는 개념.",
       "detail": "향약집성방에서 체계적으로 정리. 동의보감에서도 향약명을 병기하여 국산 약재의 활용을 강조했다.",
       "relatedTexts": ["hyangyak-jipseongbang", "donguibogam"],
-      "era": "goryeo-joseon"
+      "era": "goryeo"
     },
     {
       "id": "yangsheng",
@@ -238,7 +238,7 @@
       "definition": "손사막이 천금요방에서 제시한 의료윤리 선언. '위대한 의사는 정밀함(精)과 성실함(誠)을 갖춰야 한다.'",
       "detail": "귀천빈부를 가리지 않고 치료해야 한다는 내용. 동아시아 의료윤리의 원형으로 평가된다.",
       "relatedTexts": ["qianjin-yaofang"],
-      "era": "wei-jin-sui-tang"
+      "era": "jin-sui-tang"
     },
     {
       "id": "jingfang",
@@ -258,7 +258,7 @@
       "definition": "오운(五運)과 육기(六氣)로 기후 변화와 질병의 관계를 설명하는 학설.",
       "detail": "황제내경 소문의 7편 대론(大論)에 기초. 송대에 크게 성행하여 임상에 광범위하게 적용되었다.",
       "relatedTexts": ["huangdi-neijing"],
-      "era": "song"
+      "era": "song-dynasty"
     },
     {
       "id": "mingmen",
@@ -288,7 +288,7 @@
       "definition": "민국시대(1929년) 중의학(한의학)을 폐지하자는 주장과 정책.",
       "detail": "여운수(余雲岫) 등이 중의학 폐지를 주장하여 큰 논쟁이 발생. 전국적 반대 운동으로 무산되었으나, 근대 한의학의 존폐 위기를 보여주는 사건.",
       "relatedTexts": [],
-      "era": "modern"
+      "era": "joseon"
     }
   ]
 }

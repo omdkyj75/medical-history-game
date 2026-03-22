@@ -73,7 +73,7 @@
     {
       "id": "maijing",
       "name": "맥경(脈經)",
-      "era": "wei-jin-sui-tang",
+      "era": "jin-sui-tang",
       "author": "왕숙화(王叔和)",
       "period": "서진(西晉, 약 280년)",
       "category": "진단학",
@@ -87,7 +87,7 @@
     {
       "id": "zhenjiu-jiayijing",
       "name": "침구갑을경(鍼灸甲乙經)",
-      "era": "wei-jin-sui-tang",
+      "era": "jin-sui-tang",
       "author": "황보밀(皇甫謐)",
       "period": "서진(西晉, 약 282년)",
       "category": "침구학",
@@ -101,7 +101,7 @@
     {
       "id": "qianjin-yaofang",
       "name": "비급천금요방(備急千金要方)",
-      "era": "wei-jin-sui-tang",
+      "era": "jin-sui-tang",
       "author": "손사막(孫思邈)",
       "period": "당대(唐代, 약 652년)",
       "category": "종합의서",
@@ -115,7 +115,7 @@
     {
       "id": "waitai-miyao",
       "name": "외대비요(外臺秘要)",
-      "era": "wei-jin-sui-tang",
+      "era": "jin-sui-tang",
       "author": "왕도(王燾)",
       "period": "당대(唐代, 약 752년)",
       "category": "종합의서",
@@ -129,7 +129,7 @@
     {
       "id": "taiping-huimin",
       "name": "태평혜민화제국방(太平惠民和劑局方)",
-      "era": "song",
+      "era": "song-dynasty",
       "author": "송(宋) 정부 편찬",
       "period": "송대(宋代, 1078~1151년)",
       "category": "방제학",
@@ -185,7 +185,7 @@
     {
       "id": "bencao-gangmu",
       "name": "본초강목(本草綱目)",
-      "era": "ming",
+      "era": "ming-dynasty",
       "author": "이시진(李時珍)",
       "period": "명대(明代, 1578년)",
       "category": "본초학",
@@ -199,7 +199,7 @@
     {
       "id": "wenyi-lun",
       "name": "온역론(瘟疫論)",
-      "era": "ming",
+      "era": "ming-dynasty",
       "author": "오유성(吳又可, 오유가)",
       "period": "명 말기(1642년)",
       "category": "온병학",
@@ -213,7 +213,7 @@
     {
       "id": "wenre-lun",
       "name": "온열론(溫熱論)",
-      "era": "qing",
+      "era": "qing-dynasty",
       "author": "엽천사(葉天士, 엽계)",
       "period": "청대(淸代)",
       "category": "온병학",
@@ -227,7 +227,7 @@
     {
       "id": "yizong-jinjian",
       "name": "의종금감(醫宗金鑑)",
-      "era": "qing",
+      "era": "qing-dynasty",
       "author": "오겸(吳謙) 등 (칙편)",
       "period": "청대(淸代, 1742년)",
       "category": "종합의서",
@@ -255,7 +255,7 @@
     {
       "id": "hyangyak-jipseongbang",
       "name": "향약집성방(鄕藥集成方)",
-      "era": "goryeo-joseon",
+      "era": "goryeo",
       "author": "유효통(兪孝通) · 노중례(盧重禮) 등",
       "period": "조선 세종(1433년)",
       "category": "본초/방제",

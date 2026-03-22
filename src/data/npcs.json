@@ -129,6 +129,70 @@
       }
     },
     {
+      "id": "sunyon-hwa",
+      "name": "손용화(孫用和)",
+      "title": "교정의서국의 학자",
+      "era": "song-dynasty",
+      "emoji": "孫",
+      "personality": "교정의서국에서 의서를 교정하는 꼼꼼한 학자",
+      "likes": { "study-classics": 2, "academic-exchange": 1, "print-books": 2 },
+      "dislikes": { "rest": -1 },
+      "bonusEvent": {
+        "threshold": 4,
+        "title": "교정의서국의 특별 초대",
+        "description": "손용화가 교정의서국에서 의서를 함께 교정하자고 초대합니다.",
+        "delta": { "knowledge": 3, "reputation": 2 }
+      }
+    },
+    {
+      "id": "qian-yi",
+      "name": "전을(錢乙)",
+      "title": "소아과의 대가",
+      "era": "song-dynasty",
+      "emoji": "兒",
+      "personality": "소아과의 대가로 아이들을 살리는 데 헌신하는 의가",
+      "likes": { "clinical-practice": 2, "public-service": 1 },
+      "dislikes": { "academic-exchange": -1 },
+      "bonusEvent": {
+        "threshold": 4,
+        "title": "소아 난치병 환자",
+        "description": "전을과 함께 소아 난치병 환자를 치료하게 됩니다.",
+        "delta": { "medical": 3, "virtue": 2 }
+      }
+    },
+    {
+      "id": "kim-yeongsuk",
+      "name": "김영석(金永錫)",
+      "title": "향약 연구의 의관",
+      "era": "goryeo",
+      "emoji": "錫",
+      "personality": "고려 의종 때 향약 연구에 매진한 의관",
+      "likes": { "herb-gathering": 2, "hyangyak-research": 2, "study-classics": 1 },
+      "dislikes": { "rest": -1 },
+      "bonusEvent": {
+        "threshold": 4,
+        "title": "향약 비방의 발견",
+        "description": "김영석과 함께 향약 비방을 발견하게 됩니다.",
+        "delta": { "medical": 2, "knowledge": 2 }
+      }
+    },
+    {
+      "id": "choe-jongjun",
+      "name": "최종준(崔宗峻)",
+      "title": "송대 의서 연구가",
+      "era": "goryeo",
+      "emoji": "崔",
+      "personality": "송(宋)에서 전래된 의서를 연구하는 고려의 학자",
+      "likes": { "study-classics": 2, "academic-exchange": 1 },
+      "dislikes": { "herb-gathering": -1 },
+      "bonusEvent": {
+        "threshold": 4,
+        "title": "송대 의서 해독",
+        "description": "최종준과 함께 송대 의서를 해독하며 새로운 지식을 얻습니다.",
+        "delta": { "knowledge": 3, "reputation": 1 }
+      }
+    },
+    {
       "id": "liuwansu",
       "name": "유완소(劉完素)",
       "title": "한량파 종사(寒涼派 宗師)",

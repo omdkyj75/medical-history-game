@@ -168,7 +168,7 @@
     {
       "id": "wang-shuhe",
       "name": "왕숙화(王叔和)",
-      "era": "wei-jin-sui-tang",
+      "era": "jin-sui-tang",
       "period": "서진(西晉)",
       "role": "맥학의 체계화자",
       "icon": "叔",
@@ -183,7 +183,7 @@
     {
       "id": "huangfu-mi",
       "name": "황보밀(皇甫謐)",
-      "era": "wei-jin-sui-tang",
+      "era": "jin-sui-tang",
       "period": "서진(西晉)",
       "role": "침구학의 체계화자",
       "icon": "甫",
@@ -198,7 +198,7 @@
     {
       "id": "ge-hong",
       "name": "갈홍(葛洪)",
-      "era": "wei-jin-sui-tang",
+      "era": "jin-sui-tang",
       "period": "동진(東晉)",
       "role": "도교의학자",
       "icon": "洪",
@@ -213,7 +213,7 @@
     {
       "id": "tao-hongjing",
       "name": "도홍경(陶弘景)",
-      "era": "wei-jin-sui-tang",
+      "era": "jin-sui-tang",
       "period": "남조(南朝)",
       "role": "본초학자",
       "icon": "陶",
@@ -228,7 +228,7 @@
     {
       "id": "chao-yuanfang",
       "name": "소원방(巢元方)",
-      "era": "wei-jin-sui-tang",
+      "era": "jin-sui-tang",
       "period": "수대(隋代)",
       "role": "병리학자",
       "icon": "巢",
@@ -243,7 +243,7 @@
     {
       "id": "sun-simiao",
       "name": "손사막(孫思邈)",
-      "era": "wei-jin-sui-tang",
+      "era": "jin-sui-tang",
       "period": "당대(唐代)",
       "role": "약왕(藥王)",
       "icon": "孫",
@@ -258,7 +258,7 @@
     {
       "id": "wang-tao",
       "name": "왕도(王燾)",
-      "era": "wei-jin-sui-tang",
+      "era": "jin-sui-tang",
       "period": "당대(唐代)",
       "role": "의학 문헌 집대성자",
       "icon": "燾",
@@ -348,7 +348,7 @@
     {
       "id": "li-shizhen",
       "name": "이시진(李時珍)",
-      "era": "ming",
+      "era": "ming-dynasty",
       "period": "명대(明代)",
       "role": "본초학의 집대성자",
       "icon": "珍",
@@ -363,7 +363,7 @@
     {
       "id": "wu-youxing",
       "name": "오유성(吳又可)",
-      "era": "ming",
+      "era": "ming-dynasty",
       "period": "명 말기",
       "role": "온역학의 선구자",
       "icon": "疫",
@@ -378,7 +378,7 @@
     {
       "id": "ye-tianshi",
       "name": "엽천사(葉天士)",
-      "era": "qing",
+      "era": "qing-dynasty",
       "period": "청대(淸代)",
       "role": "온병학파 대표",
       "icon": "葉",
@@ -393,7 +393,7 @@
     {
       "id": "wu-jutong",
       "name": "오국통(吳鞠通)",
-      "era": "qing",
+      "era": "qing-dynasty",
       "period": "청대(淸代)",
       "role": "온병학파",
       "icon": "鞠",
@@ -408,7 +408,7 @@
     {
       "id": "xue-xue",
       "name": "설설(薛雪)",
-      "era": "qing",
+      "era": "qing-dynasty",
       "period": "청대(淸代)",
       "role": "온병학파",
       "icon": "雪",
@@ -423,7 +423,7 @@
     {
       "id": "wang-qingren",
       "name": "왕청임(王清任)",
-      "era": "qing",
+      "era": "qing-dynasty",
       "period": "청대(淸代)",
       "role": "해부학 선구자",
       "icon": "任",
