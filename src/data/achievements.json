@@ -40,21 +40,49 @@
       "title": "완전 정복",
       "description": "콤보 포함 전체 결과 유형을 달성했습니다",
       "icon": "🏆",
-      "condition": { "type": "unique-results", "count": 8 }
+      "condition": { "type": "unique-results", "count": 9 }
     },
     {
-      "id": "extremist",
-      "title": "극단주의자",
-      "description": "한 성향 점수가 20 이상에 도달했습니다",
+      "id": "medical-expert",
+      "title": "신의(神醫)",
+      "description": "의술 점수가 80 이상에 도달했습니다",
       "icon": "🔥",
-      "condition": { "type": "max-score", "threshold": 20 }
+      "condition": { "type": "max-stat", "stat": "medical", "threshold": 80 }
     },
     {
-      "id": "hard-path",
-      "title": "고난의 길",
-      "description": "한 성향 점수가 0 이하로 떨어졌습니다",
+      "id": "great-scholar",
+      "title": "대학자(大學者)",
+      "description": "학식 점수가 80 이상에 도달했습니다",
+      "icon": "📚",
+      "condition": { "type": "max-stat", "stat": "knowledge", "threshold": 80 }
+    },
+    {
+      "id": "stamina-zero",
+      "title": "과로의 대가",
+      "description": "체력이 0 이하로 떨어진 적이 있습니다",
       "icon": "💀",
-      "condition": { "type": "min-score", "threshold": 0 }
+      "condition": { "type": "stamina-zero" }
+    },
+    {
+      "id": "all-activities",
+      "title": "다방면 수련",
+      "description": "7가지 행동을 모두 한 번 이상 수행했습니다",
+      "icon": "🌈",
+      "condition": { "type": "all-activities-used" }
+    },
+    {
+      "id": "specialist",
+      "title": "한 우물 파기",
+      "description": "같은 행동을 10회 이상 수행했습니다",
+      "icon": "⛏️",
+      "condition": { "type": "activity-count", "count": 10 }
+    },
+    {
+      "id": "never-rest",
+      "title": "불철주야(不撤晝夜)",
+      "description": "한 번도 휴식하지 않고 게임을 완료했습니다",
+      "icon": "⚡",
+      "condition": { "type": "never-activity", "activityId": "rest" }
     }
   ]
 }

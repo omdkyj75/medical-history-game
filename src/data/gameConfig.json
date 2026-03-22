@@ -1,0 +1,970 @@
+{
+  "gameMeta": {
+    "id": "medical-history-raising-sim",
+    "title": "명의(名醫)의 길",
+    "subtitle": "10개 시대를 거치며 성장하는 한중의학사 육성 시뮬레이션",
+    "description": "당신은 시대를 건너며 수련하는 의원입니다. 상고시대에서 조선에 이르는 10개 시대를 통과하며, 매 턴 행동을 선택해 자신만의 의학적 길을 완성하십시오.",
+    "totalEras": 10,
+    "totalTurns": 31,
+    "discussionQuestions": [
+      "왜 같은 의학이라도 시대마다 중요하게 여긴 가치가 달라졌을까?",
+      "의학은 이론, 임상, 문헌, 민생 중 하나만으로 설명할 수 있을까?",
+      "조선 의학은 중국 의학의 단순한 수용인가, 주체적 재구성인가?",
+      "금원사대가의 학파 경쟁은 의학 발전에 어떤 영향을 미쳤을까?"
+    ]
+  },
+  "stats": {
+    "keys": ["medical", "knowledge", "virtue", "stamina", "reputation"],
+    "labels": {
+      "medical": "의술(醫術)",
+      "knowledge": "학식(學識)",
+      "virtue": "덕행(德行)",
+      "stamina": "체력(體力)",
+      "reputation": "명성(名聲)"
+    },
+    "descriptions": {
+      "medical": "진료와 처방, 침구와 본초 등 실제 치료 능력",
+      "knowledge": "경전과 이론, 음양오행과 병리학설에 대한 이해",
+      "virtue": "의덕(醫德)과 인품, 환자와 백성에 대한 신뢰",
+      "stamina": "수련과 활동을 지탱하는 건강과 체력",
+      "reputation": "의학계와 세상에 알려진 정도"
+    },
+    "colors": {
+      "medical": "#8b5e3c",
+      "knowledge": "#4a6a8f",
+      "virtue": "#3d7a66",
+      "stamina": "#b85c38",
+      "reputation": "#8a7232"
+    },
+    "initial": {
+      "medical": 5,
+      "knowledge": 5,
+      "virtue": 5,
+      "stamina": 10,
+      "reputation": 1
+    },
+    "max": {
+      "medical": 100,
+      "knowledge": 100,
+      "virtue": 100,
+      "stamina": 20,
+      "reputation": 100
+    }
+  },
+  "activities": [
+    {
+      "id": "study-classics",
+      "title": "경전공부",
+      "subtitle": "고전 의서를 탐독한다",
+      "icon": "📖",
+      "baseDelta": { "knowledge": 3, "stamina": -2 },
+      "description": "고전 의서를 탐독하며 이론적 기반을 다진다."
+    },
+    {
+      "id": "clinical-practice",
+      "title": "진료수련",
+      "subtitle": "환자를 직접 진료한다",
+      "icon": "💉",
+      "baseDelta": { "medical": 3, "stamina": -2 },
+      "description": "환자를 직접 만나 진단하고 치료하며 의술을 연마한다."
+    },
+    {
+      "id": "public-service",
+      "title": "민간봉사",
+      "subtitle": "백성을 돌본다",
+      "icon": "🤲",
+      "baseDelta": { "virtue": 3, "reputation": 1, "stamina": -2 },
+      "description": "가난한 백성과 환자를 찾아가 무료로 진료하고 돌본다."
+    },
+    {
+      "id": "visit-master",
+      "title": "스승방문",
+      "subtitle": "스승을 찾아뵌다",
+      "icon": "🏔️",
+      "baseDelta": { "medical": 1, "knowledge": 2, "stamina": -1 },
+      "description": "명의를 찾아가 가르침을 청하고 의술의 깊이를 더한다."
+    },
+    {
+      "id": "herb-gathering",
+      "title": "약초채집",
+      "subtitle": "산과 들에서 약초를 모은다",
+      "icon": "🌿",
+      "baseDelta": { "medical": 1, "stamina": 1 },
+      "description": "산야를 누비며 약초를 채집하고 본초 지식을 쌓는다."
+    },
+    {
+      "id": "academic-exchange",
+      "title": "학술교류",
+      "subtitle": "다른 의가와 학문을 나눈다",
+      "icon": "📜",
+      "baseDelta": { "knowledge": 2, "reputation": 2, "stamina": -2 },
+      "description": "다른 의가들과 만나 학설을 토론하고 견문을 넓힌다."
+    },
+    {
+      "id": "rest",
+      "title": "휴식",
+      "subtitle": "몸과 마음을 쉰다",
+      "icon": "🍵",
+      "baseDelta": { "stamina": 4 },
+      "description": "심신을 안정시키고 체력을 회복한다."
+    }
+  ],
+  "eras": [
+    {
+      "id": "ancient-origins",
+      "order": 1,
+      "title": "상고시대(上古時代)",
+      "period": "太古 ~ BC 5세기",
+      "turns": 2,
+      "learningPoint": "의학이 전설과 경험에서 시작되어 초기 지식이 축적된 시기",
+      "description": "전설 속 伏羲氏, 神農氏, 黃帝의 시대입니다. 약물의 기원, 침구와 외치법의 기원이 형성되고, 무의(巫醫)에서 전업의사(專業醫師)로의 전환이 시작됩니다.",
+      "keywords": ["伏羲氏", "神農氏", "黃帝", "巫醫", "藥物의 기원", "鍼灸의 기원"],
+      "activityOverrides": {
+        "visit-master": {
+          "flavorTitle": "전설의 의가를 찾아간다",
+          "flavorText": "伏羲氏와 神農氏의 가르침을 전하는 오래된 스승을 찾는다.",
+          "bonusDelta": { "knowledge": 1 }
+        },
+        "herb-gathering": {
+          "flavorTitle": "신농(神農)의 뜻을 따라 백초를 맛본다",
+          "flavorText": "신농이 백초를 맛보았듯, 직접 약초의 성질을 체험한다.",
+          "bonusDelta": { "medical": 1 }
+        },
+        "study-classics": {
+          "flavorTitle": "구전되는 의학 지식을 정리한다",
+          "flavorText": "아직 체계적 의서가 없는 시대, 구전 지식을 기억하고 정리한다."
+        }
+      },
+      "events": [
+        {
+          "id": "ao-e1",
+          "title": "무의(巫醫)와의 대결",
+          "description": "마을에서 무당이 병을 기도로 치료하려 합니다. 당신의 의술로 대응하겠습니까?",
+          "probability": 0.4,
+          "choices": [
+            {
+              "text": "약물과 침으로 직접 치료해 보인다",
+              "delta": { "medical": 2, "reputation": 1, "stamina": -1 }
+            },
+            {
+              "text": "조용히 관찰하며 무의의 방법도 기록한다",
+              "delta": { "knowledge": 2, "virtue": 1 }
+            }
+          ]
+        },
+        {
+          "id": "ao-e2",
+          "title": "희귀 약초 발견",
+          "description": "산중에서 이전에 본 적 없는 약초를 발견합니다.",
+          "probability": 0.3,
+          "choices": [
+            {
+              "text": "직접 맛보아 약성을 확인한다 (신농의 정신!)",
+              "delta": { "medical": 2, "stamina": -2 }
+            },
+            {
+              "text": "채집하여 외형과 자생지를 꼼꼼히 기록한다",
+              "delta": { "knowledge": 2, "medical": 1 }
+            }
+          ]
+        }
+      ],
+      "transitionScene": {
+        "text": "전설의 시대가 저물고, 경험 의학에서 이론 의학으로의 전환이 시작됩니다. 이제 전국시대로 들어갑니다.",
+        "historicalNote": "이 시기 형성된 약물·침구·외치법의 기원은 후대 동양의학의 세 기둥이 됩니다."
+      }
+    },
+    {
+      "id": "warring-states",
+      "order": 2,
+      "title": "전국시대(戰國時代)",
+      "period": "BC 5세기 ~ BC 3세기",
+      "turns": 3,
+      "learningPoint": "음양오행설이 의학에 도입되고 의학이론이 체계화되기 시작한 시기",
+      "description": "제자백가가 경쟁하는 지적 황금기입니다. 편작(扁鵲)이 진맥으로 명성을 떨치고, 음양오행설이 의학이론에 본격 도입됩니다. 마왕퇴(馬王堆) 의서가 당시의 의학 수준을 보여줍니다.",
+      "keywords": ["扁鵲", "陰陽五行", "經脈", "馬王堆", "望聞問切", "醫和"],
+      "activityOverrides": {
+        "visit-master": {
+          "flavorTitle": "장상군(長桑君)의 제자를 찾아간다",
+          "flavorText": "편작에게 비방을 전수한 장상군 계열의 의가를 찾는다.",
+          "bonusDelta": { "medical": 1 }
+        },
+        "study-classics": {
+          "flavorTitle": "음양오행(陰陽五行)의 원리를 탐구한다",
+          "flavorText": "자연과 인체를 하나의 원리로 설명하려는 새로운 사유를 공부한다.",
+          "bonusDelta": { "knowledge": 1 }
+        },
+        "clinical-practice": {
+          "flavorTitle": "전쟁터의 부상병을 치료한다",
+          "flavorText": "끊이지 않는 전란 속에서 외상과 질병을 치료하며 경험을 쌓는다."
+        },
+        "academic-exchange": {
+          "flavorTitle": "제자백가와 의학을 논한다",
+          "flavorText": "각 학파의 사상가들과 인체와 질병에 대해 토론한다."
+        }
+      },
+      "events": [
+        {
+          "id": "ws-e1",
+          "title": "편작(扁鵲)의 일화를 듣다",
+          "description": "편작이 채환공의 병을 망진(望診)으로 알아보았으나 거부당한 이야기를 듣습니다. 의술과 명성의 관계를 생각하게 됩니다.",
+          "probability": 0.5,
+          "choices": [
+            {
+              "text": "편작처럼 과감한 진단 능력을 키운다",
+              "delta": { "medical": 2, "reputation": 1, "stamina": -1 }
+            },
+            {
+              "text": "환자의 마음을 먼저 얻는 법을 배운다",
+              "delta": { "virtue": 2, "reputation": 1 }
+            }
+          ]
+        },
+        {
+          "id": "ws-e2",
+          "title": "마왕퇴(馬王堆) 의서 전승",
+          "description": "오래된 의서 죽간(竹簡)을 발견합니다. 경맥 이론과 도인술(導引術)에 대한 귀중한 기록입니다.",
+          "probability": 0.4,
+          "choices": [
+            {
+              "text": "경맥 이론을 집중적으로 연구한다",
+              "delta": { "knowledge": 3, "stamina": -1 }
+            },
+            {
+              "text": "도인술을 직접 수련하여 양생에 활용한다",
+              "delta": { "stamina": 2, "medical": 1 }
+            }
+          ]
+        },
+        {
+          "id": "ws-e3",
+          "title": "문지(文摯)의 심리치료",
+          "description": "문지가 제민왕의 분노를 유도하여 병을 치료한 이야기를 듣습니다. 파격적이지만 위험한 치료법입니다.",
+          "probability": 0.3,
+          "choices": [
+            {
+              "text": "심리치료의 가능성에 주목한다",
+              "delta": { "medical": 2, "knowledge": 1 }
+            },
+            {
+              "text": "위험을 감수하는 치료보다 안전한 방법을 추구한다",
+              "delta": { "virtue": 2, "medical": 1 }
+            }
+          ]
+        }
+      ],
+      "transitionScene": {
+        "text": "전국시대의 혼란 속에서 의학 이론의 기초가 놓였습니다. 이제 진한시대로 들어갑니다.",
+        "historicalNote": "이 시기에 형성된 음양오행 사유와 경맥 이론은 이후 2천 년간 동양의학의 핵심 체계가 됩니다."
+      }
+    },
+    {
+      "id": "qin-han",
+      "order": 3,
+      "title": "진한시대(秦漢時代)",
+      "period": "BC 221 ~ AD 264",
+      "turns": 4,
+      "learningPoint": "동양의학의 기초 경전이 성립하고 임상의학이 크게 발전한 시기",
+      "description": "황제내경(黃帝內經)이 완성되고, 장중경(張仲景)이 상한론(傷寒論)을 저술하며, 화타(華佗)가 외과 수술의 전설을 남깁니다. 신농본초경(神農本草經)도 이 시기에 정리됩니다.",
+      "keywords": ["黃帝內經", "傷寒論", "張仲景", "華佗", "神農本草經", "淳于意", "難經", "麻沸散"],
+      "activityOverrides": {
+        "study-classics": {
+          "flavorTitle": "황제내경(黃帝內經)을 연구한다",
+          "flavorText": "동양의학의 최고 경전, 소문(素問)과 영추(靈樞)를 탐독한다.",
+          "bonusDelta": { "knowledge": 1 }
+        },
+        "clinical-practice": {
+          "flavorTitle": "상한론(傷寒論)의 변증을 실습한다",
+          "flavorText": "장중경의 육경변증(六經辨證)을 실제 환자에게 적용해 본다.",
+          "bonusDelta": { "medical": 1 }
+        },
+        "visit-master": {
+          "flavorTitle": "명의 화타(華佗)의 제자를 찾는다",
+          "flavorText": "마비산(麻沸散)과 오금희(五禽戲)를 전하는 의가를 만난다.",
+          "bonusDelta": { "medical": 1 }
+        },
+        "herb-gathering": {
+          "flavorTitle": "신농본초경의 약물을 확인한다",
+          "flavorText": "본초경에 기록된 365종의 약물을 직접 찾아 확인한다."
+        }
+      },
+      "events": [
+        {
+          "id": "qh-e1",
+          "title": "순우의(淳于意)의 진안(診案)",
+          "description": "순우의가 환자의 치료 기록을 체계적으로 남긴 '진적(診籍)'을 접합니다. 최초의 의안(醫案) 전통입니다.",
+          "probability": 0.5,
+          "choices": [
+            {
+              "text": "나도 치료 기록을 체계적으로 남기기 시작한다",
+              "delta": { "knowledge": 2, "medical": 1, "reputation": 1 }
+            },
+            {
+              "text": "기록보다 임상 경험 자체에 집중한다",
+              "delta": { "medical": 3, "stamina": -1 }
+            }
+          ]
+        },
+        {
+          "id": "qh-e2",
+          "title": "대역병 발생",
+          "description": "장중경이 상한론 서문에 기록했듯, 대가족이 역병으로 몰살당하는 참사를 목격합니다.",
+          "probability": 0.4,
+          "choices": [
+            {
+              "text": "역병 환자를 직접 치료하러 뛰어든다",
+              "delta": { "medical": 2, "virtue": 2, "stamina": -3 }
+            },
+            {
+              "text": "역병의 원인과 치료법을 연구하여 기록한다",
+              "delta": { "knowledge": 3, "reputation": 1 }
+            }
+          ]
+        },
+        {
+          "id": "qh-e3",
+          "title": "화타(華佗)의 외과 도전",
+          "description": "화타가 마비산으로 전신마취 후 복부 수술을 시행했다는 소식을 듣습니다.",
+          "probability": 0.4,
+          "choices": [
+            {
+              "text": "외과적 치료법을 배우려 시도한다",
+              "delta": { "medical": 3, "stamina": -2 }
+            },
+            {
+              "text": "내과적 치료로 수술 없이 치유하는 길을 택한다",
+              "delta": { "knowledge": 2, "virtue": 1 }
+            }
+          ]
+        },
+        {
+          "id": "qh-e4",
+          "title": "오금희(五禽戲) 전수",
+          "description": "화타가 창안한 다섯 동물 모방 체조를 배울 기회가 생깁니다.",
+          "probability": 0.3,
+          "choices": [
+            {
+              "text": "매일 수련하여 양생법으로 삼는다",
+              "delta": { "stamina": 3, "medical": 1 }
+            },
+            {
+              "text": "원리를 연구하여 도인술 이론으로 정리한다",
+              "delta": { "knowledge": 2, "reputation": 1 }
+            }
+          ]
+        }
+      ],
+      "transitionScene": {
+        "text": "진한시대에 동양의학의 경전들이 완성되었습니다. 이제 위진수당 시대로 들어갑니다.",
+        "historicalNote": "황제내경·상한론·신농본초경·난경은 후대 한의학의 '사대경전(四大經典)'으로 불리게 됩니다."
+      }
+    },
+    {
+      "id": "jin-sui-tang",
+      "order": 4,
+      "title": "위진수당(魏晉隋唐)",
+      "period": "265 ~ 960",
+      "turns": 3,
+      "learningPoint": "맥학·침구학이 전문화되고 임상 각과가 분화된 시기",
+      "description": "왕숙화(王叔和)가 맥경(脈經)을, 황보밀(皇甫謐)이 침구갑을경(甲乙經)을 정리합니다. 손사막(孫思邈)은 비급천금요방(備急千金要方)을 저술하며 의덕(醫德)을 강조합니다.",
+      "keywords": ["王叔和", "脈經", "皇甫謐", "甲乙經", "葛洪", "孫思邈", "千金要方", "大醫精誠", "巢元方", "新修本草"],
+      "activityOverrides": {
+        "study-classics": {
+          "flavorTitle": "맥경(脈經)과 갑을경(甲乙經)을 연구한다",
+          "flavorText": "맥진과 침구의 전문 경전을 깊이 탐독한다.",
+          "bonusDelta": { "knowledge": 1 }
+        },
+        "clinical-practice": {
+          "flavorTitle": "갈홍(葛洪)의 간편처방을 실습한다",
+          "flavorText": "주후비급방(肘後備急方)의 실용적 처방을 환자에게 적용한다."
+        },
+        "visit-master": {
+          "flavorTitle": "손사막(孫思邈)의 가르침을 구한다",
+          "flavorText": "약왕(藥王)으로 불리는 손사막의 의술과 의덕을 배운다.",
+          "bonusDelta": { "virtue": 1 }
+        },
+        "public-service": {
+          "flavorTitle": "대의정성(大醫精誠)의 정신을 실천한다",
+          "flavorText": "손사막이 말한 '의술은 인술'의 정신으로 백성을 돌본다.",
+          "bonusDelta": { "virtue": 1 }
+        }
+      },
+      "events": [
+        {
+          "id": "jst-e1",
+          "title": "대의정성(大醫精誠)의 가르침",
+          "description": "손사막의 대의정성 편을 접합니다. 의사의 자세와 윤리에 대한 깊은 가르침입니다.",
+          "probability": 0.5,
+          "choices": [
+            {
+              "text": "의덕을 최우선으로 삼겠다고 다짐한다",
+              "delta": { "virtue": 3, "reputation": 1 }
+            },
+            {
+              "text": "의덕도 중요하지만 의술 자체의 정진에 더 힘쓴다",
+              "delta": { "medical": 2, "knowledge": 1 }
+            }
+          ]
+        },
+        {
+          "id": "jst-e2",
+          "title": "제병원후론(諸病源候論) 연구",
+          "description": "소원방(巢元方)의 제병원후론을 접합니다. 질병의 원인과 증후를 체계적으로 분류한 최초의 병리학 전문서입니다.",
+          "probability": 0.4,
+          "choices": [
+            {
+              "text": "병인·병리를 체계적으로 연구한다",
+              "delta": { "knowledge": 3, "stamina": -1 }
+            },
+            {
+              "text": "증후를 통한 실제 진단법에 활용한다",
+              "delta": { "medical": 2, "knowledge": 1 }
+            }
+          ]
+        },
+        {
+          "id": "jst-e3",
+          "title": "신수본초(新修本草) 편찬 참여",
+          "description": "국가 차원에서 본초서를 새로 편찬하는 사업에 참여할 기회가 생깁니다.",
+          "probability": 0.3,
+          "choices": [
+            {
+              "text": "편찬 사업에 적극 참여한다",
+              "delta": { "knowledge": 2, "reputation": 2, "stamina": -2 }
+            },
+            {
+              "text": "편찬보다 현장 임상에 전념한다",
+              "delta": { "medical": 2, "virtue": 1 }
+            }
+          ]
+        }
+      ],
+      "transitionScene": {
+        "text": "의학의 각 분과가 전문화되고 대의정성의 정신이 확립되었습니다. 이제 송대로 들어갑니다.",
+        "historicalNote": "이 시기에 맥학·침구학·병리학이 독립 분과로 성립하고, 의사 윤리의 기틀이 놓였습니다."
+      }
+    },
+    {
+      "id": "song-dynasty",
+      "order": 5,
+      "title": "송대(宋代)",
+      "period": "960 ~ 1279",
+      "turns": 3,
+      "learningPoint": "의학 출판이 폭발하고 국가 의료 체계가 정비된 시기",
+      "description": "교정의서국(校正醫書局)이 설치되어 의서가 대량 간행되고, 태평혜민화제국방(太平惠民和劑局方)이 편찬됩니다. 상한론 연구가 부흥하고 운기학설(運氣學說)이 유행합니다.",
+      "keywords": ["校正醫書局", "局方", "太平聖惠方", "傷寒論 연구", "運氣學說", "解剖", "銅人"],
+      "activityOverrides": {
+        "study-classics": {
+          "flavorTitle": "교정의서국의 교정본을 연구한다",
+          "flavorText": "국가에서 교정·간행한 의서들을 체계적으로 공부한다.",
+          "bonusDelta": { "knowledge": 1 }
+        },
+        "clinical-practice": {
+          "flavorTitle": "국방(局方)의 처방을 실습한다",
+          "flavorText": "국가 표준 처방집의 처방들을 실제 환자에게 적용해 본다."
+        },
+        "academic-exchange": {
+          "flavorTitle": "상한론 연구회에 참여한다",
+          "flavorText": "상한론을 둘러싼 학술 토론에 참가한다.",
+          "bonusDelta": { "knowledge": 1 }
+        }
+      },
+      "events": [
+        {
+          "id": "sd-e1",
+          "title": "동인(銅人) 침구 모형 제작",
+          "description": "왕유일(王惟一)이 침구 경혈을 표시한 동인 모형을 제작했습니다. 혁신적인 의학 교육 도구입니다.",
+          "probability": 0.5,
+          "choices": [
+            {
+              "text": "동인 모형으로 침구학을 집중 수련한다",
+              "delta": { "medical": 3, "knowledge": 1 }
+            },
+            {
+              "text": "동인 제작의 원리와 경혈 이론을 연구한다",
+              "delta": { "knowledge": 3, "reputation": 1 }
+            }
+          ]
+        },
+        {
+          "id": "sd-e2",
+          "title": "국방(局方) 논쟁",
+          "description": "국가 표준 처방집이 환자 개인의 차이를 무시한다는 비판이 일어납니다.",
+          "probability": 0.4,
+          "choices": [
+            {
+              "text": "개인 맞춤 치료의 중요성을 주장한다",
+              "delta": { "medical": 2, "virtue": 1, "reputation": 1 }
+            },
+            {
+              "text": "표준화의 가치를 인정하고 보완책을 제시한다",
+              "delta": { "knowledge": 2, "reputation": 1 }
+            }
+          ]
+        },
+        {
+          "id": "sd-e3",
+          "title": "인체 해부 기록",
+          "description": "송대에 실제 인체 해부가 시행되어 존진도(存眞圖)가 그려졌습니다.",
+          "probability": 0.3,
+          "choices": [
+            {
+              "text": "해부학적 지식을 의학에 적극 활용한다",
+              "delta": { "medical": 2, "knowledge": 2, "stamina": -1 }
+            },
+            {
+              "text": "전통 장부론(臟腑論)의 관점에서 이해한다",
+              "delta": { "knowledge": 3 }
+            }
+          ]
+        }
+      ],
+      "transitionScene": {
+        "text": "의학 출판의 황금기가 지나고, 이제 학파 간 치열한 논쟁의 시대가 옵니다.",
+        "historicalNote": "송대의 대량 출판과 교정 사업은 고전 의서가 후대에 전해지는 결정적 계기가 되었습니다."
+      }
+    },
+    {
+      "id": "jin-yuan",
+      "order": 6,
+      "title": "금원시대(金元時代)",
+      "period": "1115 ~ 1368",
+      "turns": 4,
+      "learningPoint": "금원사대가가 등장하여 의학 학설이 혁신적으로 발전한 시기",
+      "description": "유완소(劉完素)·장종정(張從正)·이고(李杲)·주진형(朱震亨)의 금원사대가가 각자의 학설로 의학계를 혁신합니다. 고금이궤설(古今異軌說)이 제기되고, 의학 이론 논쟁이 활발해집니다.",
+      "keywords": ["金元四大家", "劉完素", "張從正", "李杲", "朱震亨", "火熱論", "攻邪論", "脾胃論", "滋陰論", "古今異軌"],
+      "activityOverrides": {
+        "study-classics": {
+          "flavorTitle": "금원사대가의 학설을 비교 연구한다",
+          "flavorText": "한랭파·공사파·보토파·자음파의 이론을 깊이 탐구한다.",
+          "bonusDelta": { "knowledge": 1 }
+        },
+        "clinical-practice": {
+          "flavorTitle": "사대가의 처방을 임상에 적용한다",
+          "flavorText": "각 학파의 대표 처방을 환자에게 시험해 본다.",
+          "bonusDelta": { "medical": 1 }
+        },
+        "academic-exchange": {
+          "flavorTitle": "학파 간 논쟁에 참여한다",
+          "flavorText": "한랭파와 자음파, 보토파와 공사파의 치열한 논쟁에 뛰어든다.",
+          "bonusDelta": { "reputation": 1 }
+        },
+        "visit-master": {
+          "flavorTitle": "사대가 중 한 명의 문하에 들어간다",
+          "flavorText": "금원사대가의 직전 제자를 찾아 사사한다.",
+          "bonusDelta": { "medical": 1 }
+        }
+      },
+      "events": [
+        {
+          "id": "jy-e1",
+          "title": "유완소(劉完素)의 화열론(火熱論)",
+          "description": "유완소가 화열(火熱)이 만병의 원인이라 주장합니다. 한량약(寒涼藥)으로 치료해야 한다는 혁신적 학설입니다.",
+          "probability": 0.5,
+          "choices": [
+            {
+              "text": "화열론에 동의하고 한량파(寒涼派)의 길을 간다",
+              "delta": { "knowledge": 3, "reputation": 1 }
+            },
+            {
+              "text": "한쪽에 치우치지 않고 다양한 관점을 유지한다",
+              "delta": { "knowledge": 1, "virtue": 1, "medical": 1 }
+            }
+          ]
+        },
+        {
+          "id": "jy-e2",
+          "title": "장종정(張從正)의 과감한 공사법",
+          "description": "장종정이 한토하(汗吐下) 삼법으로 사기(邪氣)를 과감히 공격하여 치료합니다. 위험하지만 효과적입니다.",
+          "probability": 0.5,
+          "choices": [
+            {
+              "text": "공사법(攻邪法)을 배워 실전에 활용한다",
+              "delta": { "medical": 3, "stamina": -1 }
+            },
+            {
+              "text": "환자의 정기를 보하는 것이 우선이라고 반박한다",
+              "delta": { "knowledge": 2, "virtue": 1 }
+            }
+          ]
+        },
+        {
+          "id": "jy-e3",
+          "title": "이고(李杲)의 비위론(脾胃論)",
+          "description": "이고가 비위(脾胃)가 건강의 근본이라는 보토파(補土派) 학설을 세웁니다.",
+          "probability": 0.5,
+          "choices": [
+            {
+              "text": "비위론을 깊이 연구하고 보중익기탕을 수련한다",
+              "delta": { "knowledge": 2, "medical": 2 }
+            },
+            {
+              "text": "비위뿐 아니라 다른 장부도 함께 고려한다",
+              "delta": { "knowledge": 2, "virtue": 1 }
+            }
+          ]
+        },
+        {
+          "id": "jy-e4",
+          "title": "주진형(朱震亨)의 자음론(滋陰論)",
+          "description": "주진형이 '양은 항상 남고 음은 항상 부족하다(陽常有餘 陰常不足)'라고 주장하며 자음강화(滋陰降火)를 강조합니다.",
+          "probability": 0.5,
+          "choices": [
+            {
+              "text": "자음파의 이론을 받아들여 임상에 적용한다",
+              "delta": { "knowledge": 2, "medical": 2, "stamina": -1 }
+            },
+            {
+              "text": "사대가의 학설을 종합하여 자신만의 체계를 세운다",
+              "delta": { "knowledge": 3, "reputation": 2, "stamina": -2 }
+            }
+          ]
+        }
+      ],
+      "transitionScene": {
+        "text": "금원사대가의 학설 경쟁이 의학을 한 단계 끌어올렸습니다. 이제 명대로 들어갑니다.",
+        "historicalNote": "금원사대가는 각기 다른 관점에서 병인과 치료를 재정립하여, 의학사의 가장 큰 학술적 전환점을 만들었습니다."
+      }
+    },
+    {
+      "id": "ming-dynasty",
+      "order": 7,
+      "title": "명대(明代)",
+      "period": "1368 ~ 1644",
+      "turns": 3,
+      "learningPoint": "본초학의 집대성과 온역론의 등장으로 의학이 새롭게 발전한 시기",
+      "description": "이시진(李時珍)이 27년간 800여 종의 문헌을 섭렵하여 본초강목(本草綱目)을 완성합니다. 장경악(張景岳)은 경악전서를 저술하고, 오유성(吳有性)은 온역론(溫疫論)에서 전염병의 새로운 원인을 제시합니다.",
+      "keywords": ["李時珍", "本草綱目", "張景岳", "景岳全書", "吳有性", "溫疫論", "戾氣", "命門學說"],
+      "activityOverrides": {
+        "study-classics": {
+          "flavorTitle": "본초강목(本草綱目)을 연구한다",
+          "flavorText": "1,892종의 약물이 수록된 방대한 본초서를 탐독한다.",
+          "bonusDelta": { "knowledge": 1 }
+        },
+        "herb-gathering": {
+          "flavorTitle": "이시진처럼 직접 약초를 확인한다",
+          "flavorText": "본초강목의 기록을 실제 약초와 대조하며 확인한다.",
+          "bonusDelta": { "medical": 1 }
+        },
+        "clinical-practice": {
+          "flavorTitle": "온역(溫疫) 환자를 치료한다",
+          "flavorText": "전염병 환자를 상한론이 아닌 새로운 관점에서 치료한다."
+        },
+        "visit-master": {
+          "flavorTitle": "경악전서(景岳全書)를 전수받는다",
+          "flavorText": "장경악 계열의 의가를 찾아 온보(溫補) 학설을 배운다."
+        }
+      },
+      "events": [
+        {
+          "id": "md-e1",
+          "title": "이시진(李時珍)의 본초 탐사",
+          "description": "이시진이 직접 산야를 돌며 약물을 확인하고 본초강목을 집필 중입니다. 함께 참여할 기회입니다.",
+          "probability": 0.5,
+          "choices": [
+            {
+              "text": "함께 산야를 돌며 본초 조사에 참여한다",
+              "delta": { "medical": 2, "knowledge": 2, "stamina": -2 }
+            },
+            {
+              "text": "문헌 정리와 교정 작업을 돕는다",
+              "delta": { "knowledge": 3, "reputation": 1 }
+            }
+          ]
+        },
+        {
+          "id": "md-e2",
+          "title": "온역(溫疫) 대유행",
+          "description": "오유성이 '여기(戾氣)'라는 새로운 전염 원인을 제시합니다. 상한론으로는 설명되지 않는 전염병입니다.",
+          "probability": 0.4,
+          "choices": [
+            {
+              "text": "온역론의 새 이론을 받아들여 전염병에 대응한다",
+              "delta": { "medical": 2, "knowledge": 2, "virtue": 1, "stamina": -2 }
+            },
+            {
+              "text": "기존 상한론의 틀 안에서 치료법을 모색한다",
+              "delta": { "knowledge": 2, "medical": 1 }
+            }
+          ]
+        },
+        {
+          "id": "md-e3",
+          "title": "명문학설(命門學說) 논쟁",
+          "description": "장경악이 명문(命門)의 중요성을 강조하며 온보파(溫補派)를 주장합니다.",
+          "probability": 0.4,
+          "choices": [
+            {
+              "text": "명문학설을 깊이 연구한다",
+              "delta": { "knowledge": 3, "stamina": -1 }
+            },
+            {
+              "text": "실제 환자에게 온보법을 적용해 효과를 확인한다",
+              "delta": { "medical": 3 }
+            }
+          ]
+        }
+      ],
+      "transitionScene": {
+        "text": "본초학이 집대성되고 전염병에 대한 새로운 인식이 생겼습니다. 이제 청대로 들어갑니다.",
+        "historicalNote": "본초강목은 동아시아 약물학의 결정체이며, 온역론은 전염병에 대한 인식의 전환점이 되었습니다."
+      }
+    },
+    {
+      "id": "qing-dynasty",
+      "order": 8,
+      "title": "청대(清代)",
+      "period": "1616 ~ 1911",
+      "turns": 3,
+      "learningPoint": "온병학파가 확립되고 서양의학과의 만남이 시작된 시기",
+      "description": "엽천사(葉天士)·오국통(吳鞠通) 등이 온병학(溫病學)을 확립합니다. 종두접종(種痘接種)이 보급되고, 변증논치(辨證論治)의 원칙이 확립됩니다. 서양의학의 유입이 시작됩니다.",
+      "keywords": ["葉天士", "吳鞠通", "溫病學", "衛氣營血辨證", "三焦辨證", "種痘", "辨證論治", "中西醫匯通"],
+      "activityOverrides": {
+        "study-classics": {
+          "flavorTitle": "온병학(溫病學)을 연구한다",
+          "flavorText": "위기영혈변증(衛氣營血辨證)과 삼초변증(三焦辨證)을 공부한다.",
+          "bonusDelta": { "knowledge": 1 }
+        },
+        "clinical-practice": {
+          "flavorTitle": "온병 환자를 변증론치한다",
+          "flavorText": "온병학의 새로운 변증 체계로 열병 환자를 치료한다.",
+          "bonusDelta": { "medical": 1 }
+        },
+        "academic-exchange": {
+          "flavorTitle": "서양의학과의 교류를 시도한다",
+          "flavorText": "중서의회통(中西醫匯通)의 가능성을 탐색한다.",
+          "bonusDelta": { "reputation": 1 }
+        }
+      },
+      "events": [
+        {
+          "id": "qd-e1",
+          "title": "엽천사(葉天士)의 위기영혈 변증",
+          "description": "엽천사가 온병의 진행을 위(衛)→기(氣)→영(營)→혈(血)의 4단계로 나누어 설명합니다.",
+          "probability": 0.5,
+          "choices": [
+            {
+              "text": "위기영혈변증을 집중적으로 수련한다",
+              "delta": { "knowledge": 3, "medical": 1 }
+            },
+            {
+              "text": "상한론의 육경변증과 비교 연구한다",
+              "delta": { "knowledge": 3, "reputation": 1, "stamina": -1 }
+            }
+          ]
+        },
+        {
+          "id": "qd-e2",
+          "title": "종두법(種痘法) 보급",
+          "description": "천연두를 예방하는 인두법(人痘法)이 보급됩니다. 예방의학의 획기적 발전입니다.",
+          "probability": 0.4,
+          "choices": [
+            {
+              "text": "적극적으로 종두법을 배워 백성에게 보급한다",
+              "delta": { "medical": 2, "virtue": 2, "reputation": 1 }
+            },
+            {
+              "text": "종두법의 원리를 이론적으로 분석한다",
+              "delta": { "knowledge": 3 }
+            }
+          ]
+        },
+        {
+          "id": "qd-e3",
+          "title": "서양의학의 충격",
+          "description": "서양에서 해부학·외과학이 전해져 옵니다. 전통의학의 정체성에 대한 고민이 시작됩니다.",
+          "probability": 0.4,
+          "choices": [
+            {
+              "text": "서양의학의 장점을 받아들여 중서의회통을 추구한다",
+              "delta": { "knowledge": 2, "medical": 1, "reputation": 2, "stamina": -1 }
+            },
+            {
+              "text": "전통의학의 독자성을 지키며 깊이를 더한다",
+              "delta": { "knowledge": 2, "virtue": 2 }
+            }
+          ]
+        }
+      ],
+      "transitionScene": {
+        "text": "중국 의학이 온병학으로 또 한번 발전하고, 서양과의 만남이 시작되었습니다. 이제 한국 의학의 흐름으로 넘어갑니다.",
+        "historicalNote": "온병학은 상한론과 함께 외감병 치료의 양대 축이 되었으며, 중서의회통 논쟁은 지금까지 이어지고 있습니다."
+      }
+    },
+    {
+      "id": "goryeo",
+      "order": 9,
+      "title": "고려시대(高麗時代)",
+      "period": "918 ~ 1392",
+      "turns": 2,
+      "learningPoint": "한국 의학이 중국 의학을 수용하면서 향약(鄕藥) 중심의 자주적 발전을 시작한 시기",
+      "description": "중국에서 많은 의방서(醫方書)가 수입되면서 의학이 발전합니다. 고려 중기부터 향약(鄕藥) 연구가 시작되어, 향약구급방(鄕藥救急方)이 편찬됩니다. 자국산 약재를 활용한 의학의 자주적 발전이 시작됩니다.",
+      "keywords": ["鄕藥救急方", "鄕藥", "自主的 발전", "三和子鄕藥方", "濟衆立效方"],
+      "activityOverrides": {
+        "study-classics": {
+          "flavorTitle": "중국에서 전래된 의서를 연구한다",
+          "flavorText": "송대에서 전해진 의서들을 탐독하며 중국 의학을 수용한다."
+        },
+        "herb-gathering": {
+          "flavorTitle": "향약(鄕藥)을 채집한다",
+          "flavorText": "우리 땅에서 나는 약초를 찾아 그 효능을 확인한다.",
+          "bonusDelta": { "medical": 1 }
+        },
+        "public-service": {
+          "flavorTitle": "향약으로 백성을 치료한다",
+          "flavorText": "수입 약재 대신 향약으로 백성의 급한 병을 치료한다.",
+          "bonusDelta": { "virtue": 1 }
+        },
+        "visit-master": {
+          "flavorTitle": "민간 고로(古老)를 찾아 경험방을 수집한다",
+          "flavorText": "민간에서 전해오는 향약 경험방을 수집한다.",
+          "bonusDelta": { "medical": 1 }
+        }
+      },
+      "events": [
+        {
+          "id": "gr-e1",
+          "title": "향약구급방(鄕藥救急方) 편찬",
+          "description": "우리 땅의 약재로 급한 병을 치료하는 방서를 편찬하는 사업에 참여할 기회입니다.",
+          "probability": 0.5,
+          "choices": [
+            {
+              "text": "향약 경험방 수집에 적극 참여한다",
+              "delta": { "medical": 2, "knowledge": 1, "virtue": 1, "reputation": 1 }
+            },
+            {
+              "text": "중국 의서의 내용을 우리 실정에 맞게 번역한다",
+              "delta": { "knowledge": 3, "reputation": 1 }
+            }
+          ]
+        },
+        {
+          "id": "gr-e2",
+          "title": "송나라와의 의학 교류",
+          "description": "고려가 송에 침경(針經)을 보내고, 송의 의서를 수입하는 교류가 활발합니다.",
+          "probability": 0.4,
+          "choices": [
+            {
+              "text": "송의 최신 의서를 입수하여 연구한다",
+              "delta": { "knowledge": 3, "stamina": -1 }
+            },
+            {
+              "text": "우리 고유의 의술을 발전시키는 데 집중한다",
+              "delta": { "medical": 2, "virtue": 1 }
+            }
+          ]
+        }
+      ],
+      "transitionScene": {
+        "text": "고려에서 향약의 자주적 발전이 시작되었습니다. 이제 조선시대로 들어갑니다.",
+        "historicalNote": "향약구급방은 한국 의학이 자주적 발전의 길로 들어선 상징적 의서입니다."
+      }
+    },
+    {
+      "id": "joseon",
+      "order": 10,
+      "title": "조선시대(朝鮮時代)",
+      "period": "1392 ~ 1897",
+      "turns": 4,
+      "learningPoint": "한국 의학이 독자적 체계를 완성하고 세계적 의서를 편찬한 시기",
+      "description": "향약집성방(鄕藥集成方)·의방유취(醫方類聚)로 의학 지식을 집대성하고, 허준(許浚)이 동의보감(東醫寶鑑)을 완성합니다. 사암(舍巖)이 독창적 침법을 창안하고, 이제마(李濟馬)가 사상의학(四象醫學)이라는 세계 최초의 체질의학을 제창합니다.",
+      "keywords": ["鄕藥集成方", "醫方類聚", "許浚", "東醫寶鑑", "舍巖鍼法", "李濟馬", "四象醫學", "李圭晙", "扶陽論"],
+      "activityOverrides": {
+        "study-classics": {
+          "flavorTitle": "동의보감(東醫寶鑑)을 연구한다",
+          "flavorText": "허준이 집대성한 동양의학의 백과전서를 탐독한다.",
+          "bonusDelta": { "knowledge": 1 }
+        },
+        "clinical-practice": {
+          "flavorTitle": "사암침법(舍巖鍼法)을 수련한다",
+          "flavorText": "오행의 상생상극 원리를 활용한 독창적 침법을 익힌다.",
+          "bonusDelta": { "medical": 1 }
+        },
+        "visit-master": {
+          "flavorTitle": "허준(許浚)의 의학 전통을 이어받는다",
+          "flavorText": "동의보감의 정신을 계승하는 의가를 찾아 사사한다.",
+          "bonusDelta": { "virtue": 1 }
+        },
+        "academic-exchange": {
+          "flavorTitle": "사상의학(四象醫學) 논쟁에 참여한다",
+          "flavorText": "이제마의 체질의학이 기존 의학과 어떻게 다른지 토론한다.",
+          "bonusDelta": { "reputation": 1 }
+        },
+        "herb-gathering": {
+          "flavorTitle": "향약본초(鄕藥本草)를 정리한다",
+          "flavorText": "조선의 향약 자원을 체계적으로 조사하고 분류한다."
+        }
+      },
+      "events": [
+        {
+          "id": "js-e1",
+          "title": "허준(許浚)의 동의보감 편찬",
+          "description": "허준이 선조의 명을 받아 동의보감을 편찬합니다. 이론과 임상, 향약을 아우르는 대작입니다.",
+          "probability": 0.5,
+          "choices": [
+            {
+              "text": "동의보감 편찬에 참여하여 자료를 제공한다",
+              "delta": { "knowledge": 2, "reputation": 2, "virtue": 1, "stamina": -2 }
+            },
+            {
+              "text": "동의보감의 내용을 임상에 바로 적용한다",
+              "delta": { "medical": 3, "knowledge": 1 }
+            }
+          ]
+        },
+        {
+          "id": "js-e2",
+          "title": "사암(舍巖)의 침법 전수",
+          "description": "오행의 상생상극 원리를 침구에 독창적으로 적용한 사암침법을 배울 기회입니다.",
+          "probability": 0.4,
+          "choices": [
+            {
+              "text": "사암침법을 집중적으로 수련한다",
+              "delta": { "medical": 3, "knowledge": 1, "stamina": -1 }
+            },
+            {
+              "text": "사암침법의 이론적 원리를 분석한다",
+              "delta": { "knowledge": 3, "reputation": 1 }
+            }
+          ]
+        },
+        {
+          "id": "js-e3",
+          "title": "이제마(李濟馬)의 사상의학 제창",
+          "description": "이제마가 사람을 태양·태음·소양·소음 네 체질로 나누는 사상의학을 제창합니다. 5~6천 년 의학경험을 통한 한국적 대발명입니다.",
+          "probability": 0.5,
+          "choices": [
+            {
+              "text": "사상의학을 깊이 연구하고 체질 진단을 수련한다",
+              "delta": { "knowledge": 3, "medical": 2, "reputation": 1, "stamina": -2 }
+            },
+            {
+              "text": "전통 변증론치의 틀 안에서 체질을 참고한다",
+              "delta": { "knowledge": 2, "medical": 1, "virtue": 1 }
+            }
+          ]
+        },
+        {
+          "id": "js-e4",
+          "title": "이규준(李圭晙)의 부양론(扶陽論)",
+          "description": "이규준이 양(陽)을 부지하는 것이 치료의 대법이라는 부양론을 제창합니다. 금원사대가 이래의 자음강화론을 정면으로 반박합니다.",
+          "probability": 0.4,
+          "choices": [
+            {
+              "text": "부양론의 독창성에 주목하고 깊이 연구한다",
+              "delta": { "knowledge": 3, "reputation": 1 }
+            },
+            {
+              "text": "부양과 자음 양쪽을 겸비하는 임상을 추구한다",
+              "delta": { "medical": 2, "knowledge": 1, "virtue": 1 }
+            }
+          ]
+        }
+      ],
+      "transitionScene": {
+        "text": "조선의 의학은 동의보감과 사상의학으로 세계 의학사에 독보적 위치를 차지합니다.",
+        "historicalNote": "동의보감은 2009년 유네스코 세계기록유산에 등재되었으며, 사상의학은 세계 최초의 체질의학으로 평가됩니다."
+      }
+    }
+  ]
+}

@@ -7,7 +7,7 @@
       "subtitle": "어디서든 통하는 만능 의원",
       "priority": 1,
       "description": "특정 한 길에 치우치지 않고 시대의 요구에 따라 균형 있게 성장한 유형입니다.",
-      "longDescription": "당신은 균형성장형(均衡成長型) 의원입니다. 특정 한 방향보다 조화와 균형을 중시하며, 시대마다 다른 의학적 요구에 유연하게 대응했습니다.",
+      "longDescription": "당신은 균형성장형(均衡成長型) 의원입니다. 의술·학식·덕행·명성 어느 것 하나 소홀히 하지 않고, 시대마다 다른 의학적 요구에 유연하게 대응했습니다. 허준처럼 이론과 임상, 문헌 정리와 백성 의료를 모두 아우르는 조화의 길입니다.",
       "summaryKeywords": ["균형", "조화", "유연한 대응"],
       "reviewKeywords": ["黃帝內經", "東醫寶鑑", "의학의 다면성"],
       "historicalMatch": {
@@ -16,87 +16,88 @@
       },
       "rule": {
         "type": "range",
-        "maxMinusMinLte": 2
+        "keys": ["medical", "knowledge", "virtue", "reputation"],
+        "maxMinusMinLte": 15
       }
     },
     {
-      "id": "classic-research",
-      "title": "경전연구형(經典硏究型)",
-      "nickname": "경전 덕후형",
-      "subtitle": "고전과 이론에 강한 학구파 의원",
+      "id": "medical-master",
+      "title": "의술대가형(醫術大家型)",
+      "nickname": "실전 임상 달인형",
+      "subtitle": "진료와 치료의 달인",
       "priority": 2,
-      "description": "이론과 학설, 고전 체계를 중시하며 의학사의 구조를 깊이 이해하는 유형입니다.",
-      "longDescription": "당신은 경전연구형(經典硏究型) 의원입니다. 고전과 학설의 체계를 중시하며, 의학사를 학문적 구조 속에서 이해하는 성향이 강합니다.",
-      "summaryKeywords": ["고전", "학설", "체계 이해"],
-      "reviewKeywords": ["金元四大家", "陰陽五行", "辨證論治"],
+      "description": "환자를 직접 만나 치료하며 의술의 경지를 높인 실전파 의원입니다.",
+      "longDescription": "당신은 의술대가형(醫術大家型) 의원입니다. 이론보다 실전, 서재보다 진료실을 택하며 환자와 직접 맞서는 임상의 길을 걸었습니다. 화타의 신묘한 수술, 편작의 예리한 진단처럼 의술 자체의 깊이를 추구합니다.",
+      "summaryKeywords": ["의술", "임상", "실전"],
+      "reviewKeywords": ["華佗", "扁鵲", "望聞問切", "臨床"],
+      "historicalMatch": {
+        "name": "화타(華佗)",
+        "reason": "마비산으로 전신마취 수술을 시행하고 오금희를 창안한 전설적 의술의 대가입니다."
+      },
+      "rule": {
+        "type": "top-score",
+        "primary": "medical",
+        "secondaryPreferred": ["knowledge"]
+      }
+    },
+    {
+      "id": "scholar-type",
+      "title": "경전학자형(經典學者型)",
+      "nickname": "경전 덕후형",
+      "subtitle": "이론과 학설의 깊이를 파는 학구파",
+      "priority": 3,
+      "description": "경전과 학설을 깊이 파고들어 의학 이론의 체계를 세우는 유형입니다.",
+      "longDescription": "당신은 경전학자형(經典學者型) 의원입니다. 음양오행, 경락, 병리학설을 깊이 연구하며 의학의 이론적 기반을 다지는 길을 걸었습니다. 금원사대가처럼 독자적 학설을 세울 수 있는 잠재력을 가졌습니다.",
+      "summaryKeywords": ["학식", "이론", "학설"],
+      "reviewKeywords": ["金元四大家", "陰陽五行", "辨證論治", "黃帝內經"],
       "historicalMatch": {
         "name": "유완소(劉完素)",
-        "reason": "황제내경(黃帝內經)의 이론을 깊이 파고들어 화열병기(火熱病機)라는 독자적 학설을 세운 이론의 대가입니다."
+        "reason": "황제내경의 이론을 깊이 파고들어 화열론(火熱論)이라는 독자적 학설을 세운 이론의 대가입니다."
       },
       "rule": {
         "type": "top-score",
-        "primary": "academicReputation",
-        "secondaryPreferred": ["textUnderstanding"]
+        "primary": "knowledge",
+        "secondaryPreferred": ["medical", "reputation"]
       }
     },
     {
-      "id": "text-compilation",
-      "title": "문헌집성형(文獻集成型)",
-      "nickname": "의서 편찬 장인형",
-      "subtitle": "지식을 모으고 정리하는 체계파 의원",
-      "priority": 3,
-      "description": "의서를 읽고 정리하며 시대별 지식의 흐름을 연결하는 데 강한 유형입니다.",
-      "longDescription": "당신은 문헌집성형(文獻集成型) 의원입니다. 의서를 탐독하고 정리하며, 시대별 지식을 축적하고 연결하는 힘이 돋보입니다.",
-      "summaryKeywords": ["문헌", "정리", "집성"],
-      "reviewKeywords": ["本草綱目", "醫書 간행", "校正醫書局"],
-      "historicalMatch": {
-        "name": "이시진(李時珍)",
-        "reason": "27년간 800여 종의 문헌을 섭렵하며 본초강목(本草綱目)을 완성한 문헌 정리의 결정체입니다."
-      },
-      "rule": {
-        "type": "top-score",
-        "primary": "textUnderstanding",
-        "secondaryPreferred": ["academicReputation", "clinicalTrust"]
-      }
-    },
-    {
-      "id": "clinical-practice",
-      "title": "임상실천형(臨床實踐型)",
-      "nickname": "실전 임상 돌격형",
-      "subtitle": "현장에서 답을 찾는 행동파 의원",
+      "id": "virtuous-healer",
+      "title": "의덕인술형(醫德仁術型)",
+      "nickname": "백성의 의원형",
+      "subtitle": "백성 곁에서 의술을 실천하는 인술파",
       "priority": 4,
-      "description": "현장 진료와 실제 치료를 중시하며 질병 상황에 직접 대응하는 힘이 강한 유형입니다.",
-      "longDescription": "당신은 임상실천형(臨床實踐型) 의원입니다. 실제 환자와 질병 상황에 직접 맞서며, 현장에서 의술을 실천하는 성향이 두드러집니다.",
-      "summaryKeywords": ["임상", "현장", "실천"],
-      "reviewKeywords": ["傷寒雜病論", "望聞問切", "華佗"],
-      "historicalMatch": {
-        "name": "장종정(張從正)",
-        "reason": "이론보다 현장을 중시하며 과감한 공사법(攻邪法)으로 환자를 직접 치료한 실전파 의가입니다."
-      },
-      "rule": {
-        "type": "top-score",
-        "primary": "clinicalTrust",
-        "secondaryPreferred": ["publicFavor"]
-      }
-    },
-    {
-      "id": "medical-ethics-public",
-      "title": "의덕민본형(醫德民本型)",
-      "nickname": "백성 구휼 MVP형",
-      "subtitle": "백성 곁에서 의술을 실천하는 인술파 의원",
-      "priority": 5,
-      "description": "의학을 백성의 삶 가까이에서 실천하며 구휼과 생활 의료를 중시하는 유형입니다.",
-      "longDescription": "당신은 의덕민본형(醫德民本型) 의원입니다. 백성과 가까운 자리에서 의학을 실천하며, 민생과 구휼, 생활 의료를 중시하는 성향이 강합니다.",
-      "summaryKeywords": ["의덕", "민생", "구휼"],
-      "reviewKeywords": ["大醫精誠", "鄕藥", "民生 의료"],
+      "description": "의덕(醫德)을 최우선으로 삼고 백성의 고통에 응답하는 의원입니다.",
+      "longDescription": "당신은 의덕인술형(醫德仁術型) 의원입니다. 대의정성(大醫精誠)의 정신을 실천하며, 가난한 백성과 어려운 환자를 외면하지 않는 인술의 길을 걸었습니다.",
+      "summaryKeywords": ["의덕", "인술", "봉사"],
+      "reviewKeywords": ["大醫精誠", "孫思邈", "鄕藥", "民生 의료"],
       "historicalMatch": {
         "name": "손사막(孫思邈)",
         "reason": "대의정성(大醫精誠)을 저술하며 '의술은 인술'이라는 정신을 실천한 의덕의 상징입니다."
       },
       "rule": {
         "type": "top-score",
-        "primary": "publicFavor",
-        "secondaryPreferred": ["clinicalTrust"]
+        "primary": "virtue",
+        "secondaryPreferred": ["medical"]
+      }
+    },
+    {
+      "id": "famous-physician",
+      "title": "명의명성형(名醫名聲型)",
+      "nickname": "의학계 셀러브리티형",
+      "subtitle": "학술 교류와 명성으로 의학을 이끄는 의원",
+      "priority": 5,
+      "description": "학술 교류와 저술로 이름을 널리 알리며 의학의 발전을 이끄는 유형입니다.",
+      "longDescription": "당신은 명의명성형(名醫名聲型) 의원입니다. 학술 토론과 교류, 의서 편찬에 적극적으로 참여하여 세상에 이름을 알리고, 그 영향력으로 의학 발전에 기여합니다.",
+      "summaryKeywords": ["명성", "교류", "영향력"],
+      "reviewKeywords": ["學術交流", "醫書 편찬", "李時珍"],
+      "historicalMatch": {
+        "name": "이시진(李時珍)",
+        "reason": "27년간 800여 종의 문헌을 섭렵하며 본초강목(本草綱目)을 완성해 세계적 명성을 얻은 본초학의 거장입니다."
+      },
+      "rule": {
+        "type": "top-score",
+        "primary": "reputation",
+        "secondaryPreferred": ["knowledge"]
       }
     }
   ],
@@ -105,10 +106,10 @@
       "id": "systematizer",
       "title": "체계화거장형(體系化巨匠型)",
       "nickname": "지식 아키텍트형",
-      "subtitle": "이론과 문헌을 융합해 체계를 세우는 의원",
-      "description": "학술 이론과 문헌 정리 능력이 모두 뛰어나, 의학 지식을 하나의 체계로 완성하는 유형입니다.",
-      "longDescription": "당신은 체계화거장형(體系化巨匠型) 의원입니다. 깊은 이론적 소양과 방대한 문헌 정리 능력을 겸비하여, 흩어진 의학 지식을 하나의 거대한 체계로 통합하는 힘을 가졌습니다.",
-      "summaryKeywords": ["체계화", "이론+문헌", "통합"],
+      "subtitle": "의술과 학식을 융합해 체계를 세우는 의원",
+      "description": "뛰어난 의술과 깊은 학식을 겸비하여 의학 지식을 하나의 체계로 완성하는 유형입니다.",
+      "longDescription": "당신은 체계화거장형(體系化巨匠型) 의원입니다. 임상 경험과 이론적 깊이를 겸비하여, 흩어진 의학 지식을 하나의 거대한 체계로 통합하는 힘을 가졌습니다.",
+      "summaryKeywords": ["체계화", "의술+학식", "통합"],
       "reviewKeywords": ["傷寒論", "黃帝內經", "醫學 체계화"],
       "historicalMatch": {
         "name": "장중경(張仲景)",
@@ -116,18 +117,18 @@
       },
       "rule": {
         "type": "combo",
-        "keys": ["academicReputation", "textUnderstanding"],
-        "minEach": 8
+        "keys": ["medical", "knowledge"],
+        "minEach": 40
       }
     },
     {
       "id": "field-healer",
       "title": "현장구휼형(現場救恤型)",
       "nickname": "현장 구호 영웅형",
-      "subtitle": "임상 실력과 백성 사랑을 겸비한 의원",
-      "description": "뛰어난 임상 실력으로 백성 곁에서 직접 질병에 맞서는 현장형 의원입니다.",
-      "longDescription": "당신은 현장구휼형(現場救恤型) 의원입니다. 탁월한 임상 감각과 백성을 향한 따뜻한 마음을 동시에 갖추어, 가장 어려운 곳에서 가장 큰 힘을 발휘합니다.",
-      "summaryKeywords": ["현장", "임상+민생", "구휼"],
+      "subtitle": "의술과 덕행을 겸비한 의원",
+      "description": "뛰어난 의술로 백성 곁에서 직접 질병에 맞서는 현장형 의원입니다.",
+      "longDescription": "당신은 현장구휼형(現場救恤型) 의원입니다. 탁월한 의술과 백성을 향한 따뜻한 마음을 동시에 갖추어, 가장 어려운 곳에서 가장 큰 힘을 발휘합니다.",
+      "summaryKeywords": ["현장", "의술+덕행", "구휼"],
       "reviewKeywords": ["孫思邈", "備急千金要方", "醫德"],
       "historicalMatch": {
         "name": "손사막(孫思邈)",
@@ -135,34 +136,53 @@
       },
       "rule": {
         "type": "combo",
-        "keys": ["clinicalTrust", "publicFavor"],
-        "minEach": 8
+        "keys": ["medical", "virtue"],
+        "minEach": 40
       }
     },
     {
-      "id": "theory-practice",
-      "title": "이론실전겸비형(理論實踐兼備型)",
-      "nickname": "만능 학자 의원형",
-      "subtitle": "이론과 실전을 모두 잡은 의원",
-      "description": "깊은 학술적 이해를 바탕으로 현장에서도 뛰어난 실력을 발휘하는 희귀한 유형입니다.",
-      "longDescription": "당신은 이론실전겸비형(理論實踐兼備型) 의원입니다. 학문적 깊이와 현장 임상 능력을 모두 갖춘 드문 유형으로, 이론이 곧 실전이 되는 경지에 도달했습니다.",
-      "summaryKeywords": ["이론+실전", "겸비", "드문 유형"],
-      "reviewKeywords": ["脾胃論", "辨證論治", "學說과 臨床"],
+      "id": "innovation-pioneer",
+      "title": "혁신선구자형(革新先驅者型)",
+      "nickname": "의학 혁명가형",
+      "subtitle": "새로운 학설과 명성으로 의학을 혁신하는 의원",
+      "description": "깊은 학식과 높은 명성을 바탕으로 의학의 새로운 지평을 여는 혁신가입니다.",
+      "longDescription": "당신은 혁신선구자형(革新先驅者型) 의원입니다. 금원사대가처럼 기존 학설에 도전하고 새로운 이론을 세우며, 그 영향력으로 의학의 방향을 바꾸는 혁신의 길을 걸었습니다.",
+      "summaryKeywords": ["혁신", "학식+명성", "선구자"],
+      "reviewKeywords": ["金元四大家", "四象醫學", "學說 혁신"],
       "historicalMatch": {
-        "name": "이고(李杲)",
-        "reason": "비위론(脾胃論)이라는 독자적 학설을 세우면서도 임상에서 뛰어난 성과를 낸 이론-실전 겸비형 의가입니다."
+        "name": "이제마(李濟馬)",
+        "reason": "사상의학(四象醫學)이라는 세계 최초의 체질의학을 제창하여 동양의학에 새로운 지평을 연 혁신가입니다."
       },
       "rule": {
         "type": "combo",
-        "keys": ["academicReputation", "clinicalTrust"],
-        "minEach": 8
+        "keys": ["knowledge", "reputation"],
+        "minEach": 40
+      }
+    },
+    {
+      "id": "peoples-champion",
+      "title": "민생수호형(民生守護型)",
+      "nickname": "백성의 챔피언형",
+      "subtitle": "덕행과 명성으로 백성의 건강을 지키는 의원",
+      "description": "높은 덕행과 명성을 겸비하여 백성의 건강을 제도적으로 지키는 의원입니다.",
+      "longDescription": "당신은 민생수호형(民生守護型) 의원입니다. 개인의 치료를 넘어, 영향력과 덕행으로 의료 체계를 개선하고 백성의 건강을 지키는 큰 그림을 그립니다.",
+      "summaryKeywords": ["민생", "덕행+명성", "제도"],
+      "reviewKeywords": ["鄕藥救急方", "太平惠民", "種痘法 보급"],
+      "historicalMatch": {
+        "name": "허준(許浚)",
+        "reason": "왕명을 받아 동의보감을 편찬하고 향약으로 백성의 건강을 지킨 민생 의학의 상징입니다."
+      },
+      "rule": {
+        "type": "combo",
+        "keys": ["virtue", "reputation"],
+        "minEach": 40
       }
     }
   ],
   "scorePriorityOrder": [
-    "textUnderstanding",
-    "clinicalTrust",
-    "academicReputation",
-    "publicFavor"
+    "knowledge",
+    "medical",
+    "virtue",
+    "reputation"
   ]
 }
