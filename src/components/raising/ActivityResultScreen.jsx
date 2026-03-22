@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import StatPanel from "./StatPanel";
 
 const STAT_LABELS = {
@@ -65,9 +65,12 @@ export default function ActivityResultScreen({ game }) {
   const delta = game.lastDelta || {};
   const deltaEntries = Object.entries(delta).filter(([, v]) => v !== 0);
 
-  // 한 줄 일기
+  // 한 줄 일기 (useMemo로 리렌더 시 변경 방지)
   const templates = DIARY_TEMPLATES[game.selectedActivity] || ["오늘도 한 걸음 나아갔다."];
-  const diary = templates[Math.floor(Math.random() * templates.length)];
+  const diary = useMemo(
+    () => templates[Math.floor(Math.random() * templates.length)],
+    [game.selectedActivity]
+  );
 
   // 칭호 체크
   const title = checkTitle(game.playerStats);

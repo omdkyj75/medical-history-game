@@ -33,7 +33,7 @@ export default function ActivitySelectScreen({ game }) {
   if (!era) return null;
 
   const eraActivities = era.eraActivities || [];
-  const seed = game.globalTurnNumber * 2654435761 + game.eraIndex * 40503 + game.turnIndex * 12289;
+  const seed = (game.gameSessionSeed || 0) ^ (game.globalTurnNumber * 2654435761 + game.eraIndex * 40503 + game.turnIndex * 12289);
   const availableActivities = useMemo(
     () => pickActivities(game.activities, eraActivities, seed),
     [game.activities, eraActivities, seed]
@@ -74,6 +74,14 @@ export default function ActivitySelectScreen({ game }) {
       />
 
       <SeasonDisplay season={game.currentSeason} seasonBonus={game.seasonBonus} />
+
+      {game.eraModifier && (
+        <div className="era-modifier-badge">
+          <span className="era-modifier-hanja">{game.eraModifier.hanja}</span>
+          <span className="era-modifier-name">{game.eraModifier.name}</span>
+          <span className="era-modifier-desc">{game.eraModifier.desc}</span>
+        </div>
+      )}
 
       <div className="raising-character-area">
         <CharacterSprite

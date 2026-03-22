@@ -60,7 +60,7 @@ const TRAITS = [
     condition: { medical: 20, knowledge: 20, virtue: 20, reputation: 20 },
     effect: "모든 행동 효율 +1",
     applyTo: "all",
-    bonus: { medical: 1 }
+    bonus: { medical: 1, knowledge: 1, virtue: 1, reputation: 1 }
   }
 ];
 
@@ -91,6 +91,17 @@ export function getTraitBonus(traits, activityId) {
 
 export function hasStaminaSave(traits) {
   return traits.some((t) => t.passive === "stamina-save");
+}
+
+export function hasReputationProtect(traits) {
+  return traits.some((t) => t.passive === "reputation-protect");
+}
+
+// 명성 보호 특성: 명성 손실을 절반으로 줄임
+export function applyReputationProtect(delta, traits) {
+  if (!hasReputationProtect(traits)) return delta;
+  if (delta.reputation === undefined || delta.reputation >= 0) return delta;
+  return { ...delta, reputation: Math.ceil(delta.reputation / 2) };
 }
 
 export { TRAITS };

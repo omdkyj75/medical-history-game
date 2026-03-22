@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const STAT_LABELS = {
   medical: "의술", knowledge: "학식", virtue: "덕행",
@@ -19,6 +19,14 @@ export default function EventScreen({ game }) {
   const event = game.currentEvent;
   const [selectedIdx, setSelectedIdx] = useState(null);
   const [outcome, setOutcome] = useState(null); // { success, actualDelta }
+  const timerRef = useRef(null);
+
+  // unmount 시 타이머 정리
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
 
   if (!event) return null;
 
@@ -48,7 +56,8 @@ export default function EventScreen({ game }) {
 
     setOutcome({ success, actualDelta });
 
-    setTimeout(() => {
+    timerRef.current = setTimeout(() => {
+      timerRef.current = null;
       game.selectEventChoiceWithDelta(idx, actualDelta);
       setSelectedIdx(null);
       setOutcome(null);

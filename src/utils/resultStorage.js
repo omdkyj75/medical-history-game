@@ -27,13 +27,15 @@ export function saveResult({ playerName, finalResult, scores, history }) {
   existing.unshift(entry);
   if (existing.length > MAX_RESULTS) existing.length = MAX_RESULTS;
 
+  let saved = false;
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
+    saved = true;
   } catch {
     // localStorage full or unavailable
   }
 
-  return entry;
+  return { ...entry, _persisted: saved };
 }
 
 export function getResults() {

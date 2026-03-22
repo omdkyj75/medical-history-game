@@ -4,7 +4,7 @@ import resultTypesData from "../data/resultTypes.json";
 import { saveResult, getResults } from "../utils/resultStorage";
 import { checkNewAchievements } from "../utils/checkAchievements";
 import { getSeason, getSeasonBonus } from "../utils/seasonCalculator";
-import { checkTraits, getTraitBonus, hasStaminaSave } from "../utils/traitSystem";
+import { checkTraits, getTraitBonus, hasStaminaSave, applyReputationProtect } from "../utils/traitSystem";
 import bossEventsData from "../data/bossEvents.json";
 import pressureEventsData from "../data/pressureEvents.json";
 import npcData from "../data/npcs.json";
@@ -12,6 +12,16 @@ import medicalTextsData from "../data/medicalTexts.json";
 import scholarLineageData from "../data/scholarLineage.json";
 
 const { stats, eras, activities, gameMeta } = gameConfig;
+
+// A6: 시대별 랜덤 수식어 풀
+const ERA_MODIFIERS = [
+  { id: "abundant", name: "풍년(豐年)", hanja: "豐", desc: "풍요로운 시절 — 체력 소모 1 감소", deltaAdjust: { stamina: 1 } },
+  { id: "plague", name: "역병(疫病)", hanja: "疫", desc: "전염병 유행 — 체력 소모 1 증가, 의술 +1", deltaAdjust: { stamina: -1, medical: 1 } },
+  { id: "renaissance", name: "학술부흥(學術復興)", hanja: "興", desc: "학문이 번성 — 학식 +1 추가", deltaAdjust: { knowledge: 1 } },
+  { id: "isolation", name: "쇄국(鎖國)", hanja: "鎖", desc: "외부와 단절 — 명성 획득 절반, 덕행 +1", reputationHalf: true, deltaAdjust: { virtue: 1 } },
+  { id: "greatdoctor", name: "명의출현(名醫出現)", hanja: "名", desc: "명의가 나타남 — 사승방문 효과 2배", doubleActivity: "visit-master" },
+  { id: "war", name: "전란(戰亂)", hanja: "戰", desc: "전쟁의 시대 — 민간봉사 덕행 2배, 체력 소모 1 증가", doubleActivity: "public-service", deltaAdjust: { stamina: -1 } }
+];
 
 const SCREEN_TO_HASH = {
   start: "#/",
@@ -190,7 +200,17 @@ export function useRaisingGameState() {
   // Final
   const [finalResult, setFinalResult] = useState(null);
   const [newAchievements, setNewAchievements] = useState([]);
+  const [saveWarning, setSaveWarning] = useState(false);
   const [savedResults, setSavedResults] = useState(() => getResults());
+
+  // A1: 플레이별 세션 시드
+  const [gameSessionSeed, setGameSessionSeed] = useState(0);
+  // A3: 특수 이벤트 미발동 턴 카운터
+  const [turnsSinceSpecial, setTurnsSinceSpecial] = useState(0);
+  // A4: 시작 계절 오프셋
+  const [seasonOffset, setSeasonOffset] = useState(0);
+  // A6: 시대 수식어
+  const [eraModifier, setEraModifier] = useState(null);
 
   // navigate로 인한 hashchange는 무시 (내부 전환), 사용자 직접 URL 입력만 가드
   const navigatingRef = useRef(false);
@@ -250,8 +270,8 @@ export function useRaisingGameState() {
 
   const totalTurns = gameMeta.totalTurns;
 
-  // Season system
-  const currentSeason = useMemo(() => getSeason(globalTurnNumber), [globalTurnNumber]);
+  // Season system (A4: offset 적용)
+  const currentSeason = useMemo(() => getSeason(globalTurnNumber, seasonOffset), [globalTurnNumber, seasonOffset]);
   const seasonBonus = useMemo(() => getSeasonBonus(currentSeason?.id), [currentSeason]);
 
   // Trait system
@@ -285,7 +305,14 @@ export function useRaisingGameState() {
     setEraIndex(0);
     setTurnIndex(0);
     setPhase("activity-select");
+
+    // A5: 시작 스탯 소폭 변동 — 의술/학식/덕행 중 랜덤 2개에 +1
     const initStats = cloneInitialStats();
+    const varKeys = ["medical", "knowledge", "virtue"];
+    const shuffled = [...varKeys].sort(() => Math.random() - 0.5);
+    initStats[shuffled[0]] += 1;
+    initStats[shuffled[1]] += 1;
+
     setPlayerStats(initStats);
     statsRef.current = initStats;
     setTurnHistory([]);
@@ -299,19 +326,32 @@ export function useRaisingGameState() {
     setPendingNpcEvent(null);
     setFinalResult(null);
     setNewAchievements([]);
+    setSaveWarning(false);
     setSeenEventIds(new Set());
     setLastPressureTitle(null);
     setStaminaSaveUsed(false);
     setCollectedTexts([]);
     setEncounteredScholars([]);
+
+    // A1: 플레이별 랜덤 세션 시드
+    setGameSessionSeed(Math.floor(Math.random() * 2 ** 31));
+    // A3: 특수 이벤트 카운터 리셋
+    setTurnsSinceSpecial(0);
+    // A4: 시작 계절 랜덤 오프셋
+    setSeasonOffset(Math.floor(Math.random() * 4));
+    // A6: 첫 시대 수식어
+    setEraModifier(ERA_MODIFIERS[Math.floor(Math.random() * ERA_MODIFIERS.length)]);
+
     navigate("raising");
   }
 
-  // stamina-save 사용 여부 추적
+  // stamina-save 사용 여부 추적 (이 위치 유지 — 기존 코드와 호환)
   const [staminaSaveUsed, setStaminaSaveUsed] = useState(false);
 
   function applyTurnDelta(delta) {
-    const newStats = applyDelta(statsRef.current, delta);
+    // 명성 보호 특성 적용 (이벤트/보스/압박 상황에서 명성 손실 절반)
+    const protectedDelta = applyReputationProtect(delta, activeTraits);
+    const newStats = applyDelta(statsRef.current, protectedDelta);
 
     if (newStats.stamina <= 0) {
       if (hasStaminaSave(activeTraits) && !staminaSaveUsed) {
@@ -350,6 +390,32 @@ export function useRaisingGameState() {
         for (const [k, v] of Object.entries(seasonBonus.penalty)) {
           delta[k] = (delta[k] || 0) + v;
         }
+      }
+    }
+
+    // A6: 시대 수식어 효과 적용
+    if (eraModifier) {
+      if (eraModifier.deltaAdjust) {
+        for (const [k, v] of Object.entries(eraModifier.deltaAdjust)) {
+          delta[k] = (delta[k] || 0) + v;
+        }
+      }
+      if (eraModifier.reputationHalf && delta.reputation && delta.reputation > 0) {
+        delta.reputation = Math.max(1, Math.floor(delta.reputation / 2));
+      }
+      if (eraModifier.doubleActivity === activityId) {
+        for (const [k, v] of Object.entries(delta)) {
+          if (v > 0 && k !== "stamina") delta[k] = v * 2;
+        }
+      }
+    }
+
+    // A2: 스탯 지터 — |delta| >= 2인 항목에 50% 확률로 ±1
+    for (const k of Object.keys(delta)) {
+      if (Math.abs(delta[k]) >= 2 && Math.random() < 0.5) {
+        delta[k] += Math.random() < 0.5 ? 1 : -1;
+        // 부호 반전 방지
+        if (delta[k] === 0) delta[k] = Math.random() < 0.5 ? 1 : -1;
       }
     }
 
@@ -451,26 +517,44 @@ export function useRaisingGameState() {
       return;
     }
 
-    // 20% 확률: 압박 상황 (직전과 같은 것은 제외)
+    // A3: 점진적 발동률 — 기본 15%, 빈 턴마다 +12%
+    const specialRate = Math.min(0.7, 0.15 + turnsSinceSpecial * 0.12);
+
+    // 압박 상황 (직전과 같은 것은 제외)
     const pressurePool = pressureEventsData.pressureEvents[selectedActivity];
-    if (pressurePool && Math.random() < 0.2) {
+    if (pressurePool && Math.random() < specialRate) {
       const candidates = pressurePool.filter((p) => p.title !== lastPressureTitle);
       const pool = candidates.length > 0 ? candidates : pressurePool;
       const pick = pool[Math.floor(Math.random() * pool.length)];
-      setCurrentPressure(pick);
+
+      // A7: 압박 이벤트 요구치 ±2 변동
+      const modifiedPick = { ...pick, bold: { ...pick.bold } };
+      if (modifiedPick.bold.require) {
+        modifiedPick.bold.require = { ...modifiedPick.bold.require };
+        for (const k of Object.keys(modifiedPick.bold.require)) {
+          const variance = Math.floor(Math.random() * 5) - 2; // -2 ~ +2
+          modifiedPick.bold.require[k] = Math.max(1, modifiedPick.bold.require[k] + variance);
+        }
+      }
+
+      setCurrentPressure(modifiedPick);
       setLastPressureTitle(pick.title);
+      setTurnsSinceSpecial(0);
       setPhase("pressure");
       return;
     }
 
-    // 20% 확률: 미니게임
-    if (Math.random() < 0.2) {
+    // 미니게임
+    if (Math.random() < specialRate) {
       const mgType = ALL_MINIGAMES[Math.floor(Math.random() * ALL_MINIGAMES.length)];
       setMinigameType(mgType);
+      setTurnsSinceSpecial(0);
       setPhase("minigame");
       return;
     }
 
+    // 아무것도 발동 안 됨 → 카운터 증가
+    setTurnsSinceSpecial((prev) => prev + 1);
     checkNpcAndEvents();
   }
 
@@ -681,6 +765,8 @@ export function useRaisingGameState() {
     setEraIndex(nextEra);
     setTurnIndex(0);
     setSeenEventIds(new Set()); // Reset seen events for new era
+    // A6: 새 시대 수식어 랜덤 선택
+    setEraModifier(ERA_MODIFIERS[Math.floor(Math.random() * ERA_MODIFIERS.length)]);
     setPhase("activity-select");
   }
 
@@ -724,6 +810,10 @@ export function useRaisingGameState() {
       scores: finalStats,
       history: finalHistory
     });
+
+    if (!saved._persisted) {
+      setSaveWarning(true);
+    }
 
     const allResults = [saved, ...savedResults];
     setSavedResults(allResults);
@@ -776,9 +866,15 @@ export function useRaisingGameState() {
     turnHistory,
     activityCounts,
 
+    // Session seed (A1)
+    gameSessionSeed,
+
     // Season
     currentSeason,
     seasonBonus,
+
+    // Era modifier (A6)
+    eraModifier,
 
     // NPC
     npcData: npcData.npcs,
@@ -810,6 +906,7 @@ export function useRaisingGameState() {
     finalResult,
     newAchievements,
     savedResults,
+    saveWarning,
 
     // Actions
     startGame,

@@ -6,8 +6,8 @@ const SEASONS = [
   { id: "winter", name: "겨울", color: "#4ecdc4", bgGradient: "linear-gradient(180deg, #0f1a2a 0%, #0f0f23 100%)" }
 ];
 
-export function getSeason(globalTurnNumber) {
-  const seasonIndex = (globalTurnNumber - 1) % 4;
+export function getSeason(globalTurnNumber, offset = 0) {
+  const seasonIndex = (globalTurnNumber - 1 + offset) % 4;
   return SEASONS[seasonIndex];
 }
 
@@ -16,7 +16,7 @@ export function getSeasonBonus(seasonId) {
     case "spring":
       return { activityId: "herb-gathering", bonus: { medical: 1 }, desc: "봄철 약초가 풍성합니다" };
     case "summer":
-      return { activityId: null, penalty: { stamina: -1 }, desc: "무더위에 체력 소모가 큽니다" };
+      return { activityId: null, penalty: { stamina: -1 }, desc: "무더위에 모든 활동(휴식 포함)의 체력 소모가 1 증가합니다" };
     case "autumn":
       return { activityId: "academic-exchange", bonus: { reputation: 1 }, desc: "가을 학술 교류가 활발합니다" };
     case "winter":

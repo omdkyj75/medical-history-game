@@ -56,6 +56,13 @@ export default function FinalResultPage({ game }) {
         <button className="btn-home" onClick={goToStart}>홈</button>
       </nav>
 
+      {game.saveWarning && (
+        <div className="save-warning-banner">
+          기록 저장에 실패했습니다. 브라우저 저장 공간이 부족하거나 시크릿 모드일 수 있습니다.
+          결과 카드를 이미지로 저장해 두세요.
+        </div>
+      )}
+
       <div className="final-result-header">
         <p className="final-label">당신의 의원 유형은</p>
         <h1 className="final-nickname">{finalResult.nickname || finalResult.title}</h1>
@@ -157,9 +164,18 @@ export default function FinalResultPage({ game }) {
       <section className="review-section">
         <h2>당신을 만든 순간들</h2>
         {(() => {
-          // 스탯 변화가 가장 컸던 3턴
+          // 스탯 변화가 가장 컸던 3턴 (모든 종류의 delta 합산)
           const turnsWithImpact = turnHistory.map((h, idx) => {
-            const totalDelta = Object.values(h.delta || {}).reduce((sum, v) => sum + Math.abs(v), 0);
+            const allDeltas = [
+              h.delta,
+              h.eventDelta,
+              h.npcEventDelta,
+              h.minigameDelta,
+              h.pressureDelta,
+              h.bossEventDelta
+            ].filter(Boolean);
+            const totalDelta = allDeltas.reduce((sum, d) =>
+              sum + Object.values(d).reduce((s, v) => s + Math.abs(v), 0), 0);
             return { ...h, idx, totalDelta };
           }).sort((a, b) => b.totalDelta - a.totalDelta).slice(0, 3);
 

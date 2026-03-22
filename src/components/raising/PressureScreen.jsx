@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const STAT_LABELS = {
   medical: "의술", knowledge: "학식", virtue: "덕행",
@@ -10,10 +10,18 @@ export default function PressureScreen({ game }) {
   const [showIntro, setShowIntro] = useState(true);
   const [selectedIdx, setSelectedIdx] = useState(null);
   const [result, setResult] = useState(null);
+  const timerRef = useRef(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowIntro(false), 1200);
     return () => clearTimeout(timer);
+  }, []);
+
+  // unmount 시 선택 타이머 정리
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
   }, []);
 
   if (!pressure) return null;
@@ -38,14 +46,20 @@ export default function PressureScreen({ game }) {
     );
     const delta = success ? pressure.bold.success : pressure.bold.fail;
     setResult({ success, delta });
-    setTimeout(() => game.completePressure(delta), 1800);
+    timerRef.current = setTimeout(() => {
+      timerRef.current = null;
+      game.completePressure(delta);
+    }, 1800);
   }
 
   function handleSafe() {
     if (selectedIdx !== null) return;
     setSelectedIdx(1);
     setResult({ success: true, delta: pressure.safe.delta });
-    setTimeout(() => game.completePressure(pressure.safe.delta), 1200);
+    timerRef.current = setTimeout(() => {
+      timerRef.current = null;
+      game.completePressure(pressure.safe.delta);
+    }, 1200);
   }
 
   return (
@@ -86,8 +100,8 @@ export default function PressureScreen({ game }) {
           {selectedIdx === 1 && result && (
             <div className="raising-event-choice-deltas">
               {Object.entries(result.delta).filter(([, v]) => v !== 0).map(([key, val]) => (
-                <span key={key} className={`raising-delta-tag positive`}>
-                  {STAT_LABELS[key] || key} +{val}
+                <span key={key} className={`raising-delta-tag ${val > 0 ? "positive" : "negative"}`}>
+                  {STAT_LABELS[key] || key} {val > 0 ? `+${val}` : val}
                 </span>
               ))}
             </div>

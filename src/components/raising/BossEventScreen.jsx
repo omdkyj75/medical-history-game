@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const STAT_LABELS = {
   medical: "의술", knowledge: "학식", virtue: "덕행",
@@ -9,6 +9,14 @@ export default function BossEventScreen({ game }) {
   const bossEvent = game.currentBossEvent;
   const [selectedIdx, setSelectedIdx] = useState(null);
   const [result, setResult] = useState(null);
+  const timerRef = useRef(null);
+
+  // unmount 시 타이머 정리
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
 
   if (!bossEvent) return null;
 
@@ -27,8 +35,9 @@ export default function BossEventScreen({ game }) {
     const delta = success ? choice.success : choice.fail;
     setResult({ success, delta });
 
-    // 1.5초 후 스탯 적용 및 진행
-    setTimeout(() => {
+    // 2초 후 스탯 적용 및 진행
+    timerRef.current = setTimeout(() => {
+      timerRef.current = null;
       game.completeBossEvent(delta);
     }, 2000);
   }

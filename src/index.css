@@ -838,6 +838,17 @@ input:focus {
   max-width: 720px;
 }
 
+.save-warning-banner {
+  background: rgba(184, 92, 56, 0.2);
+  border: 1px solid var(--score-stamina, #b85c38);
+  color: #e8c9a0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
 .final-result-header {
   text-align: center;
   padding: 40px 0 20px;
@@ -2192,6 +2203,34 @@ input:focus {
 }
 
 /* ── Era Info ── */
+/* 시대 수식어 배지 */
+.era-modifier-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(138, 114, 50, 0.15);
+  border: 1px solid rgba(138, 114, 50, 0.4);
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  margin-bottom: 12px;
+  font-size: var(--text-sm);
+}
+.era-modifier-hanja {
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  color: #d4a854;
+  flex-shrink: 0;
+}
+.era-modifier-name {
+  font-weight: 600;
+  color: #d4a854;
+  white-space: nowrap;
+}
+.era-modifier-desc {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
 .raising-era-info {
   background: var(--panel-2);
   border-radius: var(--radius-md);
@@ -2605,15 +2644,25 @@ input:focus {
   animation: char-idle 2s ease-in-out infinite;
 }
 
+/* C4: idle 2프레임 숨쉬기 */
 @keyframes char-idle {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+  50% { transform: translateY(-3px); }
+}
+
+/* C4: 저체력 흔들림 */
+.char-sprite.char-low-hp {
+  animation: char-shake 0.8s ease-in-out infinite;
+}
+@keyframes char-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-1px); }
+  75% { transform: translateX(1px); }
 }
 
 .char-sprite.char-animating {
-  animation: char-bounce 0.4s ease;
+  animation: char-bounce 0.4s ease !important;
 }
-
 @keyframes char-bounce {
   0% { transform: scale(1); }
   30% { transform: scale(1.1) translateY(-8px); }
@@ -2621,28 +2670,73 @@ input:focus {
   100% { transform: scale(1); }
 }
 
-/* 모자 */
+/* C2: 자세 변화 */
+.char-sprite.pose-slouch { transform-origin: bottom center; }
+.char-sprite.pose-slouch .char-body { transform: rotate(2deg); }
+.char-sprite.pose-upright .char-hat { transform: translateY(-2px); }
+.char-sprite.pose-forward .char-arm.left { transform: rotate(-15deg); }
+.char-sprite.pose-reading .char-arm.left { transform: rotate(-30deg) translateY(-4px); }
+
+/* ── 모자 ── */
 .char-hat {
-  width: 36px;
-  height: 12px;
+  width: 34px;
+  height: 10px;
   background: #555588;
-  border-radius: 4px 4px 0 0;
+  border-radius: 3px 3px 0 0;
   position: relative;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s;
 }
-.char-hat.intermediate { background: #00cc6a; }
-.char-hat.master { background: #ffaa44; }
+/* C1: 레벨별 모자 크기 차이 확대 */
+.char-hat.beginner {
+  width: 34px;
+  height: 8px;
+}
+.char-hat.intermediate {
+  width: 38px;
+  height: 12px;
+  background: #2a5a4a;
+}
+.char-hat.master {
+  width: 42px;
+  height: 16px;
+  background: #4a3a2a;
+  border-radius: 6px 6px 0 0;
+}
 .char-hat-ornament {
   position: absolute;
-  top: -6px;
+  top: -8px;
   left: 50%;
   transform: translateX(-50%);
   width: 8px;
   height: 8px;
   background: #ff6b9d;
   border-radius: 50%;
+  animation: ornament-glow 2s ease-in-out infinite;
+}
+@keyframes ornament-glow {
+  0%, 100% { box-shadow: 0 0 4px rgba(255,107,157,0.4); }
+  50% { box-shadow: 0 0 10px rgba(255,107,157,0.8); }
+}
+.char-hat-wings {
+  position: absolute;
+  top: 2px;
+  left: -4px;
+  right: -4px;
+  height: 4px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 4px solid #ffaa44;
+}
+.char-hat-band {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  height: 3px;
+  border-radius: 0 0 2px 2px;
 }
 
-/* 얼굴 */
+/* ── 얼굴 ── */
 .char-face {
   width: 40px;
   height: 32px;
@@ -2676,6 +2770,23 @@ input:focus {
   border-radius: 0 0 3px 3px;
   margin-top: 2px;
 }
+.char-eyes.mood-proud .char-eye {
+  width: 6px;
+  height: 4px;
+  border-radius: 0 0 3px 3px;
+}
+
+/* 볼터치 */
+.char-blush {
+  position: absolute;
+  width: 6px;
+  height: 3px;
+  background: rgba(255, 130, 130, 0.4);
+  border-radius: 50%;
+  top: 18px;
+}
+.char-blush.left { left: 4px; }
+.char-blush.right { right: 4px; }
 
 .char-mouth {
   width: 8px;
@@ -2701,7 +2812,7 @@ input:focus {
   background: #c0836d;
 }
 
-/* 몸 */
+/* ── 몸 ── */
 .char-body {
   width: 44px;
   height: 36px;
@@ -2709,17 +2820,45 @@ input:focus {
   border-radius: 4px;
   position: relative;
   border: 1px solid #5555aa;
+  transition: all 0.3s;
+}
+/* C1: 레벨별 몸체 크기/장식 차이 */
+.char-body.beginner {
+  width: 40px;
+  height: 32px;
 }
 .char-body.intermediate {
+  width: 46px;
+  height: 38px;
   background: #2a5a4a;
-  border-color: #00cc6a;
 }
 .char-body.master {
+  width: 50px;
+  height: 42px;
   background: #4a3a2a;
-  border-color: #ffaa44;
 }
 
-/* 팔 */
+/* 허리띠 */
+.char-belt {
+  position: absolute;
+  left: 2px; right: 2px;
+  top: 50%;
+  height: 3px;
+  border-radius: 1px;
+}
+
+/* 어깨 장식 */
+.char-shoulder {
+  position: absolute;
+  top: -2px;
+  width: 8px;
+  height: 6px;
+  border-radius: 2px;
+}
+.char-shoulder.left { left: -3px; }
+.char-shoulder.right { right: -3px; }
+
+/* ── 팔 ── */
 .char-arm {
   position: absolute;
   width: 10px;
@@ -2727,6 +2866,7 @@ input:focus {
   background: #f5d6b8;
   border-radius: 4px;
   top: 4px;
+  transition: transform 0.3s;
 }
 .char-arm.left { left: -12px; }
 .char-arm.right { right: -12px; }
@@ -2747,10 +2887,20 @@ input:focus {
   font-size: 0.7rem;
 }
 
-/* 다리 */
+/* C5: 해금 아이콘 */
+.char-unlock-icon {
+  position: absolute;
+  top: -10px;
+  right: -8px;
+  font-size: 0.6rem;
+  filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
+}
+
+/* ── 다리 ── */
 .char-legs {
   display: flex;
   gap: 6px;
+  position: relative;
 }
 .char-leg {
   width: 12px;
@@ -2758,8 +2908,68 @@ input:focus {
   background: #333366;
   border-radius: 0 0 4px 4px;
 }
+/* C1: master 옷자락 */
+.char-robe-tail {
+  position: absolute;
+  top: -2px;
+  left: -4px;
+  right: -4px;
+  height: 6px;
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+  border-top: 6px solid #4a3a2a;
+  opacity: 0.7;
+}
+.char-legs.intermediate .char-leg { background: #1a4a3a; }
+.char-legs.master .char-leg { background: #3a2a1a; height: 14px; }
 
-/* 레벨 뱃지 */
+/* ── C3: 시즌 오버레이 소품 ── */
+.char-season-item {
+  position: absolute;
+  z-index: 2;
+  font-size: 0.55rem;
+  pointer-events: none;
+}
+.season-spring-leaf {
+  top: 12px;
+  right: -8px;
+  width: 6px;
+  height: 6px;
+  background: #88dd66;
+  border-radius: 0 50% 50% 50%;
+  transform: rotate(45deg);
+}
+.season-summer-fan {
+  top: 4px;
+  right: -14px;
+  color: #ffcc66;
+}
+.season-autumn-leaf {
+  top: 8px;
+  left: -10px;
+  width: 6px;
+  height: 6px;
+  background: #cc8844;
+  border-radius: 50% 0 50% 0;
+  transform: rotate(30deg);
+  animation: leaf-fall 3s ease-in-out infinite;
+}
+@keyframes leaf-fall {
+  0%, 100% { transform: rotate(30deg) translateY(0); opacity: 1; }
+  50% { transform: rotate(45deg) translateY(6px); opacity: 0.7; }
+}
+.season-winter-scarf {
+  top: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 4px;
+  background: #cc4444;
+  border-radius: 2px;
+  z-index: 3;
+}
+
+/* ── 레벨 뱃지 ── */
 .char-level-badge {
   font-size: 0.65rem;
   padding: 2px 8px;
@@ -2778,6 +2988,11 @@ input:focus {
   background: rgba(255, 170, 68, 0.15);
   color: var(--accent-warm);
   border-color: var(--accent-warm);
+  animation: badge-shimmer 3s ease-in-out infinite;
+}
+@keyframes badge-shimmer {
+  0%, 100% { box-shadow: 0 0 4px rgba(255,170,68,0.2); }
+  50% { box-shadow: 0 0 10px rgba(255,170,68,0.5); }
 }
 
 /* ══════════════════════════════════════════
@@ -2815,7 +3030,6 @@ input:focus {
   border-color: var(--accent-warm);
   box-shadow: 0 0 8px rgba(196, 149, 106, 0.2);
 }
-.npc-emoji { font-size: 1.6rem; }
 .npc-info { flex: 1; min-width: 0; }
 .npc-name {
   font-size: var(--text-sm);
@@ -2830,18 +3044,42 @@ input:focus {
   color: var(--text-secondary);
   margin-bottom: 4px;
 }
-.npc-affinity-bar-track {
-  width: 100%;
-  height: 4px;
-  background: var(--line);
-  border-radius: 2px;
-  overflow: hidden;
+/* B1: 픽셀 초상화 */
+.npc-pixel-portrait {
+  border: 1px solid rgba(255,255,255,0.1);
 }
-.npc-affinity-bar-fill {
-  height: 100%;
-  background: var(--accent-warm);
-  border-radius: 2px;
-  transition: width 0.4s ease;
+.npc-portrait-unlocked {
+  box-shadow: 0 0 6px rgba(255,238,136,0.5);
+}
+.npc-portrait-near {
+  animation: portrait-pulse 1.2s ease-in-out infinite;
+}
+@keyframes portrait-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+/* B2: 도트 게이지 */
+.npc-pixel-gauge {
+  display: flex;
+  gap: 3px;
+  margin-top: 4px;
+}
+.npc-gauge-slot {
+  width: 12px;
+  height: 6px;
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: background-color 0.3s;
+  image-rendering: pixelated;
+}
+.npc-gauge-slot.filled {
+  border-color: transparent;
+}
+.npc-gauge-slot.near-unlock {
+  animation: gauge-blink 0.8s ease-in-out infinite;
+}
+@keyframes gauge-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
 }
 .npc-unlocked-badge {
   font-size: 0.6rem;
@@ -2861,49 +3099,83 @@ input:focus {
   z-index: 1000;
   padding: 20px;
 }
-.npc-event-modal {
+/* B4: 도트 대화창 스타일 */
+.npc-dialog-box {
   background: var(--panel);
-  border-radius: var(--radius-lg);
-  padding: 32px 28px;
-  max-width: 420px;
+  border: 2px solid var(--accent-warm);
+  border-image: repeating-linear-gradient(
+    90deg,
+    var(--accent-warm) 0px, var(--accent-warm) 2px,
+    transparent 2px, transparent 4px
+  ) 2;
+  padding: 20px;
+  max-width: 480px;
   width: 100%;
-  text-align: center;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+  image-rendering: pixelated;
 }
-.npc-event-emoji { font-size: 3rem; margin-bottom: 8px; }
-.npc-event-badge {
+.npc-dialog-badge {
   display: inline-block;
   background: var(--accent-warm);
-  color: white;
+  color: #1a1a2e;
   font-size: var(--text-xs);
-  font-weight: 600;
-  padding: 3px 12px;
-  border-radius: 20px;
+  font-weight: 700;
+  padding: 2px 10px;
   margin-bottom: 12px;
+  letter-spacing: 1px;
 }
-.npc-event-title {
-  font-family: var(--font-title);
-  font-size: var(--text-lg);
-  color: var(--primary-strong);
-  margin-bottom: 4px;
+.npc-dialog-content {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 16px;
 }
-.npc-event-npc-name {
-  font-size: var(--text-sm);
+.npc-dialog-portrait {
+  flex-shrink: 0;
+  text-align: center;
+}
+.npc-dialog-portrait-name {
+  font-size: 0.65rem;
   color: var(--text-secondary);
-  margin-bottom: 12px;
+  margin-top: 4px;
+  white-space: nowrap;
 }
-.npc-event-desc {
+.npc-dialog-text-area {
+  flex: 1;
+  min-width: 0;
+}
+.npc-dialog-title {
+  font-family: var(--font-title);
+  font-size: var(--text-base);
+  color: var(--primary-strong);
+  margin: 0 0 8px;
+}
+.npc-dialog-desc {
   font-size: var(--text-sm);
   color: var(--text);
   line-height: 1.6;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
-.npc-event-rewards {
+.npc-dialog-rewards {
   display: flex;
-  justify-content: center;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+}
+.npc-dialog-continue {
+  display: block;
+  width: 100%;
+  background: none;
+  border: 1px solid var(--accent-warm);
+  color: var(--accent-warm);
+  font-family: var(--font-title);
+  font-size: var(--text-sm);
+  padding: 8px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: background 0.2s;
+}
+.npc-dialog-continue:hover {
+  background: rgba(196, 149, 106, 0.15);
 }
 
 /* ══════════════════════════════════════════
