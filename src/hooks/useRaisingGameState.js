@@ -182,8 +182,12 @@ export function useRaisingGameState() {
       const hash = window.location.hash || "#/";
       const target = HASH_TO_SCREEN[hash];
       if (!target) { navigate("start"); return; }
-      // 사용자가 직접 URL로 guarded screen에 진입 시도 → 게임 미시작이면 차단
-      if (GUARDED_SCREENS.has(target) && turnHistory.length === 0) {
+      // 사용자가 직접 URL로 guarded screen에 진입 시도 → 조건 미충족이면 차단
+      if (target === "raising" && turnHistory.length === 0) {
+        navigate("start");
+        return;
+      }
+      if (target === "final" && !finalResult) {
         navigate("start");
         return;
       }

@@ -12,9 +12,11 @@ export function saveResult({ playerName, finalResult, scores, history }) {
     historicalMatch: finalResult.historicalMatch || null,
     scores: { ...scores },
     history: history.map((h) => ({
-      stageTitle: h.stageTitle,
-      choiceTitle: h.choiceTitle,
-      eventTitle: h.eventTitle
+      eraTitle: h.eraTitle || h.stageTitle,
+      activityTitle: h.activityTitle || h.choiceTitle,
+      eventTitle: h.eventTitle || null,
+      npcEventTitle: h.npcEventTitle || null,
+      minigameType: h.minigameType || null
     })),
     timestamp: Date.now()
   };
