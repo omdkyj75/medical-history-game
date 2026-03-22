@@ -475,6 +475,29 @@ export function useRaisingGameState() {
     }
   }
 
+  // 이벤트 선택 — 외부에서 계산된 delta를 받는 버전
+  function selectEventChoiceWithDelta(choiceIndex, actualDelta) {
+    const choice = currentEvent?.choices?.[choiceIndex];
+    if (!choice) return;
+
+    setSelectedEventChoice(choice);
+    const newStats = applyDelta(playerStats, actualDelta);
+    setPlayerStats(newStats);
+
+    setTurnHistory((prev) => {
+      const updated = [...prev];
+      const last = { ...updated[updated.length - 1] };
+      last.eventTitle = currentEvent.title;
+      last.eventChoiceText = choice.text;
+      last.eventDelta = actualDelta;
+      last.statsAfter = newStats;
+      updated[updated.length - 1] = last;
+      return updated;
+    });
+
+    advanceTurn();
+  }
+
   function selectEventChoice(choiceIndex) {
     const choice = currentEvent?.choices?.[choiceIndex];
     if (!choice) return;
@@ -483,7 +506,6 @@ export function useRaisingGameState() {
     const newStats = applyDelta(playerStats, choice.delta);
     setPlayerStats(newStats);
 
-    // Update last history entry with event info
     setTurnHistory((prev) => {
       const updated = [...prev];
       const last = { ...updated[updated.length - 1] };
@@ -651,6 +673,7 @@ export function useRaisingGameState() {
     selectActivity,
     proceedAfterResult,
     selectEventChoice,
+    selectEventChoiceWithDelta,
     proceedToNextEra,
     dismissNpcEvent,
     completeMinigame,
