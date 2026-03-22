@@ -1738,36 +1738,72 @@ input:focus {
   margin: 0 auto;
 }
 
-/* ── Compact Layout ── */
-.compact-top-row {
-  display: flex;
-  gap: 12px;
-  align-items: flex-end;
-  margin-bottom: 8px;
+/* ── Activity Screen Layout ── */
+.act-screen {
+  padding: 16px;
 }
-.compact-top-row .raising-turn-indicator { flex: 1; margin-bottom: 0; }
-.compact-top-row .season-display { margin-bottom: 0; flex: 0 0 auto; }
 
-.compact-info-row {
+.act-topbar {
   display: flex;
+  align-items: baseline;
   gap: 12px;
-  align-items: flex-start;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
-.compact-char-mini {
+.act-era-name {
+  font-family: var(--font-title);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--primary);
+}
+.act-turn-info {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+.act-season {
+  margin-left: auto;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--sc, var(--text));
+  border: 1px solid var(--sc, var(--line));
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.act-progress-track {
+  height: 3px;
+  background: var(--line);
+  border-radius: 2px;
+  margin-bottom: 12px;
+}
+.act-progress-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.act-status-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+.act-char {
   flex: 0 0 auto;
 }
-.compact-char-mini .char-sprite-container { transform: scale(0.55); transform-origin: top left; }
-.compact-char-mini .char-level-badge { font-size: 0.5rem; }
-.compact-info-body {
+.act-char .char-sprite-container { transform: scale(0.5); transform-origin: top left; height: 75px; }
+.act-char .char-level-badge { font-size: 0.5rem; }
+.act-stats-col {
   flex: 1;
   min-width: 0;
 }
-.compact-era-learning {
-  font-size: var(--text-sm);
-  color: var(--text);
-  margin-bottom: 4px;
-  line-height: 1.4;
+.act-stats-col .raising-stat-panel { margin: 0; }
+.act-keywords-col {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: flex-end;
 }
 
 /* ── Turn Indicator ── */
@@ -2409,26 +2445,25 @@ input:focus {
 .npc-list {
   display: flex;
   gap: 10px;
-  overflow-x: auto;
   padding-bottom: 4px;
 }
 .npc-card {
-  flex: 0 0 auto;
+  flex: 1 1 auto;
   display: flex;
-  gap: 8px;
+  gap: 10px;
   align-items: center;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  padding: 8px 12px;
-  min-width: 170px;
+  padding: 12px 16px;
+  min-width: 200px;
   transition: border-color 0.2s;
 }
 .npc-card.npc-unlocked {
   border-color: var(--accent-warm);
   box-shadow: 0 0 8px rgba(196, 149, 106, 0.2);
 }
-.npc-emoji { font-size: 1.4rem; }
+.npc-emoji { font-size: 1.8rem; }
 .npc-info { flex: 1; min-width: 0; }
 .npc-name {
   font-size: var(--text-sm);
