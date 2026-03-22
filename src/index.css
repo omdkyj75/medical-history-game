@@ -1738,77 +1738,9 @@ input:focus {
   margin: 0 auto;
 }
 
-/* ── Activity Screen Layout ── */
-.act-screen {
-  padding: 16px;
-}
-
-.act-topbar {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  margin-bottom: 4px;
-}
-.act-era-name {
-  font-family: var(--font-title);
-  font-size: var(--text-lg);
-  font-weight: 700;
-  color: var(--primary);
-}
-.act-turn-info {
-  font-size: var(--text-xs);
-  color: var(--text-secondary);
-}
-.act-season {
-  margin-left: auto;
-  font-size: var(--text-xs);
-  font-weight: 600;
-  color: var(--sc, var(--text));
-  border: 1px solid var(--sc, var(--line));
-  padding: 2px 8px;
-  border-radius: var(--radius-sm);
-}
-
-.act-progress-track {
-  height: 3px;
-  background: var(--line);
-  border-radius: 2px;
-  margin-bottom: 12px;
-}
-.act-progress-fill {
-  height: 100%;
-  background: var(--primary);
-  border-radius: 2px;
-  transition: width 0.4s ease;
-}
-
-.act-status-row {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  margin-bottom: 10px;
-}
-.act-char {
-  flex: 0 0 auto;
-}
-.act-char .char-sprite-container { transform: scale(0.5); transform-origin: top left; height: 75px; }
-.act-char .char-level-badge { font-size: 0.5rem; }
-.act-stats-col {
-  flex: 1;
-  min-width: 0;
-}
-.act-stats-col .raising-stat-panel { margin: 0; }
-.act-keywords-col {
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  align-items: flex-end;
-}
-
 /* ── Turn Indicator ── */
 .raising-turn-indicator {
-  margin-bottom: 8px;
+  margin-bottom: 20px;
 }
 .raising-turn-era {
   font-family: var(--font-title);
@@ -1842,8 +1774,8 @@ input:focus {
 .raising-era-info {
   background: var(--panel-2);
   border-radius: var(--radius-md);
-  padding: 12px;
-  margin-bottom: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
 }
 .raising-era-period {
   font-size: var(--text-sm);
@@ -1884,14 +1816,13 @@ input:focus {
 
 /* ── Stat Panel ── */
 .raising-stat-panel {
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 20px;
 }
 .raising-stat-row {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 4px;
+  gap: 10px;
+  margin-bottom: 8px;
 }
 .raising-stat-label {
   flex: 0 0 90px;
@@ -1901,7 +1832,7 @@ input:focus {
 }
 .raising-stat-bar-track {
   flex: 1;
-  height: 10px;
+  height: 14px;
   background: var(--line);
   border-radius: 7px;
   position: relative;
@@ -1938,9 +1869,9 @@ input:focus {
 /* ── Prompt ── */
 .raising-prompt {
   font-family: var(--font-title);
-  font-size: var(--text-base);
+  font-size: var(--text-lg);
   color: var(--text);
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   text-align: center;
 }
 
@@ -2207,14 +2138,13 @@ input:focus {
 .season-display {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
+  gap: 8px;
+  padding: 8px 14px;
   background: var(--panel);
   border: 1px solid var(--line);
-  border-left: 3px solid var(--season-color, var(--primary));
-  border-radius: var(--radius-sm);
-  margin-bottom: 6px;
-  font-size: var(--text-xs);
+  border-left: 4px solid var(--season-color, var(--primary));
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
 }
 .season-icon { font-size: 1.2rem; }
 .season-name {
@@ -2234,7 +2164,7 @@ input:focus {
 .raising-character-area {
   display: flex;
   justify-content: center;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 .char-sprite-container {
@@ -2433,7 +2363,7 @@ input:focus {
    NPC Panel
    ══════════════════════════════════════════ */
 .npc-panel {
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 .npc-panel-title {
   font-family: var(--font-title);
@@ -2445,25 +2375,26 @@ input:focus {
 .npc-list {
   display: flex;
   gap: 10px;
+  overflow-x: auto;
   padding-bottom: 4px;
 }
 .npc-card {
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  padding: 12px 16px;
-  min-width: 200px;
+  padding: 10px 14px;
+  min-width: 180px;
   transition: border-color 0.2s;
 }
 .npc-card.npc-unlocked {
   border-color: var(--accent-warm);
   box-shadow: 0 0 8px rgba(196, 149, 106, 0.2);
 }
-.npc-emoji { font-size: 1.8rem; }
+.npc-emoji { font-size: 1.6rem; }
 .npc-info { flex: 1; min-width: 0; }
 .npc-name {
   font-size: var(--text-sm);
