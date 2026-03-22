@@ -8,6 +8,8 @@ import { checkTraits, getTraitBonus, hasStaminaSave } from "../utils/traitSystem
 import bossEventsData from "../data/bossEvents.json";
 import pressureEventsData from "../data/pressureEvents.json";
 import npcData from "../data/npcs.json";
+import medicalTextsData from "../data/medicalTexts.json";
+import scholarLineageData from "../data/scholarLineage.json";
 
 const { stats, eras, activities, gameMeta } = gameConfig;
 
@@ -18,6 +20,9 @@ const SCREEN_TO_HASH = {
   final: "#/final",
   history: "#/history",
   achievements: "#/achievements",
+  collection: "#/collection",
+  lineage: "#/lineage",
+  glossary: "#/glossary",
 };
 
 const HASH_TO_SCREEN = Object.fromEntries(
@@ -52,7 +57,11 @@ function applyDelta(currentStats, delta) {
 }
 
 function getActivityDelta(activityId, era) {
-  const activity = activities.find((a) => a.id === activityId);
+  let activity = activities.find((a) => a.id === activityId);
+  if (!activity) {
+    // Check era-specific activities
+    activity = era?.eraActivities?.find((a) => a.id === activityId);
+  }
   if (!activity) return {};
 
   const base = { ...activity.baseDelta };
@@ -65,12 +74,16 @@ function getActivityDelta(activityId, era) {
   return base;
 }
 
-function pickRandomEvent(era) {
+function pickRandomEvent(era, seenIds = new Set()) {
   const events = era?.events;
   if (!events || events.length === 0) return null;
 
+  // Exclude already-seen events in this era
+  const unseen = events.filter((e) => !seenIds.has(e.id));
+  if (unseen.length === 0) return null;
+
   // Filter by probability
-  const candidates = events.filter(
+  const candidates = unseen.filter(
     (e) => Math.random() < (e.probability ?? 0.4)
   );
   if (candidates.length === 0) return null;
@@ -156,6 +169,13 @@ export function useRaisingGameState() {
   const [currentBossEvent, setCurrentBossEvent] = useState(null);
   const [currentPressure, setCurrentPressure] = useState(null);
 
+  // Seen events tracking (prevents duplicate events within same era)
+  const [seenEventIds, setSeenEventIds] = useState(new Set());
+
+  // Academic collection tracking
+  const [collectedTexts, setCollectedTexts] = useState([]);
+  const [encounteredScholars, setEncounteredScholars] = useState([]);
+
   // Current turn state
   const [selectedActivity, setSelectedActivity] = useState(null);
   const [lastDelta, setLastDelta] = useState(null);
@@ -238,9 +258,13 @@ export function useRaisingGameState() {
     [currentEra]
   );
 
-  // Get activity info with era overrides
+  // Get activity info with era overrides (checks both global and era-specific activities)
   function getActivityInfo(activityId) {
-    const base = activities.find((a) => a.id === activityId);
+    let base = activities.find((a) => a.id === activityId);
+    if (!base) {
+      // Check era-specific activities
+      base = currentEra?.eraActivities?.find((a) => a.id === activityId);
+    }
     if (!base) return null;
     const override = currentEra?.activityOverrides?.[activityId];
     return {
@@ -267,6 +291,9 @@ export function useRaisingGameState() {
     setPendingNpcEvent(null);
     setFinalResult(null);
     setNewAchievements([]);
+    setSeenEventIds(new Set());
+    setCollectedTexts([]);
+    setEncounteredScholars([]);
     navigate("raising");
   }
 
@@ -328,7 +355,7 @@ export function useRaisingGameState() {
         eraTitle: currentEra.title,
         turn: turnIndex + 1,
         activityId,
-        activityTitle: activities.find((a) => a.id === activityId)?.title || activityId,
+        activityTitle: (activities.find((a) => a.id === activityId) || currentEra?.eraActivities?.find((a) => a.id === activityId))?.title || activityId,
         delta,
         statsAfter: newStats
       }
@@ -434,10 +461,11 @@ export function useRaisingGameState() {
       }
     }
 
-    // Check for random event
-    const event = pickRandomEvent(currentEra);
+    // Check for random event (excluding already seen events)
+    const event = pickRandomEvent(currentEra, seenEventIds);
     if (event) {
       setCurrentEvent(event);
+      setSeenEventIds((prev) => new Set([...prev, event.id]));
       setPhase("event");
     } else {
       advanceTurn();
@@ -465,10 +493,11 @@ export function useRaisingGameState() {
       setPendingNpcEvent(null);
     }
 
-    // Continue to random event check
-    const evt = pickRandomEvent(currentEra);
+    // Continue to random event check (excluding already seen)
+    const evt = pickRandomEvent(currentEra, seenEventIds);
     if (evt) {
       setCurrentEvent(evt);
+      setSeenEventIds((prev) => new Set([...prev, evt.id]));
       setPhase("event");
     } else {
       advanceTurn();
@@ -570,11 +599,43 @@ export function useRaisingGameState() {
     }
   }
 
-  function proceedToNextEra() {
+  function proceedToNextEra(quizBonus) {
+    // Apply era review quiz bonus if any
+    if (quizBonus) {
+      const newStats = applyDelta(playerStats, quizBonus);
+      setPlayerStats(newStats);
+    }
+
+    // Collect medical texts and scholars for completed era
+    collectEraAcademicData(currentEra?.id);
+
     const nextEra = eraIndex + 1;
     setEraIndex(nextEra);
     setTurnIndex(0);
+    setSeenEventIds(new Set()); // Reset seen events for new era
     setPhase("activity-select");
+  }
+
+  function collectEraAcademicData(eraId) {
+    // Auto-collect medical texts related to this era
+    const eraTexts = medicalTextsData.texts.filter((t) => t.era === eraId);
+    setCollectedTexts((prev) => {
+      const existing = new Set(prev);
+      const newTexts = eraTexts
+        .filter((t) => !existing.has(t.id))
+        .map((t) => t.id);
+      return [...prev, ...newTexts];
+    });
+
+    // Auto-collect scholars from this era
+    const eraScholars = scholarLineageData.scholars
+      .filter((s) => s.era === eraId)
+      .map((s) => s.id);
+    setEncounteredScholars((prev) => {
+      const existing = new Set(prev);
+      const newScholars = eraScholars.filter((id) => !existing.has(id));
+      return [...prev, ...newScholars];
+    });
   }
 
   function finishGame() {
@@ -605,6 +666,9 @@ export function useRaisingGameState() {
   function goToHowToPlay() { navigate("howToPlay"); }
   function goToHistory() { setSavedResults(getResults()); navigate("history"); }
   function goToAchievements() { navigate("achievements"); }
+  function goToCollection() { navigate("collection"); }
+  function goToLineage() { navigate("lineage"); }
+  function goToGlossary() { navigate("glossary"); }
 
   function dismissAchievements() { setNewAchievements([]); }
 
@@ -649,6 +713,10 @@ export function useRaisingGameState() {
     // Traits
     activeTraits,
 
+    // Academic collection
+    collectedTexts,
+    encounteredScholars,
+
     // Boss event & Pressure
     currentBossEvent,
     currentPressure,
@@ -686,6 +754,9 @@ export function useRaisingGameState() {
     goToHowToPlay,
     goToHistory,
     goToAchievements,
+    goToCollection,
+    goToLineage,
+    goToGlossary,
     dismissAchievements
   };
 }

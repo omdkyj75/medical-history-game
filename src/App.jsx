@@ -7,6 +7,9 @@ import FinalResultPage from "./components/FinalResultPage";
 import HistoryPage from "./components/HistoryPage";
 import AchievementPage from "./components/AchievementPage";
 import AchievementToast from "./components/AchievementToast";
+import MedicalTextCollection from "./components/raising/MedicalTextCollection";
+import ScholarLineagePage from "./components/ScholarLineagePage";
+import GlossaryPage from "./components/GlossaryPage";
 
 export default function App() {
   const game = useRaisingGameState();
@@ -19,6 +22,21 @@ export default function App() {
       {game.screen === "final" && <FinalResultPage game={game} />}
       {game.screen === "history" && <HistoryPage game={game} />}
       {game.screen === "achievements" && <AchievementPage game={game} />}
+      {game.screen === "collection" && (
+        <MedicalTextCollection
+          collectedTexts={game.collectedTexts}
+          onClose={game.goToStart}
+        />
+      )}
+      {game.screen === "lineage" && (
+        <ScholarLineagePage
+          encounteredScholars={game.encounteredScholars}
+          onBack={game.goToStart}
+        />
+      )}
+      {game.screen === "glossary" && (
+        <GlossaryPage onBack={game.goToStart} />
+      )}
 
       {game.newAchievements.length > 0 && (
         <AchievementToast

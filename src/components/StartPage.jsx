@@ -32,6 +32,11 @@ export default function StartPage({ game }) {
           <button className="btn-text" onClick={game.goToHistory}>플레이 기록</button>
           <button className="btn-text" onClick={game.goToAchievements}>업적</button>
         </div>
+        <div className="start-links start-academic-links">
+          <button className="btn-text" onClick={game.goToCollection}>📚 의서 도감</button>
+          <button className="btn-text" onClick={game.goToLineage}>🧬 인물 관계도</button>
+          <button className="btn-text" onClick={game.goToGlossary}>📖 용어 사전</button>
+        </div>
       </div>
     </main>
   );

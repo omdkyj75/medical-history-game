@@ -6,12 +6,23 @@ import CharacterSprite from "./CharacterSprite";
 import SeasonDisplay from "./SeasonDisplay";
 import NpcPanel from "./NpcPanel";
 
-function pickActivities(allActivities, seed) {
+function pickActivities(allActivities, eraActivities, seed) {
   const rest = allActivities.find((a) => a.id === "rest");
-  const others = allActivities.filter((a) => a.id !== "rest");
-  const shuffled = [...others];
+  const globalOthers = allActivities.filter((a) => a.id !== "rest");
+  const combined = [...globalOthers, ...(eraActivities || [])];
+
+  // Seeded PRNG (mulberry32) for reproducible but well-distributed shuffles
+  let s = seed | 0;
+  function rand() {
+    s = (s + 0x6d2b79f5) | 0;
+    let t = Math.imul(s ^ (s >>> 15), 1 | s);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  }
+
+  const shuffled = [...combined];
   for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(((seed * (i + 1) * 9301 + 49297) % 233280) / 233280 * (i + 1));
+    const j = Math.floor(rand() * (i + 1));
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
   return [...shuffled.slice(0, 4), rest];
@@ -21,10 +32,11 @@ export default function ActivitySelectScreen({ game }) {
   const era = game.currentEra;
   if (!era) return null;
 
-  const seed = game.globalTurnNumber * 17 + game.eraIndex * 31;
+  const eraActivities = era.eraActivities || [];
+  const seed = game.globalTurnNumber * 2654435761 + game.eraIndex * 40503 + game.turnIndex * 12289;
   const availableActivities = useMemo(
-    () => pickActivities(game.activities, seed),
-    [game.activities, seed]
+    () => pickActivities(game.activities, eraActivities, seed),
+    [game.activities, eraActivities, seed]
   );
 
   const activityInfos = availableActivities.map((a) => game.getActivityInfo(a.id));

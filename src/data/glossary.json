@@ -1,0 +1,294 @@
+{
+  "terms": [
+    {
+      "id": "yin-yang",
+      "term": "음양(陰陽)",
+      "reading": "eum-yang",
+      "category": "기초이론",
+      "definition": "우주 만물의 대립·통일적 두 측면. 상대적이며 서로 의존하고, 소장(消長)·전화(轉化)한다.",
+      "detail": "양은 밝음·따뜻함·활동·상승, 음은 어두움·차가움·정지·하강을 대표한다. 인체에서는 장부·기혈·병증을 음양으로 분류한다.",
+      "relatedTexts": ["huangdi-neijing"],
+      "era": "ancient-origins"
+    },
+    {
+      "id": "wuxing",
+      "term": "오행(五行)",
+      "reading": "o-haeng",
+      "category": "기초이론",
+      "definition": "목(木)·화(火)·토(土)·금(金)·수(水) 다섯 가지 기본 물질의 운동 변화 법칙.",
+      "detail": "상생(相生): 목→화→토→금→수→목. 상극(相克): 목→토→수→화→금→목. 장부·오색·오미 등과 배속하여 인체를 설명한다.",
+      "relatedTexts": ["huangdi-neijing"],
+      "era": "ancient-origins"
+    },
+    {
+      "id": "jing-qi-shen",
+      "term": "정기신(精氣神)",
+      "reading": "jeong-gi-sin",
+      "category": "기초이론",
+      "definition": "인체 생명활동의 세 가지 근본 물질. 정(精)은 물질적 기초, 기(氣)는 기능적 활동, 신(神)은 정신 활동.",
+      "detail": "삼보(三寶)라고도 한다. 양생(養生)의 핵심은 이 세 가지를 보존하고 기르는 것이다.",
+      "relatedTexts": ["huangdi-neijing"],
+      "era": "warring-states"
+    },
+    {
+      "id": "zangfu",
+      "term": "장부(臟腑)",
+      "reading": "jang-bu",
+      "category": "기초이론",
+      "definition": "오장(五臟: 간·심·비·폐·신)과 육부(六腑: 담·소장·위·대장·방광·삼초)의 총칭.",
+      "detail": "장(臟)은 정기를 저장하고, 부(腑)는 음식물을 소화·전달한다. 장부 사이는 표리(表裏) 관계로 연결된다.",
+      "relatedTexts": ["huangdi-neijing", "nanjing"],
+      "era": "ancient-origins"
+    },
+    {
+      "id": "jingluo",
+      "term": "경락(經絡)",
+      "reading": "gyeong-rak",
+      "category": "기초이론",
+      "definition": "기혈(氣血)이 운행하는 통로. 경맥(經脈)은 간선, 낙맥(絡脈)은 지선에 해당한다.",
+      "detail": "12정경(正經)과 기경팔맥(奇經八脈)이 기본 체계. 침구 치료의 이론적 근거가 된다.",
+      "relatedTexts": ["huangdi-neijing", "nanjing", "zhenjiu-jiayijing"],
+      "era": "ancient-origins"
+    },
+    {
+      "id": "bianzheng-lunzhi",
+      "term": "변증논치(辨證論治)",
+      "reading": "byeon-jeung-non-chi",
+      "category": "진단/치료",
+      "definition": "증후(證候)를 분별(辨)하여 치료 방법을 논(論)하고 치료(治)하는 한의학 핵심 방법론.",
+      "detail": "장중경이 상한론에서 확립했다. 같은 병이라도 증이 다르면 치료가 다르고(同病異治), 다른 병이라도 증이 같으면 같은 치료를 한다(異病同治).",
+      "relatedTexts": ["shanghan-lun"],
+      "era": "qin-han"
+    },
+    {
+      "id": "liujing-bianzheng",
+      "term": "육경변증(六經辨證)",
+      "reading": "yuk-gyeong-byeon-jeung",
+      "category": "진단/치료",
+      "definition": "외감병을 태양·양명·소양·태음·소음·궐음 6단계로 분류하는 변증 체계.",
+      "detail": "장중경의 상한론에서 확립. 병의 진행 단계와 깊이를 체계적으로 파악할 수 있게 한 획기적 방법론.",
+      "relatedTexts": ["shanghan-lun"],
+      "era": "qin-han"
+    },
+    {
+      "id": "weiqiyingxue",
+      "term": "위기영혈변증(衛氣營血辨證)",
+      "reading": "wi-gi-yeong-hyeol-byeon-jeung",
+      "category": "진단/치료",
+      "definition": "온병(溫病)의 진행을 위(衛)·기(氣)·영(營)·혈(血) 4단계로 나누는 변증 체계.",
+      "detail": "엽천사가 확립. 위분(衛分)은 표증, 기분(氣分)은 이열(裏熱), 영분(營分)은 열입심포, 혈분(血分)은 동혈(動血)·출혈을 특징으로 한다.",
+      "relatedTexts": ["wenre-lun"],
+      "era": "qing"
+    },
+    {
+      "id": "siqi-wuwei",
+      "term": "사기오미(四氣五味)",
+      "reading": "sa-gi-o-mi",
+      "category": "본초학",
+      "definition": "약물의 네 가지 성질(寒·熱·溫·涼)과 다섯 가지 맛(酸·苦·甘·辛·鹹).",
+      "detail": "약물의 기본 성능을 나타내는 분류법. 신농본초경에서 정립되었다. 열증에는 한량약, 한증에는 온열약을 쓰는 원칙의 근거.",
+      "relatedTexts": ["shennong-bencao"],
+      "era": "qin-han"
+    },
+    {
+      "id": "junchen-zuoshi",
+      "term": "군신좌사(君臣佐使)",
+      "reading": "gun-sin-jwa-sa",
+      "category": "방제학",
+      "definition": "처방 구성의 원칙. 군약(주약)·신약(보조)·좌약(제어)·사약(인경) 네 역할로 약물을 배합한다.",
+      "detail": "신농본초경에서 처음 개념이 제시되었으며, 이후 모든 방제학의 기본 원리가 되었다.",
+      "relatedTexts": ["shennong-bencao"],
+      "era": "qin-han"
+    },
+    {
+      "id": "shanghan",
+      "term": "상한(傷寒)",
+      "reading": "sang-han",
+      "category": "병증",
+      "definition": "좁은 의미로는 한사(寒邪)에 의한 외감병, 넓은 의미로는 모든 외감열병의 총칭.",
+      "detail": "장중경의 상한론에서 체계화. 후대에 온병학이 발전하면서 상한과 온병의 구분·논쟁이 중요 주제가 되었다.",
+      "relatedTexts": ["shanghan-lun"],
+      "era": "qin-han"
+    },
+    {
+      "id": "wenbing",
+      "term": "온병(溫病)",
+      "reading": "on-byeong",
+      "category": "병증",
+      "definition": "온열(溫熱)성 외감병의 총칭. 상한과 구분되는 별도의 질병 범주.",
+      "detail": "명·청대에 온병학파가 형성되면서 체계화. 오유성의 여기설, 엽천사의 위기영혈변증이 핵심 이론.",
+      "relatedTexts": ["wenyi-lun", "wenre-lun"],
+      "era": "ming"
+    },
+    {
+      "id": "liqi",
+      "term": "여기(戾氣)",
+      "reading": "ryeo-gi",
+      "category": "병인론",
+      "definition": "전염병의 원인이 되는 특수한 물질적 병인. 오유성이 제시한 혁신적 개념.",
+      "detail": "입과 코를 통해 침입하고(口鼻道始), 각기 다른 여기가 각기 다른 질병을 일으킨다고 설명. 세균설 이전의 선구적 물질적 병인론.",
+      "relatedTexts": ["wenyi-lun"],
+      "era": "ming"
+    },
+    {
+      "id": "jinyuan-sidajia",
+      "term": "금원사대가(金元四大家)",
+      "reading": "geum-won-sa-dae-ga",
+      "category": "의학사",
+      "definition": "금원 시대 의학을 혁신한 네 명의 의가: 유완소·장종정·이고·주진형.",
+      "detail": "유완소(한량파)·장종정(공하파)·이고(보토파)·주진형(자음파). 각각 독자적 학설로 송대 국방(局方) 중심 의학의 한계를 극복했다.",
+      "relatedTexts": ["suwen-xuanji", "piwei-lun", "gezhi-yulun"],
+      "era": "jin-yuan"
+    },
+    {
+      "id": "hanliangpai",
+      "term": "한량파(寒涼派)",
+      "reading": "han-ryang-pa",
+      "category": "학파",
+      "definition": "유완소(劉完素)를 중심으로 한 학파. 화열(火熱)이 질병의 주요 원인이라 보고 한량약 위주로 치료.",
+      "detail": "육기개화설(六氣皆化火說)이 핵심 주장. 화열이 과다한 병증에 한량약으로 청열(清熱)하는 치법을 발전시켰다.",
+      "relatedTexts": ["suwen-xuanji"],
+      "era": "jin-yuan"
+    },
+    {
+      "id": "butupai",
+      "term": "보토파(補土派)",
+      "reading": "bo-to-pa",
+      "category": "학파",
+      "definition": "이고(李杲)를 중심으로 한 학파. 비위(脾胃)를 인체의 근본으로 보고 보비익기(補脾益氣)를 중시.",
+      "detail": "내상병(內傷病)의 원인을 비위 손상에서 찾았다. 보중익기탕(補中益氣湯)이 대표 처방.",
+      "relatedTexts": ["piwei-lun"],
+      "era": "jin-yuan"
+    },
+    {
+      "id": "ziyinpai",
+      "term": "자음파(滋陰派)",
+      "reading": "ja-eum-pa",
+      "category": "학파",
+      "definition": "주진형(朱震亨)을 중심으로 한 학파. '양유여음부족(陽有餘陰不足)'을 주장하고 자음(滋陰)을 중시.",
+      "detail": "상화론(相火論)을 통해 상화가 망동하면 음(陰)이 소모된다고 설명. 자음강화법(滋陰降火法)이 핵심 치법.",
+      "relatedTexts": ["gezhi-yulun"],
+      "era": "jin-yuan"
+    },
+    {
+      "id": "sasang",
+      "term": "사상체질(四象體質)",
+      "reading": "sa-sang-che-jil",
+      "category": "체질의학",
+      "definition": "이제마가 창시한 체질 분류. 태양인·태음인·소양인·소음인 네 체질로 사람을 나눈다.",
+      "detail": "장부의 대소(大小)와 성정(性情)의 차이에 따라 체질이 결정된다. 각 체질마다 잘 걸리는 병과 적합한 처방이 다르다.",
+      "relatedTexts": ["donguisusebowon"],
+      "era": "joseon"
+    },
+    {
+      "id": "dongui",
+      "term": "동의(東醫)",
+      "reading": "dong-ui",
+      "category": "의학사",
+      "definition": "동방(東方), 즉 조선의 의학이라는 뜻. 허준이 동의보감에서 사용한 개념.",
+      "detail": "중국 의학에 대한 의존에서 벗어나 조선 고유의 의학 정체성을 선언한 용어. 향약(鄕藥) 활용과 양생 중시가 특징.",
+      "relatedTexts": ["donguibogam"],
+      "era": "joseon"
+    },
+    {
+      "id": "hyangyak",
+      "term": "향약(鄕藥)",
+      "reading": "hyang-yak",
+      "category": "본초학",
+      "definition": "조선(한국) 자국에서 나는 약재. 중국산 당약(唐藥)과 구분되는 개념.",
+      "detail": "향약집성방에서 체계적으로 정리. 동의보감에서도 향약명을 병기하여 국산 약재의 활용을 강조했다.",
+      "relatedTexts": ["hyangyak-jipseongbang", "donguibogam"],
+      "era": "goryeo-joseon"
+    },
+    {
+      "id": "yangsheng",
+      "term": "양생(養生)",
+      "reading": "yang-saeng",
+      "category": "예방의학",
+      "definition": "생명을 기르고 건강을 유지하는 방법. 질병 예방과 장수를 목적으로 한다.",
+      "detail": "황제내경에서 '치미병(治未病, 아직 병들지 않은 것을 치료한다)'이라는 예방의학 개념이 시작. 동의보감의 핵심 주제이기도 하다.",
+      "relatedTexts": ["huangdi-neijing", "donguibogam"],
+      "era": "ancient-origins"
+    },
+    {
+      "id": "maizhen",
+      "term": "맥진(脈診)",
+      "reading": "maek-jin",
+      "category": "진단학",
+      "definition": "손목(촌구) 등의 맥박을 만져 질병을 진단하는 방법. 사진(四診) 중 절진(切診)에 해당.",
+      "detail": "난경에서 촌구독취법(寸口獨取法)을 제시하고, 왕숙화의 맥경에서 24종 맥상을 정리하여 체계화.",
+      "relatedTexts": ["nanjing", "maijing"],
+      "era": "warring-states"
+    },
+    {
+      "id": "sizhen",
+      "term": "사진(四診)",
+      "reading": "sa-jin",
+      "category": "진단학",
+      "definition": "한의학의 네 가지 진단 방법: 망(望)·문(聞)·문(問)·절(切).",
+      "detail": "망진(시각), 문진(청각·후각), 문진(질문), 절진(촉진·맥진). 편작이 사진을 활용한 것으로 전해지며, 이후 한의학 진단의 기본 틀이 되었다.",
+      "relatedTexts": ["huangdi-neijing", "nanjing"],
+      "era": "warring-states"
+    },
+    {
+      "id": "dayi-jingcheng",
+      "term": "대의정성(大醫精誠)",
+      "reading": "dae-ui-jeong-seong",
+      "category": "의료윤리",
+      "definition": "손사막이 천금요방에서 제시한 의료윤리 선언. '위대한 의사는 정밀함(精)과 성실함(誠)을 갖춰야 한다.'",
+      "detail": "귀천빈부를 가리지 않고 치료해야 한다는 내용. 동아시아 의료윤리의 원형으로 평가된다.",
+      "relatedTexts": ["qianjin-yaofang"],
+      "era": "wei-jin-sui-tang"
+    },
+    {
+      "id": "jingfang",
+      "term": "경방(經方)",
+      "reading": "gyeong-bang",
+      "category": "방제학",
+      "definition": "상한론·금궤요략에 수록된 처방의 총칭. 후대의 시방(時方)과 구분된다.",
+      "detail": "장중경이 정리한 처방들로, 약미가 적고 배합이 간결하며 효과가 명확한 것이 특징. 계지탕·마황탕 등이 대표 경방.",
+      "relatedTexts": ["shanghan-lun", "jingui-yaolue"],
+      "era": "qin-han"
+    },
+    {
+      "id": "wuyun-liuqi",
+      "term": "운기학설(五運六氣)",
+      "reading": "un-gi-hak-seol",
+      "category": "기초이론",
+      "definition": "오운(五運)과 육기(六氣)로 기후 변화와 질병의 관계를 설명하는 학설.",
+      "detail": "황제내경 소문의 7편 대론(大論)에 기초. 송대에 크게 성행하여 임상에 광범위하게 적용되었다.",
+      "relatedTexts": ["huangdi-neijing"],
+      "era": "song"
+    },
+    {
+      "id": "mingmen",
+      "term": "명문(命門)",
+      "reading": "myeong-mun",
+      "category": "기초이론",
+      "definition": "생명의 문(門). 원기(元氣)가 머무는 곳으로, 인체 생명활동의 근원.",
+      "detail": "난경에서 '좌신우명문(左腎右命門)' 설을 제시. 이후 명·청대에 명문학설이 크게 발전했다.",
+      "relatedTexts": ["nanjing"],
+      "era": "ancient-origins"
+    },
+    {
+      "id": "mawangdui",
+      "term": "마왕퇴(馬王堆)",
+      "reading": "ma-wang-toe",
+      "category": "의학사",
+      "definition": "1973년 중국 호남성에서 발굴된 한대 고분. 다수의 고대 의학 문헌이 출토되었다.",
+      "detail": "족비십일맥구경, 음양십일맥구경 등 경맥 문헌과 오십이병방(五十二病方) 등이 발견되어, 한의학 초기 발전 과정을 밝히는 중요 자료.",
+      "relatedTexts": [],
+      "era": "warring-states"
+    },
+    {
+      "id": "zhongyifeizhilun",
+      "term": "중의폐지론(中醫廢止論)",
+      "reading": "jung-ui-pye-ji-ron",
+      "category": "의학사",
+      "definition": "민국시대(1929년) 중의학(한의학)을 폐지하자는 주장과 정책.",
+      "detail": "여운수(余雲岫) 등이 중의학 폐지를 주장하여 큰 논쟁이 발생. 전국적 반대 운동으로 무산되었으나, 근대 한의학의 존폐 위기를 보여주는 사건.",
+      "relatedTexts": [],
+      "era": "modern"
+    }
+  ]
+}
