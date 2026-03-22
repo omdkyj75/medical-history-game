@@ -6,28 +6,39 @@ import EraTransitionScreen from "./EraTransitionScreen";
 import DeadScreen from "./DeadScreen";
 import NpcEventModal from "./NpcEventModal";
 import MuteButton from "./MuteButton";
+
+// 미니게임 8종
 import PulseGame from "./minigames/PulseGame";
 import HerbSortGame from "./minigames/HerbSortGame";
 import PatientGame from "./minigames/PatientGame";
+import YinYangGame from "./minigames/YinYangGame";
+import MeridianGame from "./minigames/MeridianGame";
+import FourDiagGame from "./minigames/FourDiagGame";
+import HistoryQuizGame from "./minigames/HistoryQuizGame";
+import EightPrinciplesGame from "./minigames/EightPrinciplesGame";
+
 import { startBgm, stopBgm, sfxStatUp, sfxEvent, sfxEraTransition, sfxNpcEvent, resumeAudio } from "../../utils/audioManager";
 
 const MINIGAME_COMPONENTS = {
   pulse: PulseGame,
   herb: HerbSortGame,
-  patient: PatientGame
+  patient: PatientGame,
+  yinyang: YinYangGame,
+  meridian: MeridianGame,
+  fourdiag: FourDiagGame,
+  history: HistoryQuizGame,
+  eightprinciples: EightPrinciplesGame
 };
 
 export default function RaisingGamePage({ game }) {
   const { phase } = game;
 
-  // Resume audio on first interaction
   useEffect(() => {
     const handler = () => resumeAudio();
     document.addEventListener("click", handler, { once: true });
     return () => document.removeEventListener("click", handler);
   }, []);
 
-  // BGM based on season
   useEffect(() => {
     if (phase === "activity-select" && game.currentSeason) {
       startBgm(game.currentSeason.id);
@@ -35,14 +46,12 @@ export default function RaisingGamePage({ game }) {
     return () => stopBgm();
   }, [game.currentSeason?.id, phase]);
 
-  // Sound effects on phase change
   useEffect(() => {
     if (phase === "activity-result") sfxStatUp();
     if (phase === "event") sfxEvent();
     if (phase === "era-transition") sfxEraTransition();
   }, [phase]);
 
-  // NPC event sound
   useEffect(() => {
     if (game.pendingNpcEvent) sfxNpcEvent();
   }, [game.pendingNpcEvent]);

@@ -4,16 +4,28 @@ import React, { useState, useMemo } from "react";
 const HERB_POOL = [
   { name: "인삼(人蔘)", effect: "보기(補氣)", category: "보약" },
   { name: "감초(甘草)", effect: "조화(調和)", category: "보약" },
-  { name: "황련(黃連)", effect: "청열(淸熱)", category: "한약" },
-  { name: "부자(附子)", effect: "온양(溫陽)", category: "온약" },
-  { name: "당귀(當歸)", effect: "보혈(補血)", category: "보약" },
+  { name: "황련(黃連)", effect: "청열(淸熱)", category: "청열약" },
+  { name: "부자(附子)", effect: "온양(溫陽)", category: "온리약" },
+  { name: "당귀(當歸)", effect: "보혈(補血)", category: "보혈약" },
   { name: "마황(麻黃)", effect: "발한(發汗)", category: "해표약" },
-  { name: "석고(石膏)", effect: "청열사화(淸熱瀉火)", category: "한약" },
+  { name: "석고(石膏)", effect: "청열사화(淸熱瀉火)", category: "청열약" },
   { name: "대황(大黃)", effect: "사하(瀉下)", category: "공하약" },
-  { name: "황기(黃芪)", effect: "보기고표(補氣固表)", category: "보약" },
-  { name: "지황(地黃)", effect: "자음(滋陰)", category: "보약" },
-  { name: "계지(桂枝)", effect: "발한해기(發汗解肌)", category: "온약" },
-  { name: "백작(白芍)", effect: "양혈(養血)", category: "보약" }
+  { name: "황기(黃芪)", effect: "보기고표(補氣固表)", category: "보기약" },
+  { name: "지황(地黃)", effect: "자음(滋陰)", category: "보음약" },
+  { name: "계지(桂枝)", effect: "발한해기(發汗解肌)", category: "해표약" },
+  { name: "백작약(白芍藥)", effect: "양혈렴음(養血斂陰)", category: "보혈약" },
+  { name: "천궁(川芎)", effect: "활혈행기(活血行氣)", category: "활혈약" },
+  { name: "백출(白朮)", effect: "건비조습(健脾燥濕)", category: "보기약" },
+  { name: "복령(茯苓)", effect: "이수삼습(利水滲濕)", category: "이수약" },
+  { name: "반하(半夏)", effect: "조습화담(燥濕化痰)", category: "화담약" },
+  { name: "진피(陳皮)", effect: "이기조습(理氣燥濕)", category: "이기약" },
+  { name: "시호(柴胡)", effect: "화해소양(和解少陽)", category: "해표약" },
+  { name: "황금(黃芩)", effect: "청열조습(淸熱燥濕)", category: "청열약" },
+  { name: "생강(生薑)", effect: "발산풍한(發散風寒)", category: "해표약" },
+  { name: "대조(大棗)", effect: "보중익기(補中益氣)", category: "보기약" },
+  { name: "작약(芍藥)", effect: "유간지통(柔肝止痛)", category: "보혈약" },
+  { name: "행인(杏仁)", effect: "지해평천(止咳平喘)", category: "지해약" },
+  { name: "건강(乾薑)", effect: "온중산한(溫中散寒)", category: "온리약" }
 ];
 
 const TOTAL_ROUNDS = 4;

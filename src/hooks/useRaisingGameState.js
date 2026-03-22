@@ -327,12 +327,11 @@ export function useRaisingGameState() {
     setPhase("activity-result");
   }
 
-  // Minigame trigger map: activityId → minigame type
-  const MINIGAME_MAP = {
-    "clinical-practice": "pulse",
-    "herb-gathering": "herb",
-    "public-service": "patient"
-  };
+  // 전체 미니게임 풀 — 모든 행동에서 랜덤 발동
+  const ALL_MINIGAMES = [
+    "pulse", "herb", "patient",
+    "yinyang", "meridian", "fourdiag", "history", "eightprinciples"
+  ];
 
   function completeMinigame(result) {
     // Apply bonus delta from minigame
@@ -357,9 +356,9 @@ export function useRaisingGameState() {
   }
 
   function proceedAfterResult() {
-    // Check for minigame trigger (30% chance)
-    const mgType = MINIGAME_MAP[selectedActivity];
-    if (mgType && Math.random() < 0.3) {
+    // 25% 확률로 랜덤 미니게임 발동 (휴식 제외)
+    if (selectedActivity !== "rest" && Math.random() < 0.25) {
+      const mgType = ALL_MINIGAMES[Math.floor(Math.random() * ALL_MINIGAMES.length)];
       setMinigameType(mgType);
       setPhase("minigame");
       return;
