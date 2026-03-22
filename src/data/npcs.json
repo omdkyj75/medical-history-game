@@ -1,0 +1,244 @@
+{
+  "npcs": [
+    {
+      "id": "fuxi",
+      "name": "복희씨(伏羲氏)",
+      "title": "팔괘의 창시자",
+      "era": "ancient-origins",
+      "emoji": "🐉",
+      "personality": "신비롭고 지혜로운 태고의 성인",
+      "likes": { "study-classics": 2, "academic-exchange": 1 },
+      "dislikes": { "rest": -1 },
+      "bonusEvent": {
+        "threshold": 5,
+        "title": "복희씨의 가르침",
+        "description": "복희씨가 팔괘의 원리로 인체를 설명해 줍니다.",
+        "delta": { "knowledge": 3 }
+      }
+    },
+    {
+      "id": "shennong",
+      "name": "신농씨(神農氏)",
+      "title": "본초학의 시조",
+      "era": "ancient-origins",
+      "emoji": "🌾",
+      "personality": "백초를 맛보는 용감한 탐구자",
+      "likes": { "herb-gathering": 3, "clinical-practice": 1 },
+      "dislikes": { "academic-exchange": -1 },
+      "bonusEvent": {
+        "threshold": 5,
+        "title": "신농씨의 비방",
+        "description": "신농씨가 특별한 약초의 효능을 전수해 줍니다.",
+        "delta": { "medical": 3 }
+      }
+    },
+    {
+      "id": "bianque",
+      "name": "편작(扁鵲)",
+      "title": "진맥의 대가",
+      "era": "warring-states",
+      "emoji": "🔮",
+      "personality": "예리하고 직관적인 천재 의가",
+      "likes": { "clinical-practice": 3, "visit-master": 2 },
+      "dislikes": { "rest": -1 },
+      "bonusEvent": {
+        "threshold": 6,
+        "title": "편작의 망진 비법",
+        "description": "편작이 환자의 안색만으로 병을 진단하는 비법을 전수합니다.",
+        "delta": { "medical": 4, "reputation": 1 }
+      }
+    },
+    {
+      "id": "yihe",
+      "name": "의화(醫和)",
+      "title": "육기 병인론의 선구자",
+      "era": "warring-states",
+      "emoji": "🌬️",
+      "personality": "논리적이고 체계적인 이론가",
+      "likes": { "study-classics": 3, "academic-exchange": 2 },
+      "dislikes": { "herb-gathering": -1 },
+      "bonusEvent": {
+        "threshold": 6,
+        "title": "의화의 육기론 강의",
+        "description": "의화가 음양·풍우·회명의 여섯 기운과 질병의 관계를 설명합니다.",
+        "delta": { "knowledge": 4 }
+      }
+    },
+    {
+      "id": "zhongjing",
+      "name": "장중경(張仲景)",
+      "title": "의성(醫聖)",
+      "era": "qin-han",
+      "emoji": "📕",
+      "personality": "온화하지만 엄격한 의학의 체계화자",
+      "likes": { "study-classics": 2, "clinical-practice": 2, "public-service": 1 },
+      "dislikes": {},
+      "bonusEvent": {
+        "threshold": 7,
+        "title": "장중경의 육경변증 전수",
+        "description": "장중경이 상한론의 핵심인 육경변증을 직접 전수합니다.",
+        "delta": { "medical": 3, "knowledge": 3 }
+      }
+    },
+    {
+      "id": "huatuo",
+      "name": "화타(華佗)",
+      "title": "외과의 전설",
+      "era": "qin-han",
+      "emoji": "🗡️",
+      "personality": "대담하고 혁신적인 외과 의가",
+      "likes": { "clinical-practice": 3, "herb-gathering": 1 },
+      "dislikes": { "study-classics": -1 },
+      "bonusEvent": {
+        "threshold": 7,
+        "title": "화타의 오금희 전수",
+        "description": "화타가 다섯 동물의 움직임을 모방한 양생 체조를 가르쳐 줍니다.",
+        "delta": { "medical": 2, "stamina": 3 }
+      }
+    },
+    {
+      "id": "sunsi",
+      "name": "손사막(孫思邈)",
+      "title": "약왕(藥王)",
+      "era": "jin-sui-tang",
+      "emoji": "👴",
+      "personality": "자비롭고 겸손한 의덕의 화신",
+      "likes": { "public-service": 3, "visit-master": 2, "herb-gathering": 1 },
+      "dislikes": {},
+      "bonusEvent": {
+        "threshold": 6,
+        "title": "대의정성의 가르침",
+        "description": "손사막이 의사의 도리인 대의정성(大醫精誠)을 직접 일러줍니다.",
+        "delta": { "virtue": 4, "reputation": 2 }
+      }
+    },
+    {
+      "id": "wangshuhe",
+      "name": "왕숙화(王叔和)",
+      "title": "맥학의 대가",
+      "era": "jin-sui-tang",
+      "emoji": "🫀",
+      "personality": "꼼꼼하고 분석적인 맥진 전문가",
+      "likes": { "clinical-practice": 2, "study-classics": 2 },
+      "dislikes": { "rest": -1 },
+      "bonusEvent": {
+        "threshold": 6,
+        "title": "맥경 비전",
+        "description": "왕숙화가 24종의 맥상을 직접 지도해 줍니다.",
+        "delta": { "medical": 3, "knowledge": 2 }
+      }
+    },
+    {
+      "id": "liuwansu",
+      "name": "유완소(劉完素)",
+      "title": "한량파 종사(寒涼派 宗師)",
+      "era": "jin-yuan",
+      "emoji": "🧊",
+      "personality": "열정적이고 논쟁을 즐기는 혁신가",
+      "likes": { "study-classics": 3, "academic-exchange": 2 },
+      "dislikes": { "rest": -1 },
+      "bonusEvent": {
+        "threshold": 7,
+        "title": "화열론의 정수",
+        "description": "유완소가 육기(六氣)가 모두 화(火)로 변할 수 있다는 핵심 이론을 전수합니다.",
+        "delta": { "knowledge": 4, "reputation": 1 }
+      }
+    },
+    {
+      "id": "ligao",
+      "name": "이고(李杲)",
+      "title": "보토파 종사(補土派 宗師)",
+      "era": "jin-yuan",
+      "emoji": "🌱",
+      "personality": "온화하고 배려 깊은 비위 전문가",
+      "likes": { "clinical-practice": 2, "public-service": 2, "visit-master": 1 },
+      "dislikes": {},
+      "bonusEvent": {
+        "threshold": 7,
+        "title": "보중익기탕의 비밀",
+        "description": "이고가 비위를 보하는 핵심 처방의 원리를 전수합니다.",
+        "delta": { "medical": 3, "knowledge": 2, "virtue": 1 }
+      }
+    },
+    {
+      "id": "lishizhen",
+      "name": "이시진(李時珍)",
+      "title": "본초학의 거장",
+      "era": "ming-dynasty",
+      "emoji": "📗",
+      "personality": "끈기 있고 탐구적인 박물학자",
+      "likes": { "herb-gathering": 3, "study-classics": 2 },
+      "dislikes": { "rest": -1 },
+      "bonusEvent": {
+        "threshold": 7,
+        "title": "본초강목의 편찬 참여",
+        "description": "이시진과 함께 약물을 조사하고 본초강목의 일부를 함께 정리합니다.",
+        "delta": { "knowledge": 3, "medical": 2, "reputation": 2 }
+      }
+    },
+    {
+      "id": "wuyouxing",
+      "name": "오유성(吳有性)",
+      "title": "온역론의 개척자",
+      "era": "ming-dynasty",
+      "emoji": "🦠",
+      "personality": "관찰력이 뛰어난 혁신적 전염병 학자",
+      "likes": { "clinical-practice": 3, "public-service": 1 },
+      "dislikes": { "academic-exchange": -1 },
+      "bonusEvent": {
+        "threshold": 6,
+        "title": "여기(戾氣)의 발견",
+        "description": "오유성이 전염병의 새로운 원인에 대한 통찰을 나눠줍니다.",
+        "delta": { "medical": 3, "knowledge": 2 }
+      }
+    },
+    {
+      "id": "yetianshi",
+      "name": "엽천사(葉天士)",
+      "title": "온병학의 대가",
+      "era": "qing-dynasty",
+      "emoji": "🌡️",
+      "personality": "통찰력 있고 임상 경험이 풍부한 대가",
+      "likes": { "clinical-practice": 3, "study-classics": 1 },
+      "dislikes": {},
+      "bonusEvent": {
+        "threshold": 6,
+        "title": "위기영혈변증 비전",
+        "description": "엽천사가 온병의 4단계 변증을 직접 전수합니다.",
+        "delta": { "medical": 3, "knowledge": 3 }
+      }
+    },
+    {
+      "id": "heoJun",
+      "name": "허준(許浚)",
+      "title": "동의보감의 저자",
+      "era": "joseon",
+      "emoji": "📘",
+      "personality": "성실하고 백성을 사랑하는 균형잡힌 의가",
+      "likes": { "study-classics": 2, "public-service": 2, "herb-gathering": 1 },
+      "dislikes": {},
+      "bonusEvent": {
+        "threshold": 7,
+        "title": "동의보감 편찬의 비밀",
+        "description": "허준이 동의보감을 편찬하면서 깨달은 의학의 본질을 전합니다.",
+        "delta": { "knowledge": 3, "virtue": 3, "reputation": 2 }
+      }
+    },
+    {
+      "id": "leejema",
+      "name": "이제마(李濟馬)",
+      "title": "사상의학의 창시자",
+      "era": "joseon",
+      "emoji": "🔬",
+      "personality": "독창적이고 반골 기질의 혁신가",
+      "likes": { "academic-exchange": 3, "clinical-practice": 2 },
+      "dislikes": { "rest": -1 },
+      "bonusEvent": {
+        "threshold": 7,
+        "title": "사상체질 진단법",
+        "description": "이제마가 태양·태음·소양·소음 체질의 감별법을 전수합니다.",
+        "delta": { "medical": 3, "knowledge": 3, "reputation": 2 }
+      }
+    }
+  ]
+}

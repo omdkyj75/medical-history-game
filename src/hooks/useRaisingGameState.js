@@ -3,6 +3,8 @@ import gameConfig from "../data/gameConfig.json";
 import resultTypesData from "../data/resultTypes.json";
 import { saveResult, getResults } from "../utils/resultStorage";
 import { checkNewAchievements } from "../utils/checkAchievements";
+import { getSeason, getSeasonBonus } from "../utils/seasonCalculator";
+import npcData from "../data/npcs.json";
 
 const { stats, eras, activities, gameMeta } = gameConfig;
 
@@ -13,7 +15,6 @@ const SCREEN_TO_HASH = {
   final: "#/final",
   history: "#/history",
   achievements: "#/achievements",
-  quiz: "#/quiz"
 };
 
 const HASH_TO_SCREEN = Object.fromEntries(
@@ -137,11 +138,16 @@ export function useRaisingGameState() {
   const [screen, setScreenRaw] = useState(screenFromHash);
   const [eraIndex, setEraIndex] = useState(0);
   const [turnIndex, setTurnIndex] = useState(0);
-  // phases: activity-select, activity-result, event, era-transition, final
+  // phases: activity-select, activity-result, minigame, event, era-transition, final
   const [phase, setPhase] = useState("activity-select");
+  const [minigameType, setMinigameType] = useState(null);
   const [playerStats, setPlayerStats] = useState(cloneInitialStats);
   const [turnHistory, setTurnHistory] = useState([]);
   const [activityCounts, setActivityCounts] = useState({});
+
+  // NPC affinity
+  const [npcAffinities, setNpcAffinities] = useState({});
+  const [pendingNpcEvent, setPendingNpcEvent] = useState(null);
 
   // Current turn state
   const [selectedActivity, setSelectedActivity] = useState(null);
@@ -194,6 +200,16 @@ export function useRaisingGameState() {
 
   const totalTurns = gameMeta.totalTurns;
 
+  // Season system
+  const currentSeason = useMemo(() => getSeason(globalTurnNumber), [globalTurnNumber]);
+  const seasonBonus = useMemo(() => getSeasonBonus(currentSeason?.id), [currentSeason]);
+
+  // NPC system - get NPCs for current era
+  const currentNpcs = useMemo(
+    () => npcData.npcs.filter((n) => n.era === currentEra?.id),
+    [currentEra]
+  );
+
   // Get activity info with era overrides
   function getActivityInfo(activityId) {
     const base = activities.find((a) => a.id === activityId);
@@ -219,15 +235,41 @@ export function useRaisingGameState() {
     setLastDelta(null);
     setCurrentEvent(null);
     setSelectedEventChoice(null);
+    setNpcAffinities({});
+    setPendingNpcEvent(null);
     setFinalResult(null);
     setNewAchievements([]);
     navigate("raising");
   }
 
   function selectActivity(activityId) {
-    // Check stamina warning: if stamina would go below 0
-    const delta = getActivityDelta(activityId, currentEra);
+    const delta = { ...getActivityDelta(activityId, currentEra) };
+
+    // Apply season bonus/penalty
+    if (seasonBonus) {
+      if (seasonBonus.activityId === activityId && seasonBonus.bonus) {
+        for (const [k, v] of Object.entries(seasonBonus.bonus)) {
+          delta[k] = (delta[k] || 0) + v;
+        }
+      }
+      if (seasonBonus.activityId === null && seasonBonus.penalty) {
+        for (const [k, v] of Object.entries(seasonBonus.penalty)) {
+          delta[k] = (delta[k] || 0) + v;
+        }
+      }
+    }
+
     const newStats = applyDelta(playerStats, delta);
+
+    // 체력 0 이하 → 사망
+    if (newStats.stamina <= 0) {
+      newStats.stamina = 0;
+      setPlayerStats(newStats);
+      setSelectedActivity(activityId);
+      setLastDelta(delta);
+      setPhase("dead");
+      return;
+    }
 
     setSelectedActivity(activityId);
     setLastDelta(delta);
@@ -250,14 +292,97 @@ export function useRaisingGameState() {
       }
     ]);
 
+    // Update NPC affinities
+    setNpcAffinities((prev) => {
+      const next = { ...prev };
+      for (const npc of currentNpcs) {
+        const likeVal = npc.likes?.[activityId] || 0;
+        const dislikeVal = npc.dislikes?.[activityId] || 0;
+        const change = likeVal + dislikeVal;
+        if (change !== 0) {
+          next[npc.id] = Math.max(0, (next[npc.id] || 0) + change);
+        }
+      }
+      return next;
+    });
+
     setPhase("activity-result");
   }
 
+  // Minigame trigger map: activityId → minigame type
+  const MINIGAME_MAP = {
+    "clinical-practice": "pulse",
+    "herb-gathering": "herb",
+    "public-service": "patient"
+  };
+
+  function completeMinigame(result) {
+    // Apply bonus delta from minigame
+    const { label, ...delta } = result;
+    const newStats = applyDelta(playerStats, delta);
+    setPlayerStats(newStats);
+    setMinigameType(null);
+
+    // Continue to NPC/event check
+    checkNpcAndEvents();
+  }
+
   function proceedAfterResult() {
+    // Check for minigame trigger (30% chance)
+    const mgType = MINIGAME_MAP[selectedActivity];
+    if (mgType && Math.random() < 0.3) {
+      setMinigameType(mgType);
+      setPhase("minigame");
+      return;
+    }
+
+    checkNpcAndEvents();
+  }
+
+  function checkNpcAndEvents() {
+    // Check for NPC bonus event first
+    for (const npc of currentNpcs) {
+      const aff = npcAffinities[npc.id] || 0;
+      const threshold = npc.bonusEvent?.threshold;
+      if (threshold && aff >= threshold && !turnHistory.some(h => h.npcEventId === npc.id)) {
+        setPendingNpcEvent({ npc, event: npc.bonusEvent });
+        return;
+      }
+    }
+
     // Check for random event
     const event = pickRandomEvent(currentEra);
     if (event) {
       setCurrentEvent(event);
+      setPhase("event");
+    } else {
+      advanceTurn();
+    }
+  }
+
+  function dismissNpcEvent() {
+    if (pendingNpcEvent) {
+      const { npc, event } = pendingNpcEvent;
+      const newStats = applyDelta(playerStats, event.delta);
+      setPlayerStats(newStats);
+
+      // Mark this NPC event as triggered in history
+      setTurnHistory((prev) => {
+        const updated = [...prev];
+        const last = { ...updated[updated.length - 1] };
+        last.npcEventId = npc.id;
+        last.npcEventTitle = event.title;
+        updated[updated.length - 1] = last;
+        return updated;
+      });
+
+      setPendingNpcEvent(null);
+    }
+
+    // Continue to random event check
+    const evt = pickRandomEvent(currentEra);
+    if (evt) {
+      setCurrentEvent(evt);
       setPhase("event");
     } else {
       advanceTurn();
@@ -342,7 +467,7 @@ export function useRaisingGameState() {
   function goToHowToPlay() { navigate("howToPlay"); }
   function goToHistory() { setSavedResults(getResults()); navigate("history"); }
   function goToAchievements() { navigate("achievements"); }
-  function goToQuiz() { navigate("quiz"); }
+
   function dismissAchievements() { setNewAchievements([]); }
 
   return {
@@ -373,6 +498,19 @@ export function useRaisingGameState() {
     turnHistory,
     activityCounts,
 
+    // Season
+    currentSeason,
+    seasonBonus,
+
+    // NPC
+    npcData: npcData.npcs,
+    currentNpcs,
+    npcAffinities,
+    pendingNpcEvent,
+
+    // Minigame
+    minigameType,
+
     // Current turn
     selectedActivity,
     lastDelta,
@@ -391,6 +529,8 @@ export function useRaisingGameState() {
     proceedAfterResult,
     selectEventChoice,
     proceedToNextEra,
+    dismissNpcEvent,
+    completeMinigame,
     getActivityInfo,
 
     // Navigation actions
@@ -398,7 +538,6 @@ export function useRaisingGameState() {
     goToHowToPlay,
     goToHistory,
     goToAchievements,
-    goToQuiz,
     dismissAchievements
   };
 }

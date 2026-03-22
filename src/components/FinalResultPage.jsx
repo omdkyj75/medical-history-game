@@ -90,6 +90,39 @@ export default function FinalResultPage({ game }) {
         </section>
       )}
 
+      {/* 만난 NPC 인연 */}
+      {game.currentNpcs !== undefined && (
+        <section>
+          <h2>당신과 인연을 맺은 인물들</h2>
+          <div className="final-npc-grid">
+            {(() => {
+              const allNpcs = game.eras.flatMap((era) => {
+                const npcs = (game.npcData || []).filter((n) => n.era === era.id);
+                return npcs.map((npc) => ({
+                  ...npc,
+                  eraTitle: era.title,
+                  affinity: game.npcAffinities[npc.id] || 0
+                }));
+              }).filter((n) => n.affinity > 0);
+
+              if (allNpcs.length === 0) return <p>인연을 맺은 인물이 없습니다.</p>;
+
+              return allNpcs.sort((a, b) => b.affinity - a.affinity).map((npc) => (
+                <div key={npc.id} className="final-npc-card">
+                  <span className="final-npc-emoji">{npc.emoji}</span>
+                  <div className="final-npc-info">
+                    <div className="final-npc-name">{npc.name}</div>
+                    <div className="final-npc-title">{npc.title}</div>
+                    <div className="final-npc-era">{npc.eraTitle}</div>
+                    <div className="final-npc-affinity">호감도: {"★".repeat(Math.min(5, npc.affinity))}</div>
+                  </div>
+                </div>
+              ));
+            })()}
+          </div>
+        </section>
+      )}
+
       <section>
         <h2>턴별 행동 기록</h2>
         <div className="final-timeline">

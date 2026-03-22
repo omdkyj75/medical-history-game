@@ -32,11 +32,7 @@ export default function StartPage({ game }) {
         <button className="btn-primary" onClick={() => game.startGame("")}>
           육성 시뮬레이션 시작
         </button>
-        <button className="btn-quiz" onClick={game.goToQuiz}>
-          퀴즈 도전
-          <span className="btn-quiz-desc">10시대 × 4문제, 총 40문제</span>
-        </button>
-        <div className="start-links">
+<div className="start-links">
           <button className="btn-text" onClick={game.goToHowToPlay}>게임 방법</button>
           <button className="btn-text" onClick={game.goToHistory}>플레이 기록</button>
           <button className="btn-text" onClick={game.goToAchievements}>업적</button>
