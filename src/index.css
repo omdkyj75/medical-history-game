@@ -141,27 +141,28 @@ input:focus {
 }
 
 .app-footer {
-  position: fixed;
-  bottom: 8px;
-  right: 12px;
+  text-align: center;
+  padding: 24px 0 12px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 4px;
-  opacity: 0.2;
+  gap: 6px;
+  opacity: 0.35;
   transition: opacity 0.2s;
-  z-index: 10;
 }
-.app-footer:hover { opacity: 0.45; }
+.app-footer:hover { opacity: 0.6; }
 .app-footer a {
   color: var(--text-secondary, #888);
   text-decoration: none;
-  font-size: 0.6rem;
-  letter-spacing: 0.02em;
+  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 .app-footer a:hover { color: var(--primary, #00ff88); }
 .app-footer-dot {
   color: var(--text-secondary, #888);
-  font-size: 0.5rem;
+  font-size: 0.6rem;
 }
 
 .page {
