@@ -8,17 +8,16 @@ const GOOD_WINDOW = 300;    // ±ms for good
 
 export default function PulseGame({ onComplete }) {
   const [phase, setPhase] = useState("ready"); // ready | playing | result
-  const [beats, setBeats] = useState([]);
   const [currentBeat, setCurrentBeat] = useState(0);
   const [score, setScore] = useState(0);
   const [pulseAnim, setPulseAnim] = useState(false);
   const [feedback, setFeedback] = useState(null);
   const beatTimeRef = useRef(null);
-  const timerRef = useRef(null);
+  const beatTimerRef = useRef(null);
+  const missTimerRef = useRef(null);
 
   const startGame = useCallback(() => {
     setPhase("playing");
-    setBeats([]);
     setCurrentBeat(0);
     setScore(0);
     setFeedback(null);
@@ -31,11 +30,19 @@ export default function PulseGame({ onComplete }) {
       return;
     }
     const delay = BEAT_INTERVAL + (Math.random() * 400 - 200); // slight randomness
-    timerRef.current = setTimeout(() => {
+    beatTimerRef.current = setTimeout(() => {
       beatTimeRef.current = Date.now();
       setPulseAnim(true);
       setTimeout(() => setPulseAnim(false), 300);
       setCurrentBeat(beatIndex + 1);
+
+      missTimerRef.current = setTimeout(() => {
+        if (!beatTimeRef.current) return;
+        beatTimeRef.current = null;
+        setFeedback("miss");
+        setTimeout(() => setFeedback(null), 400);
+        scheduleBeat(beatIndex + 1);
+      }, GOOD_WINDOW);
     }, delay);
   }
 
@@ -57,6 +64,7 @@ export default function PulseGame({ onComplete }) {
     setFeedback(result);
     setTimeout(() => setFeedback(null), 400);
     beatTimeRef.current = null;
+    if (missTimerRef.current) clearTimeout(missTimerRef.current);
 
     // Schedule next beat
     scheduleBeat(currentBeat);
@@ -64,7 +72,8 @@ export default function PulseGame({ onComplete }) {
 
   useEffect(() => {
     return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
+      if (beatTimerRef.current) clearTimeout(beatTimerRef.current);
+      if (missTimerRef.current) clearTimeout(missTimerRef.current);
     };
   }, []);
 
