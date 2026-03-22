@@ -38,6 +38,12 @@ export default function App() {
         <GlossaryPage onBack={game.goToStart} />
       )}
 
+      <footer className="app-footer">
+        <a href="https://www.instagram.com/hooonnam" target="_blank" rel="noopener noreferrer">ig</a>
+        <span className="app-footer-dot">·</span>
+        <a href="https://github.com/hooonnam" target="_blank" rel="noopener noreferrer">gh</a>
+      </footer>
+
       {game.newAchievements.length > 0 && (
         <AchievementToast
           achievements={game.newAchievements}
