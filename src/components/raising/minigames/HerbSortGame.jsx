@@ -74,7 +74,7 @@ export default function HerbSortGame({ onComplete }) {
   return (
     <div className="minigame-container">
       <div className="minigame-header">
-        <span className="minigame-icon">🌿</span>
+        <span className="minigame-icon">草</span>
         <h2>약초 분류(本草 分類)</h2>
         <p>약초의 효능에 맞는 약재를 고르세요!</p>
       </div>

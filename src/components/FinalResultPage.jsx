@@ -10,11 +10,11 @@ const SCORE_LABELS = {
 };
 
 const SCORE_COLORS = {
-  medical: "#8b5e3c",
-  knowledge: "#4a6a8f",
-  virtue: "#3d7a66",
-  stamina: "#b85c38",
-  reputation: "#8a7232"
+  medical: "var(--score-medical)",
+  knowledge: "var(--score-knowledge)",
+  virtue: "var(--score-virtue)",
+  stamina: "var(--score-stamina)",
+  reputation: "var(--score-reputation)"
 };
 
 const TENDENCY_NAMES = {

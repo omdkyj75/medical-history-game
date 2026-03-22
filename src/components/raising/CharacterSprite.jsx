@@ -54,10 +54,10 @@ export default function CharacterSprite({ stats, animating, season }) {
         <div className={`char-body ${state.level}`}>
           {/* 왼팔 + 아이템 */}
           <div className={`char-arm left ${animating ? "arm-action" : ""}`}>
-            {state.item === "needle" && <div className="char-item needle">💉</div>}
-            {state.item === "book" && <div className="char-item book">📖</div>}
-            {state.item === "herb" && <div className="char-item herb">🌿</div>}
-            {state.item === "scroll" && <div className="char-item scroll">📜</div>}
+            {state.item === "needle" && <div className="char-item needle">鍼</div>}
+            {state.item === "book" && <div className="char-item book">書</div>}
+            {state.item === "herb" && <div className="char-item herb">草</div>}
+            {state.item === "scroll" && <div className="char-item scroll">名</div>}
           </div>
           {/* 오른팔 */}
           <div className={`char-arm right ${animating ? "arm-action" : ""}`} />

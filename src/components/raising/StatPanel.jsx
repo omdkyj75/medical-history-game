@@ -8,7 +8,7 @@ export default function StatPanel({ stats, statConfig, previewDelta }) {
       {keys.map((key) => {
         const value = stats[key] ?? 0;
         const max = statConfig.max[key] ?? 100;
-        const color = statConfig.colors[key] ?? "#888";
+        const color = `var(--score-${key}, #888)`;
         const label = statConfig.labels[key] ?? key;
         const pct = Math.min(100, (value / max) * 100);
         const delta = previewDelta?.[key];

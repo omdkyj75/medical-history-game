@@ -15,7 +15,7 @@ export default function MuteButton() {
       onClick={handleToggle}
       title={muted ? "소리 켜기" : "소리 끄기"}
     >
-      {muted ? "🔇" : "🔊"}
+      {muted ? "OFF" : "ON"}
     </button>
   );
 }

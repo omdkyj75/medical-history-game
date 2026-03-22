@@ -5,7 +5,7 @@ export default function DeadScreen({ game }) {
 
   return (
     <div className="raising-dead-screen">
-      <div className="dead-icon">💀</div>
+      <div className="dead-icon">死</div>
       <h1 className="dead-title">과로사(過勞死)</h1>
       <p className="dead-subtitle">
         {era?.title}에서 체력이 다하여 쓰러졌습니다.

@@ -94,7 +94,7 @@ export default function PatientGame({ onComplete }) {
   return (
     <div className="minigame-container">
       <div className="minigame-header">
-        <span className="minigame-icon">🏥</span>
+        <span className="minigame-icon">患</span>
         <h2>환자 치료(患者 治療)</h2>
         <p>환자의 증상을 보고 적절한 처방을 선택하세요!</p>
       </div>
@@ -109,7 +109,7 @@ export default function PatientGame({ onComplete }) {
       {phase === "playing" && currentQ && (
         <div className="minigame-playing">
           <div className="patient-case">
-            <div className="patient-emoji">🤒</div>
+            <div className="patient-emoji">病</div>
             <div className="patient-symptoms">
               <div className="patient-label">환자의 증상</div>
               <div className="patient-symptom-text">{currentQ.symptoms}</div>

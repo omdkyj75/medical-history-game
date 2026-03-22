@@ -56,7 +56,7 @@
       "id": "study-classics",
       "title": "경전공부",
       "subtitle": "고전 의서를 탐독한다",
-      "icon": "📖",
+      "icon": "經",
       "baseDelta": { "knowledge": 3, "stamina": -2 },
       "description": "고전 의서를 탐독하며 이론적 기반을 다진다."
     },
@@ -64,7 +64,7 @@
       "id": "clinical-practice",
       "title": "진료수련",
       "subtitle": "환자를 직접 진료한다",
-      "icon": "💉",
+      "icon": "診",
       "baseDelta": { "medical": 3, "stamina": -2 },
       "description": "환자를 직접 만나 진단하고 치료하며 의술을 연마한다."
     },
@@ -72,7 +72,7 @@
       "id": "public-service",
       "title": "민간봉사",
       "subtitle": "백성을 돌본다",
-      "icon": "🤲",
+      "icon": "仁",
       "baseDelta": { "virtue": 3, "reputation": 1, "stamina": -2 },
       "description": "가난한 백성과 환자를 찾아가 무료로 진료하고 돌본다."
     },
@@ -80,7 +80,7 @@
       "id": "visit-master",
       "title": "스승방문",
       "subtitle": "스승을 찾아뵌다",
-      "icon": "🏔️",
+      "icon": "師",
       "baseDelta": { "medical": 1, "knowledge": 2, "stamina": -1 },
       "description": "명의를 찾아가 가르침을 청하고 의술의 깊이를 더한다."
     },
@@ -88,7 +88,7 @@
       "id": "herb-gathering",
       "title": "약초채집",
       "subtitle": "산과 들에서 약초를 모은다",
-      "icon": "🌿",
+      "icon": "草",
       "baseDelta": { "medical": 1, "stamina": 1 },
       "description": "산야를 누비며 약초를 채집하고 본초 지식을 쌓는다."
     },
@@ -96,7 +96,7 @@
       "id": "academic-exchange",
       "title": "학술교류",
       "subtitle": "다른 의가와 학문을 나눈다",
-      "icon": "📜",
+      "icon": "論",
       "baseDelta": { "knowledge": 2, "reputation": 2, "stamina": -2 },
       "description": "다른 의가들과 만나 학설을 토론하고 견문을 넓힌다."
     },
@@ -104,7 +104,7 @@
       "id": "rest",
       "title": "휴식",
       "subtitle": "몸과 마음을 쉰다",
-      "icon": "🍵",
+      "icon": "息",
       "baseDelta": { "stamina": 4 },
       "description": "심신을 안정시키고 체력을 회복한다."
     }

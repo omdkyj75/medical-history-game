@@ -80,7 +80,7 @@ export default function PulseGame({ onComplete }) {
   return (
     <div className="minigame-container">
       <div className="minigame-header">
-        <span className="minigame-icon">🫀</span>
+        <span className="minigame-icon">脈</span>
         <h2>맥진(脈診) 수련</h2>
         <p>맥박이 뛸 때 타이밍에 맞춰 클릭하세요!</p>
       </div>

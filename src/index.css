@@ -1,31 +1,31 @@
 /* ══════════════════════════════════════════
-   한의사메이커 — Design System v2
-   "문헌 아카이브 + 현대 편집" 미감
+   한의사메이커 — Design System v3
+   "네오 레트로" — 다크 배경 + 네온 악센트
    ══════════════════════════════════════════ */
 
 :root {
   /* ── Colors ── */
-  --bg: #f5f2ec;
-  --panel: #fffefb;
-  --panel-2: #f0ebe2;
-  --text: #1a1714;
-  --text-secondary: #78716a;
-  --primary: #8b5e3c;
-  --primary-strong: #5c3a1e;
-  --accent: #4a7c6f;
-  --accent-warm: #c4956a;
-  --line: #e2ddd5;
-  --line-strong: #c8c0b4;
-  --negative: #9e4a3a;
+  --bg: #0f0f23;
+  --panel: #1e1e3f;
+  --panel-2: #2a2a50;
+  --text: #e0e0ff;
+  --text-secondary: #8888bb;
+  --primary: #00ff88;
+  --primary-strong: #00cc6a;
+  --accent: #ff6b9d;
+  --accent-warm: #ffaa44;
+  --line: #333366;
+  --line-strong: #4444aa;
+  --negative: #ff4444;
 
-  /* ── Radius (절제) ── */
+  /* ── Radius ── */
   --radius-lg: 12px;
   --radius-md: 8px;
   --radius-sm: 4px;
 
   /* ── Typography ── */
-  --font-body: "Pretendard Variable", "Pretendard", -apple-system, "Apple SD Gothic Neo", sans-serif;
-  --font-title: "마루 부리OTF", "MaruBuri", "Noto Serif KR", serif;
+  --font-body: "SUIT Variable", "SUIT", "Pretendard Variable", "Pretendard", -apple-system, sans-serif;
+  --font-title: "SUIT Variable", "SUIT", "Pretendard Variable", -apple-system, sans-serif;
   --text-xs: 0.72rem;
   --text-sm: 0.82rem;
   --text-base: 0.95rem;
@@ -34,11 +34,12 @@
   --text-2xl: 2rem;
   --text-3xl: 2.8rem;
 
-  /* ── Score Colors ── */
-  --score-academic: #8b5e3c;
-  --score-clinical: #3d7a66;
-  --score-text: #4a6a8f;
-  --score-public: #8a7232;
+  /* ── Stat Colors (네온 톤) ── */
+  --score-medical: #ff6b6b;
+  --score-knowledge: #4ecdc4;
+  --score-virtue: #ffe66d;
+  --score-stamina: #ff8a5c;
+  --score-reputation: #a78bfa;
 }
 
 * { box-sizing: border-box; }
@@ -71,9 +72,9 @@ button {
 .modal-card .button-group button:first-child {
   padding: 14px 28px;
   background: var(--primary);
-  color: #fff;
+  color: var(--bg);
   border-radius: var(--radius-sm);
-  font-weight: 600;
+  font-weight: 700;
   font-size: var(--text-base);
   letter-spacing: 0.02em;
 }
@@ -1803,12 +1804,12 @@ input:focus {
 
 /* ── Stamina Warning ── */
 .raising-stamina-warning {
-  background: #fef2f2;
-  border: 1px solid #fca5a5;
+  background: rgba(255, 68, 68, 0.1);
+  border: 1px solid rgba(255, 68, 68, 0.3);
   border-radius: var(--radius-md);
   padding: 10px 14px;
   margin-bottom: 12px;
-  color: #991b1b;
+  color: var(--negative);
   font-size: var(--text-sm);
   font-weight: 500;
 }
@@ -1862,8 +1863,8 @@ input:focus {
   font-size: var(--text-xs);
   margin-left: 4px;
 }
-.raising-stat-delta.positive { color: #16a34a; }
-.raising-stat-delta.negative { color: #dc2626; }
+.raising-stat-delta.positive { color: var(--primary); }
+.raising-stat-delta.negative { color: var(--negative); }
 
 /* ── Prompt ── */
 .raising-prompt {
@@ -1896,8 +1897,15 @@ input:focus {
 }
 .raising-activity-card:hover {
   border-color: var(--primary);
-  box-shadow: 0 2px 12px rgba(139, 94, 60, 0.12);
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.15);
   transform: translateY(-2px);
+}
+.raising-activity-hanzi {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--primary);
+  font-family: var(--font-title);
+  line-height: 1;
 }
 .raising-activity-card.disabled {
   opacity: 0.5;
@@ -1933,12 +1941,14 @@ input:focus {
   font-variant-numeric: tabular-nums;
 }
 .raising-delta-tag.positive {
-  background: #dcfce7;
-  color: #166534;
+  background: rgba(0, 255, 136, 0.15);
+  color: var(--primary);
+  border: 1px solid rgba(0, 255, 136, 0.3);
 }
 .raising-delta-tag.negative {
-  background: #fef2f2;
-  color: #991b1b;
+  background: rgba(255, 68, 68, 0.15);
+  color: var(--negative);
+  border: 1px solid rgba(255, 68, 68, 0.3);
 }
 
 /* ── Activity Result Screen ── */
@@ -2187,12 +2197,12 @@ input:focus {
 .char-hat {
   width: 36px;
   height: 12px;
-  background: #4a3728;
+  background: #555588;
   border-radius: 4px 4px 0 0;
   position: relative;
 }
-.char-hat.intermediate { background: #2c5f4a; }
-.char-hat.master { background: #8b5e3c; }
+.char-hat.intermediate { background: #00cc6a; }
+.char-hat.master { background: #ffaa44; }
 .char-hat-ornament {
   position: absolute;
   top: -6px;
@@ -2200,7 +2210,7 @@ input:focus {
   transform: translateX(-50%);
   width: 8px;
   height: 8px;
-  background: #c4956a;
+  background: #ff6b9d;
   border-radius: 50%;
 }
 
@@ -2267,18 +2277,18 @@ input:focus {
 .char-body {
   width: 44px;
   height: 36px;
-  background: #e8ddd0;
+  background: #3a3a6a;
   border-radius: 4px;
   position: relative;
-  border: 1px solid #d5c8b8;
+  border: 1px solid #5555aa;
 }
 .char-body.intermediate {
-  background: #d4e8d0;
-  border-color: #b8d4b0;
+  background: #2a5a4a;
+  border-color: #00cc6a;
 }
 .char-body.master {
-  background: #d0d8e8;
-  border-color: #b0b8d4;
+  background: #4a3a2a;
+  border-color: #ffaa44;
 }
 
 /* 팔 */
@@ -2317,7 +2327,7 @@ input:focus {
 .char-leg {
   width: 12px;
   height: 16px;
-  background: #4a3728;
+  background: #333366;
   border-radius: 0 0 4px 4px;
 }
 
@@ -2332,14 +2342,14 @@ input:focus {
   border: 1px solid var(--line);
 }
 .char-level-badge.intermediate {
-  background: #dcfce7;
-  color: #166534;
-  border-color: #86efac;
+  background: rgba(0, 255, 136, 0.15);
+  color: var(--primary);
+  border-color: var(--primary);
 }
 .char-level-badge.master {
-  background: #fef3c7;
-  color: #92400e;
-  border-color: #fcd34d;
+  background: rgba(255, 170, 68, 0.15);
+  color: var(--accent-warm);
+  border-color: var(--accent-warm);
 }
 
 /* ══════════════════════════════════════════
@@ -2562,9 +2572,9 @@ input:focus {
   margin-top: 12px;
   animation: feedback-pop 0.3s ease;
 }
-.pulse-feedback.perfect { color: #16a34a; }
-.pulse-feedback.good { color: #ca8a04; }
-.pulse-feedback.miss { color: #dc2626; }
+.pulse-feedback.perfect { color: var(--primary); }
+.pulse-feedback.good { color: var(--accent-warm); }
+.pulse-feedback.miss { color: var(--negative); }
 .pulse-hint {
   color: var(--text-secondary);
   font-size: var(--text-xs);
@@ -2621,14 +2631,14 @@ input:focus {
   border-color: var(--primary);
 }
 .herb-option-btn.correct {
-  border-color: #16a34a;
-  background: #dcfce7;
-  color: #166534;
+  border-color: var(--primary);
+  background: rgba(0, 255, 136, 0.15);
+  color: var(--primary);
 }
 .herb-option-btn.wrong {
-  border-color: #dc2626;
-  background: #fef2f2;
-  color: #991b1b;
+  border-color: var(--negative);
+  background: rgba(255, 68, 68, 0.15);
+  color: var(--negative);
 }
 .herb-progress {
   font-size: var(--text-sm);
@@ -2661,11 +2671,12 @@ input:focus {
   line-height: 1.5;
 }
 .patient-diagnosis {
-  background: #fef3c7;
+  background: rgba(255, 170, 68, 0.15);
+  border: 1px solid rgba(255, 170, 68, 0.3);
   border-radius: var(--radius-sm);
   padding: 8px 12px;
   font-size: var(--text-sm);
-  color: #92400e;
+  color: var(--accent-warm);
   margin-bottom: 12px;
 }
 
