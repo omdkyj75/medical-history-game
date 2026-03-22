@@ -153,17 +153,86 @@ export default function FinalResultPage({ game }) {
         </button>
       </section>
 
+      {/* 회고: 당신을 만든 3개의 순간 */}
       <section className="review-section">
-        <h2>학습 복습</h2>
+        <h2>당신을 만든 순간들</h2>
         {(() => {
+          // 스탯 변화가 가장 컸던 3턴
+          const turnsWithImpact = turnHistory.map((h, idx) => {
+            const totalDelta = Object.values(h.delta || {}).reduce((sum, v) => sum + Math.abs(v), 0);
+            return { ...h, idx, totalDelta };
+          }).sort((a, b) => b.totalDelta - a.totalDelta).slice(0, 3);
+
+          // 가장 많이 고른 활동
+          const activityFreq = {};
+          turnHistory.forEach((h) => {
+            const key = h.activityTitle || h.activityId;
+            activityFreq[key] = (activityFreq[key] || 0) + 1;
+          });
+          const topActivities = Object.entries(activityFreq)
+            .sort((a, b) => b[1] - a[1]).slice(0, 3);
+
+          // 가장 가까운 NPC
+          const allNpcs = (game.npcData || []).map((npc) => ({
+            ...npc,
+            affinity: game.npcAffinities[npc.id] || 0
+          })).filter((n) => n.affinity > 0).sort((a, b) => b.affinity - a.affinity);
+          const bestNpc = allNpcs[0];
+
+          // 놓친 엔딩 제안
           const scoreKeys = ["medical", "knowledge", "virtue", "reputation"];
-          const topKey = scoreKeys.sort((a, b) => (scores[b] || 0) - (scores[a] || 0))[0];
+          const sorted = [...scoreKeys].sort((a, b) => (scores[b] || 0) - (scores[a] || 0));
+          const weakest = sorted[sorted.length - 1];
+
           return (
             <div className="review-content">
-              <p>당신은 <strong>{TENDENCY_NAMES[topKey]}</strong>을(를) 가장 중시했습니다.</p>
+              <div className="review-moments">
+                <h3>결정적 순간 TOP 3</h3>
+                {turnsWithImpact.map((t, i) => (
+                  <div key={i} className="review-moment-item">
+                    <span className="review-moment-num">{i + 1}</span>
+                    <div>
+                      <strong>{t.eraTitle}</strong> — {t.activityTitle}
+                      {t.eventTitle && <span className="timeline-event"> ({t.eventTitle})</span>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="review-habits">
+                <h3>자주 택한 길</h3>
+                {topActivities.map(([name, count], i) => (
+                  <div key={i} className="review-habit-item">
+                    {name} <span className="review-habit-count">{count}회</span>
+                  </div>
+                ))}
+              </div>
+
+              {bestNpc && (
+                <div className="review-best-npc">
+                  <h3>가장 깊은 인연</h3>
+                  <div className="review-npc-card">
+                    <span className="review-npc-emoji">{bestNpc.emoji}</span>
+                    <div>
+                      <strong>{bestNpc.name}</strong>
+                      <p>{bestNpc.title}</p>
+                      <p>호감도 {"★".repeat(Math.min(5, bestNpc.affinity))}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div className="review-missed">
+                <h3>놓친 가능성</h3>
+                <p>
+                  {TENDENCY_NAMES[weakest]}을(를) 더 키웠다면 다른 엔딩에 도달했을 수 있습니다.
+                  다음 판에는 {TENDENCY_NAMES[weakest]} 중심 플레이를 도전해보세요!
+                </p>
+              </div>
+
               {finalResult.reviewKeywords && (
                 <div className="review-keywords">
-                  <p className="review-keywords-label">복습 키워드</p>
+                  <h3>복습 키워드</h3>
                   <div className="review-keywords-list">
                     {finalResult.reviewKeywords.map((kw) => (
                       <span key={kw} className="review-keyword-tag">{kw}</span>

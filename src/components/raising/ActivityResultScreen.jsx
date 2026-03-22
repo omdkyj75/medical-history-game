@@ -97,6 +97,18 @@ export default function ActivityResultScreen({ game }) {
         </div>
       )}
 
+      {game.activeTraits && game.activeTraits.length > 0 && (
+        <div className="raising-traits-display">
+          {game.activeTraits.map((t) => (
+            <div key={t.id} className="raising-trait-tag">
+              <span className="trait-hanja">{t.hanja}</span>
+              <span className="trait-name">{t.name}</span>
+              <span className="trait-effect">{t.effect}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
       <StatPanel stats={game.playerStats} statConfig={game.stats} />
 
       <button className="btn-primary" onClick={game.proceedAfterResult}>

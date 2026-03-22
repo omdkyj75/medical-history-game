@@ -4,6 +4,8 @@ import ActivityResultScreen from "./ActivityResultScreen";
 import EventScreen from "./EventScreen";
 import EraTransitionScreen from "./EraTransitionScreen";
 import DeadScreen from "./DeadScreen";
+import BossEventScreen from "./BossEventScreen";
+import PressureScreen from "./PressureScreen";
 import NpcEventModal from "./NpcEventModal";
 import MuteButton from "./MuteButton";
 
@@ -67,6 +69,8 @@ export default function RaisingGamePage({ game }) {
       {phase === "event" && <EventScreen game={game} />}
       {phase === "era-transition" && <EraTransitionScreen game={game} />}
       {phase === "dead" && <DeadScreen game={game} />}
+      {phase === "boss-event" && <BossEventScreen game={game} />}
+      {phase === "pressure" && <PressureScreen game={game} />}
       {phase === "minigame" && MinigameComponent && (
         <MinigameComponent onComplete={game.completeMinigame} />
       )}

@@ -1,0 +1,84 @@
+{
+  "bossEvents": {
+    "ancient-origins": {
+      "title": "미지의 약초를 검증하라",
+      "description": "마을에서 알 수 없는 풀을 먹고 쓰러진 사람이 발생했습니다. 당신의 판단이 필요합니다.",
+      "choices": [
+        { "text": "직접 맛보아 독성을 확인한다 (신농의 정신)", "require": { "medical": 8 }, "success": { "medical": 4, "reputation": 2 }, "fail": { "stamina": -4, "medical": 1 } },
+        { "text": "증상을 관찰하고 해독법을 유추한다", "require": { "knowledge": 8 }, "success": { "knowledge": 3, "medical": 2 }, "fail": { "knowledge": 1 } }
+      ]
+    },
+    "warring-states": {
+      "title": "제후의 병을 진단하라",
+      "description": "한 제후가 원인 모를 병에 걸렸습니다. 편작처럼 과감히 진단할 것인가?",
+      "choices": [
+        { "text": "망진만으로 진단을 선언한다", "require": { "medical": 12 }, "success": { "reputation": 4, "medical": 3 }, "fail": { "reputation": -2, "medical": 1 } },
+        { "text": "신중하게 여러 진단법을 병행한다", "require": { "knowledge": 10 }, "success": { "knowledge": 3, "virtue": 2 }, "fail": { "knowledge": 1 } }
+      ]
+    },
+    "qin-han": {
+      "title": "대역병에 맞서라",
+      "description": "장중경이 기록했듯, 대가족이 역병으로 쓰러지고 있습니다. 어떻게 대응하겠습니까?",
+      "choices": [
+        { "text": "환자 속으로 뛰어들어 직접 치료한다", "require": { "medical": 15, "virtue": 10 }, "success": { "medical": 3, "virtue": 4, "reputation": 3 }, "fail": { "stamina": -5, "virtue": 2 } },
+        { "text": "치료법을 체계화하여 기록으로 남긴다", "require": { "knowledge": 15 }, "success": { "knowledge": 4, "reputation": 3 }, "fail": { "knowledge": 2 } }
+      ]
+    },
+    "jin-sui-tang": {
+      "title": "의덕(醫德)의 시험",
+      "description": "부유한 귀족과 가난한 농부가 동시에 찾아왔습니다. 누구를 먼저 치료하겠습니까?",
+      "choices": [
+        { "text": "증상이 급한 농부를 먼저 치료한다", "require": { "virtue": 12 }, "success": { "virtue": 4, "medical": 2 }, "fail": { "reputation": -2, "virtue": 2 } },
+        { "text": "귀족을 먼저 치료해 후원을 확보한다", "require": { "reputation": 10 }, "success": { "reputation": 4, "medical": 1 }, "fail": { "virtue": -2, "reputation": 2 } }
+      ]
+    },
+    "song-dynasty": {
+      "title": "국방(局方) 논쟁에 참여하라",
+      "description": "국가 표준 처방집이 개인 맞춤 치료를 무시한다는 논쟁이 벌어집니다.",
+      "choices": [
+        { "text": "공개 토론에서 맞춤 치료의 중요성을 역설한다", "require": { "knowledge": 15, "reputation": 10 }, "success": { "reputation": 4, "knowledge": 3 }, "fail": { "reputation": -1, "knowledge": 2 } },
+        { "text": "표준화를 인정하되 보완책을 제안한다", "require": { "knowledge": 12 }, "success": { "knowledge": 3, "virtue": 2 }, "fail": { "knowledge": 1 } }
+      ]
+    },
+    "jin-yuan": {
+      "title": "학파 공개 논쟁",
+      "description": "금원사대가의 학설이 충돌합니다. 당신은 어떤 입장을 취하겠습니까?",
+      "choices": [
+        { "text": "독자적 학설을 세워 논쟁에 뛰어든다", "require": { "knowledge": 20, "reputation": 12 }, "success": { "knowledge": 4, "reputation": 5 }, "fail": { "reputation": -3, "knowledge": 2 } },
+        { "text": "각 학파의 장점을 종합하는 절충안을 제시한다", "require": { "knowledge": 15, "virtue": 10 }, "success": { "knowledge": 3, "virtue": 3, "reputation": 2 }, "fail": { "knowledge": 2 } }
+      ]
+    },
+    "ming-dynasty": {
+      "title": "금기 처방 논란",
+      "description": "부자(附子)를 대량 사용하는 파격적 처방이 논란이 되고 있습니다.",
+      "choices": [
+        { "text": "임상 경험을 바탕으로 과감히 사용한다", "require": { "medical": 20 }, "success": { "medical": 4, "reputation": 3 }, "fail": { "stamina": -3, "reputation": -2 } },
+        { "text": "안전한 용량으로 조절하여 사용한다", "require": { "medical": 12, "knowledge": 12 }, "success": { "medical": 2, "knowledge": 2, "virtue": 2 }, "fail": { "medical": 1 } }
+      ]
+    },
+    "qing-dynasty": {
+      "title": "서양의학과의 대결",
+      "description": "서양 의사가 전통 의학의 효과를 부정합니다. 어떻게 대응하겠습니까?",
+      "choices": [
+        { "text": "공개 치료 대결로 효과를 증명한다", "require": { "medical": 20, "reputation": 15 }, "success": { "reputation": 5, "medical": 3 }, "fail": { "reputation": -3, "medical": 1 } },
+        { "text": "서양의학의 장점을 인정하고 통합을 모색한다", "require": { "knowledge": 18 }, "success": { "knowledge": 4, "reputation": 3 }, "fail": { "knowledge": 2 } }
+      ]
+    },
+    "goryeo": {
+      "title": "향약(鄕藥)의 독자성을 증명하라",
+      "description": "중국 약재에 의존하지 않고 우리 땅의 약재로 치료할 수 있는가?",
+      "choices": [
+        { "text": "향약만으로 난치병을 치료해 보인다", "require": { "medical": 15 }, "success": { "medical": 3, "virtue": 3, "reputation": 2 }, "fail": { "medical": 1, "virtue": 1 } },
+        { "text": "향약과 수입 약재를 병용하는 실용적 방법을 택한다", "require": { "knowledge": 12 }, "success": { "knowledge": 3, "medical": 2 }, "fail": { "knowledge": 1 } }
+      ]
+    },
+    "joseon": {
+      "title": "왕실 진료 — 최후의 시험",
+      "description": "왕이 병에 걸렸습니다. 당신의 의술, 학식, 덕행 모두가 시험받는 순간입니다.",
+      "choices": [
+        { "text": "동의보감의 정신으로 정성을 다해 치료한다", "require": { "medical": 20, "virtue": 15 }, "success": { "reputation": 6, "medical": 3, "virtue": 2 }, "fail": { "reputation": -2, "medical": 2 } },
+        { "text": "사상의학적 체질 분석으로 새로운 접근을 시도한다", "require": { "knowledge": 20, "medical": 15 }, "success": { "knowledge": 4, "reputation": 5, "medical": 3 }, "fail": { "knowledge": 2, "reputation": -1 } }
+      ]
+    }
+  }
+}

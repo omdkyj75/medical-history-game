@@ -1,0 +1,23 @@
+{
+  "pressureEvents": {
+    "clinical-practice": [
+      { "title": "위험한 처방", "desc": "환자 상태가 급변했습니다. 위험하지만 효과적인 처방을 쓸 것인가?", "bold": { "text": "과감히 시도한다", "success": { "medical": 3, "reputation": 2 }, "fail": { "stamina": -3, "reputation": -1 }, "require": { "medical": 12 } }, "safe": { "text": "검증된 처방만 쓴다", "delta": { "medical": 1, "virtue": 1 } } },
+      { "title": "깊은 밤 응급환자", "desc": "한밤중에 위급한 환자가 찾아왔습니다.", "bold": { "text": "당장 달려간다", "success": { "medical": 2, "virtue": 3 }, "fail": { "stamina": -4 }, "require": { "stamina": 6 } }, "safe": { "text": "내일 아침 진료한다", "delta": { "stamina": 1 } } }
+    ],
+    "study-classics": [
+      { "title": "이단적 학설", "desc": "경전에 반하는 새로운 해석을 발견했습니다.", "bold": { "text": "공개적으로 발표한다", "success": { "knowledge": 3, "reputation": 3 }, "fail": { "reputation": -2, "knowledge": 1 }, "require": { "knowledge": 12 } }, "safe": { "text": "조용히 기록만 남긴다", "delta": { "knowledge": 2 } } }
+    ],
+    "academic-exchange": [
+      { "title": "공개 학술 토론", "desc": "다른 학파의 의가가 당신의 주장에 도전합니다.", "bold": { "text": "정면 논쟁에 응한다", "success": { "reputation": 4, "knowledge": 2 }, "fail": { "reputation": -2, "knowledge": 1 }, "require": { "knowledge": 15 } }, "safe": { "text": "겸손하게 물러난다", "delta": { "virtue": 2 } } }
+    ],
+    "public-service": [
+      { "title": "전염병 지역", "desc": "전염병이 퍼진 마을에서 도움을 요청합니다.", "bold": { "text": "무리해서 더 많은 환자를 본다", "success": { "virtue": 4, "reputation": 2 }, "fail": { "stamina": -4, "virtue": 2 }, "require": { "stamina": 8 } }, "safe": { "text": "할 수 있는 만큼만 한다", "delta": { "virtue": 1, "medical": 1 } } }
+    ],
+    "herb-gathering": [
+      { "title": "험준한 절벽의 약초", "desc": "절벽 위에 귀한 약초가 보입니다.", "bold": { "text": "위험을 감수하고 채집한다", "success": { "medical": 3, "knowledge": 1 }, "fail": { "stamina": -4 }, "require": { "stamina": 7 } }, "safe": { "text": "안전한 약초만 채집한다", "delta": { "medical": 1 } } }
+    ],
+    "visit-master": [
+      { "title": "스승의 시험", "desc": "스승이 갑작스러운 문답으로 실력을 시험합니다.", "bold": { "text": "자신 있게 대답한다", "success": { "knowledge": 3, "medical": 1 }, "fail": { "knowledge": 1 }, "require": { "knowledge": 10 } }, "safe": { "text": "겸손히 모르겠다고 답한다", "delta": { "virtue": 1, "knowledge": 1 } } }
+    ]
+  }
+}

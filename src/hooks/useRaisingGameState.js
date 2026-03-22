@@ -4,6 +4,9 @@ import resultTypesData from "../data/resultTypes.json";
 import { saveResult, getResults } from "../utils/resultStorage";
 import { checkNewAchievements } from "../utils/checkAchievements";
 import { getSeason, getSeasonBonus } from "../utils/seasonCalculator";
+import { checkTraits, getTraitBonus, hasStaminaSave } from "../utils/traitSystem";
+import bossEventsData from "../data/bossEvents.json";
+import pressureEventsData from "../data/pressureEvents.json";
 import npcData from "../data/npcs.json";
 
 const { stats, eras, activities, gameMeta } = gameConfig;
@@ -149,6 +152,10 @@ export function useRaisingGameState() {
   const [npcAffinities, setNpcAffinities] = useState({});
   const [pendingNpcEvent, setPendingNpcEvent] = useState(null);
 
+  // Boss event & Pressure
+  const [currentBossEvent, setCurrentBossEvent] = useState(null);
+  const [currentPressure, setCurrentPressure] = useState(null);
+
   // Current turn state
   const [selectedActivity, setSelectedActivity] = useState(null);
   const [lastDelta, setLastDelta] = useState(null);
@@ -222,6 +229,9 @@ export function useRaisingGameState() {
   const currentSeason = useMemo(() => getSeason(globalTurnNumber), [globalTurnNumber]);
   const seasonBonus = useMemo(() => getSeasonBonus(currentSeason?.id), [currentSeason]);
 
+  // Trait system
+  const activeTraits = useMemo(() => checkTraits(playerStats), [playerStats]);
+
   // NPC system - get NPCs for current era
   const currentNpcs = useMemo(
     () => npcData.npcs.filter((n) => n.era === currentEra?.id),
@@ -260,8 +270,17 @@ export function useRaisingGameState() {
     navigate("raising");
   }
 
+  // stamina-save 사용 여부 추적
+  const [staminaSaveUsed, setStaminaSaveUsed] = useState(false);
+
   function selectActivity(activityId) {
     const delta = { ...getActivityDelta(activityId, currentEra) };
+
+    // Apply trait bonus
+    const traitBonus = getTraitBonus(activeTraits, activityId);
+    for (const [k, v] of Object.entries(traitBonus)) {
+      delta[k] = (delta[k] || 0) + v;
+    }
 
     // Apply season bonus/penalty
     if (seasonBonus) {
@@ -279,14 +298,19 @@ export function useRaisingGameState() {
 
     const newStats = applyDelta(playerStats, delta);
 
-    // 체력 0 이하 → 사망
+    // 체력 0 이하 → stamina-save trait가 있으면 1회 생존
     if (newStats.stamina <= 0) {
-      newStats.stamina = 0;
-      setPlayerStats(newStats);
-      setSelectedActivity(activityId);
-      setLastDelta(delta);
-      setPhase("dead");
-      return;
+      if (hasStaminaSave(activeTraits) && !staminaSaveUsed) {
+        newStats.stamina = 3;
+        setStaminaSaveUsed(true);
+      } else {
+        newStats.stamina = 0;
+        setPlayerStats(newStats);
+        setSelectedActivity(activityId);
+        setLastDelta(delta);
+        setPhase("dead");
+        return;
+      }
     }
 
     setSelectedActivity(activityId);
@@ -356,13 +380,45 @@ export function useRaisingGameState() {
   }
 
   function proceedAfterResult() {
-    // 25% 확률로 랜덤 미니게임 발동 (휴식 제외)
-    if (selectedActivity !== "rest" && Math.random() < 0.25) {
+    if (selectedActivity === "rest") {
+      checkNpcAndEvents();
+      return;
+    }
+
+    // 20% 확률: 압박 상황
+    const pressurePool = pressureEventsData.pressureEvents[selectedActivity];
+    if (pressurePool && Math.random() < 0.2) {
+      const pick = pressurePool[Math.floor(Math.random() * pressurePool.length)];
+      setCurrentPressure(pick);
+      setPhase("pressure");
+      return;
+    }
+
+    // 20% 확률: 미니게임
+    if (Math.random() < 0.2) {
       const mgType = ALL_MINIGAMES[Math.floor(Math.random() * ALL_MINIGAMES.length)];
       setMinigameType(mgType);
       setPhase("minigame");
       return;
     }
+
+    checkNpcAndEvents();
+  }
+
+  function completePressure(delta) {
+    const newStats = applyDelta(playerStats, delta);
+    setPlayerStats(newStats);
+    setCurrentPressure(null);
+
+    setTurnHistory((prev) => {
+      const updated = [...prev];
+      const last = { ...updated[updated.length - 1] };
+      last.pressureTitle = currentPressure?.title;
+      last.pressureDelta = delta;
+      last.statsAfter = newStats;
+      updated[updated.length - 1] = last;
+      return updated;
+    });
 
     checkNpcAndEvents();
   }
@@ -443,6 +499,29 @@ export function useRaisingGameState() {
     advanceTurn();
   }
 
+  function completeBossEvent(delta) {
+    const newStats = applyDelta(playerStats, delta);
+    setPlayerStats(newStats);
+    setCurrentBossEvent(null);
+
+    // Record in history
+    setTurnHistory((prev) => {
+      const updated = [...prev];
+      const last = { ...updated[updated.length - 1] };
+      last.bossEventTitle = currentBossEvent?.title;
+      last.bossEventDelta = delta;
+      last.statsAfter = newStats;
+      updated[updated.length - 1] = last;
+      return updated;
+    });
+
+    if (isLastEra) {
+      finishGame();
+    } else {
+      setPhase("era-transition");
+    }
+  }
+
   function advanceTurn() {
     setCurrentEvent(null);
     setSelectedEventChoice(null);
@@ -450,8 +529,15 @@ export function useRaisingGameState() {
     setLastDelta(null);
 
     if (isLastTurnInEra) {
+      // 시대 마지막 턴 → 보스 이벤트 체크
+      const bossEvent = bossEventsData.bossEvents[currentEra?.id];
+      if (bossEvent) {
+        setCurrentBossEvent(bossEvent);
+        setPhase("boss-event");
+        return;
+      }
+
       if (isLastEra) {
-        // Game over — evaluate result
         finishGame();
       } else {
         setPhase("era-transition");
@@ -538,6 +624,13 @@ export function useRaisingGameState() {
     npcAffinities,
     pendingNpcEvent,
 
+    // Traits
+    activeTraits,
+
+    // Boss event & Pressure
+    currentBossEvent,
+    currentPressure,
+
     // Minigame
     minigameType,
 
@@ -561,6 +654,8 @@ export function useRaisingGameState() {
     proceedToNextEra,
     dismissNpcEvent,
     completeMinigame,
+    completeBossEvent,
+    completePressure,
     getActivityInfo,
 
     // Navigation actions
