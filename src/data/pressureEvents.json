@@ -2,22 +2,40 @@
   "pressureEvents": {
     "clinical-practice": [
       { "title": "위험한 처방", "desc": "환자 상태가 급변했습니다. 위험하지만 효과적인 처방을 쓸 것인가?", "bold": { "text": "과감히 시도한다", "success": { "medical": 3, "reputation": 2 }, "fail": { "stamina": -3, "reputation": -1 }, "require": { "medical": 12 } }, "safe": { "text": "검증된 처방만 쓴다", "delta": { "medical": 1, "virtue": 1 } } },
-      { "title": "깊은 밤 응급환자", "desc": "한밤중에 위급한 환자가 찾아왔습니다.", "bold": { "text": "당장 달려간다", "success": { "medical": 2, "virtue": 3 }, "fail": { "stamina": -4 }, "require": { "stamina": 6 } }, "safe": { "text": "내일 아침 진료한다", "delta": { "stamina": 1 } } }
+      { "title": "깊은 밤 응급환자", "desc": "한밤중에 위급한 환자가 찾아왔습니다.", "bold": { "text": "당장 달려간다", "success": { "medical": 2, "virtue": 3 }, "fail": { "stamina": -4 }, "require": { "stamina": 6 } }, "safe": { "text": "내일 아침 진료한다", "delta": { "stamina": 1 } } },
+      { "title": "원인불명의 고열", "desc": "아이가 사흘째 원인 모를 고열에 시달리고 있습니다.", "bold": { "text": "직접 새로운 처방을 시도한다", "success": { "medical": 3, "virtue": 2 }, "fail": { "stamina": -3 }, "require": { "medical": 10 } }, "safe": { "text": "경전의 처방을 그대로 따른다", "delta": { "medical": 1, "knowledge": 1 } } },
+      { "title": "권세가의 진료 요청", "desc": "고관대작이 은밀히 진료를 부탁합니다. 실패하면 화가 미칠 수 있습니다.", "bold": { "text": "직접 진료한다", "success": { "reputation": 4, "medical": 1 }, "fail": { "reputation": -3 }, "require": { "medical": 14 } }, "safe": { "text": "정중히 사양한다", "delta": { "virtue": 1 } } },
+      { "title": "약물 부작용", "desc": "처방한 약에서 예상치 못한 부작용이 나타났습니다.", "bold": { "text": "즉시 대응 처방을 내린다", "success": { "medical": 3, "knowledge": 1 }, "fail": { "stamina": -2, "reputation": -1 }, "require": { "medical": 11 } }, "safe": { "text": "투약을 중단하고 경과를 관찰한다", "delta": { "medical": 1 } } }
     ],
     "study-classics": [
-      { "title": "이단적 학설", "desc": "경전에 반하는 새로운 해석을 발견했습니다.", "bold": { "text": "공개적으로 발표한다", "success": { "knowledge": 3, "reputation": 3 }, "fail": { "reputation": -2, "knowledge": 1 }, "require": { "knowledge": 12 } }, "safe": { "text": "조용히 기록만 남긴다", "delta": { "knowledge": 2 } } }
+      { "title": "이단적 학설", "desc": "경전에 반하는 새로운 해석을 발견했습니다.", "bold": { "text": "공개적으로 발표한다", "success": { "knowledge": 3, "reputation": 3 }, "fail": { "reputation": -2, "knowledge": 1 }, "require": { "knowledge": 12 } }, "safe": { "text": "조용히 기록만 남긴다", "delta": { "knowledge": 2 } } },
+      { "title": "오자(誤字) 발견", "desc": "널리 쓰이는 의서에서 중대한 오류를 발견했습니다.", "bold": { "text": "공식적으로 교정을 제안한다", "success": { "knowledge": 3, "reputation": 2 }, "fail": { "reputation": -2 }, "require": { "knowledge": 13 } }, "safe": { "text": "개인 필기에만 기록한다", "delta": { "knowledge": 2 } } },
+      { "title": "학파 간 논쟁", "desc": "서로 다른 학파의 해석이 정면 충돌합니다. 당신의 의견을 묻습니다.", "bold": { "text": "독자적 견해를 제시한다", "success": { "knowledge": 2, "reputation": 3 }, "fail": { "reputation": -1, "knowledge": 1 }, "require": { "knowledge": 11 } }, "safe": { "text": "양쪽의 장점을 절충한다", "delta": { "knowledge": 1, "virtue": 1 } } },
+      { "title": "희귀 문헌 발견", "desc": "소실된 것으로 알려진 고대 의서의 필사본을 발견했습니다.", "bold": { "text": "밤새워 필사하고 연구한다", "success": { "knowledge": 4, "medical": 1 }, "fail": { "stamina": -4 }, "require": { "stamina": 5 } }, "safe": { "text": "중요 부분만 발췌한다", "delta": { "knowledge": 2 } } }
     ],
     "academic-exchange": [
-      { "title": "공개 학술 토론", "desc": "다른 학파의 의가가 당신의 주장에 도전합니다.", "bold": { "text": "정면 논쟁에 응한다", "success": { "reputation": 4, "knowledge": 2 }, "fail": { "reputation": -2, "knowledge": 1 }, "require": { "knowledge": 15 } }, "safe": { "text": "겸손하게 물러난다", "delta": { "virtue": 2 } } }
+      { "title": "공개 학술 토론", "desc": "다른 학파의 의가가 당신의 주장에 도전합니다.", "bold": { "text": "정면 논쟁에 응한다", "success": { "reputation": 4, "knowledge": 2 }, "fail": { "reputation": -2, "knowledge": 1 }, "require": { "knowledge": 15 } }, "safe": { "text": "겸손하게 물러난다", "delta": { "virtue": 2 } } },
+      { "title": "외지 의가의 도발", "desc": "먼 곳에서 온 의가가 당신의 의술을 시험하겠다고 합니다.", "bold": { "text": "실력으로 증명한다", "success": { "medical": 2, "reputation": 3 }, "fail": { "reputation": -2 }, "require": { "medical": 13 } }, "safe": { "text": "겸양지덕을 보인다", "delta": { "virtue": 2 } } },
+      { "title": "학술 모임의 연설", "desc": "다수의 의가가 모인 자리에서 발표를 요청받았습니다.", "bold": { "text": "독창적 견해를 펼친다", "success": { "reputation": 3, "knowledge": 2 }, "fail": { "reputation": -1 }, "require": { "knowledge": 12 } }, "safe": { "text": "선대 의가의 학설을 정리해서 발표한다", "delta": { "knowledge": 1, "reputation": 1 } } },
+      { "title": "논문 공동 집필", "desc": "유력한 의가가 공동 저술을 제안합니다. 하지만 의견 차이가 있습니다.", "bold": { "text": "내 소신을 관철한다", "success": { "knowledge": 3, "reputation": 2 }, "fail": { "reputation": -2 }, "require": { "knowledge": 14 } }, "safe": { "text": "상대의 의견을 존중하며 타협한다", "delta": { "virtue": 1, "knowledge": 1 } } }
     ],
     "public-service": [
-      { "title": "전염병 지역", "desc": "전염병이 퍼진 마을에서 도움을 요청합니다.", "bold": { "text": "무리해서 더 많은 환자를 본다", "success": { "virtue": 4, "reputation": 2 }, "fail": { "stamina": -4, "virtue": 2 }, "require": { "stamina": 8 } }, "safe": { "text": "할 수 있는 만큼만 한다", "delta": { "virtue": 1, "medical": 1 } } }
+      { "title": "전염병 지역", "desc": "전염병이 퍼진 마을에서 도움을 요청합니다.", "bold": { "text": "무리해서 더 많은 환자를 본다", "success": { "virtue": 4, "reputation": 2 }, "fail": { "stamina": -4, "virtue": 2 }, "require": { "stamina": 8 } }, "safe": { "text": "할 수 있는 만큼만 한다", "delta": { "virtue": 1, "medical": 1 } } },
+      { "title": "가난한 노인의 간청", "desc": "약값을 낼 수 없는 노인이 무릎 꿇고 치료를 구합니다.", "bold": { "text": "무상으로 치료하고 약까지 제공한다", "success": { "virtue": 4, "reputation": 1 }, "fail": { "stamina": -3 }, "require": { "virtue": 8 } }, "safe": { "text": "기본 치료만 해드린다", "delta": { "virtue": 1, "medical": 1 } } },
+      { "title": "재난 지역 파견", "desc": "홍수 피해 지역에서 의원을 급히 구합니다.", "bold": { "text": "즉시 출발한다", "success": { "virtue": 3, "reputation": 3 }, "fail": { "stamina": -5 }, "require": { "stamina": 7 } }, "safe": { "text": "약재만 보내고 지시사항을 전달한다", "delta": { "virtue": 1 } } },
+      { "title": "치료비 분쟁", "desc": "부유한 환자가 치료비를 깎으라고 횡포를 부립니다.", "bold": { "text": "원칙대로 받겠다고 맞선다", "success": { "virtue": 2, "reputation": 2 }, "fail": { "reputation": -2 }, "require": { "virtue": 10 } }, "safe": { "text": "적당히 타협한다", "delta": { "virtue": 1 } } }
     ],
     "herb-gathering": [
-      { "title": "험준한 절벽의 약초", "desc": "절벽 위에 귀한 약초가 보입니다.", "bold": { "text": "위험을 감수하고 채집한다", "success": { "medical": 3, "knowledge": 1 }, "fail": { "stamina": -4 }, "require": { "stamina": 7 } }, "safe": { "text": "안전한 약초만 채집한다", "delta": { "medical": 1 } } }
+      { "title": "험준한 절벽의 약초", "desc": "절벽 위에 귀한 약초가 보입니다.", "bold": { "text": "위험을 감수하고 채집한다", "success": { "medical": 3, "knowledge": 1 }, "fail": { "stamina": -4 }, "require": { "stamina": 7 } }, "safe": { "text": "안전한 약초만 채집한다", "delta": { "medical": 1 } } },
+      { "title": "독초 감별", "desc": "생김새가 비슷한 약초와 독초가 뒤섞여 있습니다.", "bold": { "text": "경험을 믿고 직접 감별한다", "success": { "medical": 2, "knowledge": 2 }, "fail": { "stamina": -3, "medical": -1 }, "require": { "knowledge": 10 } }, "safe": { "text": "확실한 것만 채집한다", "delta": { "medical": 1 } } },
+      { "title": "약초 상인의 제안", "desc": "약초 상인이 희귀 약재를 비싼 값에 제안합니다. 진위가 불확실합니다.", "bold": { "text": "감별 후 구매한다", "success": { "medical": 3 }, "fail": { "reputation": -1 }, "require": { "knowledge": 11 } }, "safe": { "text": "직접 채집한 것만 쓴다", "delta": { "virtue": 1 } } },
+      { "title": "야생동물 조우", "desc": "깊은 산에서 약초를 찾다 맹수와 마주쳤습니다.", "bold": { "text": "침착하게 약초를 마저 캔다", "success": { "medical": 2, "stamina": 2 }, "fail": { "stamina": -5 }, "require": { "stamina": 9 } }, "safe": { "text": "조용히 후퇴한다", "delta": { "stamina": 1 } } }
     ],
     "visit-master": [
-      { "title": "스승의 시험", "desc": "스승이 갑작스러운 문답으로 실력을 시험합니다.", "bold": { "text": "자신 있게 대답한다", "success": { "knowledge": 3, "medical": 1 }, "fail": { "knowledge": 1 }, "require": { "knowledge": 10 } }, "safe": { "text": "겸손히 모르겠다고 답한다", "delta": { "virtue": 1, "knowledge": 1 } } }
+      { "title": "스승의 시험", "desc": "스승이 갑작스러운 문답으로 실력을 시험합니다.", "bold": { "text": "자신 있게 대답한다", "success": { "knowledge": 3, "medical": 1 }, "fail": { "knowledge": 1 }, "require": { "knowledge": 10 } }, "safe": { "text": "겸손히 모르겠다고 답한다", "delta": { "virtue": 1, "knowledge": 1 } } },
+      { "title": "스승의 비전(秘傳)", "desc": "스승이 비밀스러운 처방을 전수하려 합니다. 대신 평생 비밀을 지켜야 합니다.", "bold": { "text": "서약하고 전수받는다", "success": { "medical": 4, "knowledge": 2 }, "fail": { "virtue": -1 }, "require": { "virtue": 8 } }, "safe": { "text": "공개할 수 없는 지식은 사양한다", "delta": { "virtue": 2 } } },
+      { "title": "스승 간의 갈등", "desc": "두 스승의 학설이 서로 충돌합니다. 한쪽 편을 들어야 할 상황입니다.", "bold": { "text": "내가 옳다고 믿는 쪽을 택한다", "success": { "knowledge": 3 }, "fail": { "reputation": -2 }, "require": { "knowledge": 12 } }, "safe": { "text": "양쪽 모두에게서 배운다", "delta": { "knowledge": 1, "virtue": 1 } } },
+      { "title": "스승의 위독", "desc": "스승이 갑자기 쓰러졌습니다. 당신이 직접 치료해야 합니다.", "bold": { "text": "배운 대로 직접 치료한다", "success": { "medical": 3, "virtue": 2 }, "fail": { "stamina": -3 }, "require": { "medical": 12 } }, "safe": { "text": "다른 명의를 모셔온다", "delta": { "virtue": 1 } } }
     ]
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import quizData from "../../data/eraReviewQuiz.json";
 
 export default function EraReviewCard({ eraId, onQuizComplete }) {
@@ -6,8 +6,9 @@ export default function EraReviewCard({ eraId, onQuizComplete }) {
   const [currentQ, setCurrentQ] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showExplanation, setShowExplanation] = useState(false);
-  const [correctCount, setCorrectCount] = useState(0);
+  const correctRef = useRef(0);
   const [quizDone, setQuizDone] = useState(false);
+  const [finalCorrect, setFinalCorrect] = useState(0);
 
   const review = quizData.eraReviews.find((r) => r.eraId === eraId);
   if (!review) return null;
@@ -19,7 +20,7 @@ export default function EraReviewCard({ eraId, onQuizComplete }) {
     setSelectedAnswer(index);
     setShowExplanation(true);
     if (index === questions[currentQ].answerIndex) {
-      setCorrectCount((c) => c + 1);
+      correctRef.current += 1;
     }
   };
 
@@ -29,11 +30,11 @@ export default function EraReviewCard({ eraId, onQuizComplete }) {
       setSelectedAnswer(null);
       setShowExplanation(false);
     } else {
+      const total = correctRef.current;
+      setFinalCorrect(total);
       setQuizDone(true);
-      const bonus = correctCount + (selectedAnswer === questions[currentQ].answerIndex ? 1 : 0);
-      const knowledgeBonus = bonus * 2;
       if (onQuizComplete) {
-        onQuizComplete({ knowledge: knowledgeBonus });
+        onQuizComplete({ knowledge: total * 2 });
       }
     }
   };
@@ -105,10 +106,10 @@ export default function EraReviewCard({ eraId, onQuizComplete }) {
       {quizDone && (
         <div className="era-review-quiz-result">
           <p className="era-review-quiz-result-text">
-            {questions.length}문제 중 {correctCount + (selectedAnswer === questions[questions.length - 1].answerIndex ? 1 : 0) - (showExplanation ? 0 : 0)}개 정답!
+            {questions.length}문제 중 {finalCorrect}개 정답!
           </p>
           <span className="raising-delta-tag positive">
-            학식 +{(correctCount + (selectedAnswer === questions[questions.length - 1].answerIndex ? 1 : 0)) * 2}
+            학식 +{finalCorrect * 2}
           </span>
         </div>
       )}

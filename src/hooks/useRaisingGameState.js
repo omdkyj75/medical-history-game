@@ -174,6 +174,9 @@ export function useRaisingGameState() {
   // Seen events tracking (prevents duplicate events within same era)
   const [seenEventIds, setSeenEventIds] = useState(new Set());
 
+  // Seen pressure events tracking (prevents repeats)
+  const [lastPressureTitle, setLastPressureTitle] = useState(null);
+
   // Academic collection tracking
   const [collectedTexts, setCollectedTexts] = useState([]);
   const [encounteredScholars, setEncounteredScholars] = useState([]);
@@ -224,7 +227,7 @@ export function useRaisingGameState() {
     }
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
-  }, [navigate, turnHistory.length]);
+  }, [finalResult, navigate, turnHistory.length]);
 
   useEffect(() => {
     const hash = SCREEN_TO_HASH[screen];
@@ -297,6 +300,7 @@ export function useRaisingGameState() {
     setFinalResult(null);
     setNewAchievements([]);
     setSeenEventIds(new Set());
+    setLastPressureTitle(null);
     setStaminaSaveUsed(false);
     setCollectedTexts([]);
     setEncounteredScholars([]);
@@ -305,6 +309,26 @@ export function useRaisingGameState() {
 
   // stamina-save 사용 여부 추적
   const [staminaSaveUsed, setStaminaSaveUsed] = useState(false);
+
+  function applyTurnDelta(delta) {
+    const newStats = applyDelta(statsRef.current, delta);
+
+    if (newStats.stamina <= 0) {
+      if (hasStaminaSave(activeTraits) && !staminaSaveUsed) {
+        newStats.stamina = 3;
+        setStaminaSaveUsed(true);
+      } else {
+        newStats.stamina = 0;
+        setPlayerStats(newStats);
+        statsRef.current = newStats;
+        return { newStats, didDie: true };
+      }
+    }
+
+    setPlayerStats(newStats);
+    statsRef.current = newStats;
+    return { newStats, didDie: false };
+  }
 
   function selectActivity(activityId) {
     const delta = { ...getActivityDelta(activityId, currentEra) };
@@ -397,9 +421,7 @@ export function useRaisingGameState() {
   function completeMinigame(result) {
     // Apply bonus delta from minigame
     const { label, ...delta } = result;
-    const newStats = applyDelta(playerStats, delta);
-    setPlayerStats(newStats);
-    statsRef.current = newStats;
+    const { newStats, didDie } = applyTurnDelta(delta);
     setMinigameType(null);
 
     // Record minigame result in turn history
@@ -414,6 +436,11 @@ export function useRaisingGameState() {
       return updated;
     });
 
+    if (didDie) {
+      setPhase("dead");
+      return;
+    }
+
     // Continue to NPC/event check
     checkNpcAndEvents();
   }
@@ -424,11 +451,14 @@ export function useRaisingGameState() {
       return;
     }
 
-    // 20% 확률: 압박 상황
+    // 20% 확률: 압박 상황 (직전과 같은 것은 제외)
     const pressurePool = pressureEventsData.pressureEvents[selectedActivity];
     if (pressurePool && Math.random() < 0.2) {
-      const pick = pressurePool[Math.floor(Math.random() * pressurePool.length)];
+      const candidates = pressurePool.filter((p) => p.title !== lastPressureTitle);
+      const pool = candidates.length > 0 ? candidates : pressurePool;
+      const pick = pool[Math.floor(Math.random() * pool.length)];
       setCurrentPressure(pick);
+      setLastPressureTitle(pick.title);
       setPhase("pressure");
       return;
     }
@@ -445,9 +475,7 @@ export function useRaisingGameState() {
   }
 
   function completePressure(delta) {
-    const newStats = applyDelta(playerStats, delta);
-    setPlayerStats(newStats);
-    statsRef.current = newStats;
+    const { newStats, didDie } = applyTurnDelta(delta);
     setCurrentPressure(null);
 
     setTurnHistory((prev) => {
@@ -460,6 +488,11 @@ export function useRaisingGameState() {
       turnHistoryRef.current = updated;
       return updated;
     });
+
+    if (didDie) {
+      setPhase("dead");
+      return;
+    }
 
     checkNpcAndEvents();
   }
@@ -489,9 +522,7 @@ export function useRaisingGameState() {
   function dismissNpcEvent() {
     if (pendingNpcEvent) {
       const { npc, event } = pendingNpcEvent;
-      const newStats = applyDelta(playerStats, event.delta);
-      setPlayerStats(newStats);
-      statsRef.current = newStats;
+      const { newStats, didDie } = applyTurnDelta(event.delta);
 
       // Mark this NPC event as triggered in history with delta and updated stats
       setTurnHistory((prev) => {
@@ -507,6 +538,11 @@ export function useRaisingGameState() {
       });
 
       setPendingNpcEvent(null);
+
+      if (didDie) {
+        setPhase("dead");
+        return;
+      }
     }
 
     // Continue to random event check (excluding already seen)
@@ -526,9 +562,7 @@ export function useRaisingGameState() {
     if (!choice) return;
 
     setSelectedEventChoice(choice);
-    const newStats = applyDelta(playerStats, actualDelta);
-    setPlayerStats(newStats);
-    statsRef.current = newStats;
+    const { newStats, didDie } = applyTurnDelta(actualDelta);
 
     setTurnHistory((prev) => {
       const updated = [...prev];
@@ -542,6 +576,11 @@ export function useRaisingGameState() {
       return updated;
     });
 
+    if (didDie) {
+      setPhase("dead");
+      return;
+    }
+
     advanceTurn();
   }
 
@@ -550,9 +589,7 @@ export function useRaisingGameState() {
     if (!choice) return;
 
     setSelectedEventChoice(choice);
-    const newStats = applyDelta(playerStats, choice.delta);
-    setPlayerStats(newStats);
-    statsRef.current = newStats;
+    const { newStats, didDie } = applyTurnDelta(choice.delta);
 
     setTurnHistory((prev) => {
       const updated = [...prev];
@@ -566,14 +603,17 @@ export function useRaisingGameState() {
       return updated;
     });
 
+    if (didDie) {
+      setPhase("dead");
+      return;
+    }
+
     // Brief delay then advance
     advanceTurn();
   }
 
   function completeBossEvent(delta) {
-    const newStats = applyDelta(playerStats, delta);
-    setPlayerStats(newStats);
-    statsRef.current = newStats;
+    const { newStats, didDie } = applyTurnDelta(delta);
     setCurrentBossEvent(null);
 
     // Record in history
@@ -587,6 +627,11 @@ export function useRaisingGameState() {
       turnHistoryRef.current = updated;
       return updated;
     });
+
+    if (didDie) {
+      setPhase("dead");
+      return;
+    }
 
     if (isLastEra) {
       finishGame();
