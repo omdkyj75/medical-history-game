@@ -88,8 +88,6 @@ export default function ActivitySelectScreen({ game }) {
         </div>
       )}
 
-      <StatPanel stats={game.playerStats} statConfig={game.stats} />
-
       <div className="raising-prompt">이번 턴에 무엇을 하시겠습니까?</div>
 
       <div className="raising-activity-grid">
@@ -104,6 +102,8 @@ export default function ActivitySelectScreen({ game }) {
           />
         ))}
       </div>
+
+      <StatPanel stats={game.playerStats} statConfig={game.stats} />
     </div>
   );
 }
