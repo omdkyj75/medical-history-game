@@ -2040,6 +2040,13 @@ input:focus {
   border-color: var(--primary);
   box-shadow: 0 2px 8px rgba(139, 94, 60, 0.1);
 }
+.raising-event-choice-btn.selected {
+  border-color: var(--primary);
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.2);
+}
+.raising-event-choice-btn.dimmed {
+  opacity: 0.35;
+}
 .raising-event-choice-text {
   font-size: var(--text-base);
   color: var(--text);
