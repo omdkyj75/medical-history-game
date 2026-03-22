@@ -1738,9 +1738,41 @@ input:focus {
   margin: 0 auto;
 }
 
+/* ── Compact Layout ── */
+.compact-top-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  margin-bottom: 8px;
+}
+.compact-top-row .raising-turn-indicator { flex: 1; margin-bottom: 0; }
+.compact-top-row .season-display { margin-bottom: 0; flex: 0 0 auto; }
+
+.compact-info-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+.compact-char-mini {
+  flex: 0 0 auto;
+}
+.compact-char-mini .char-sprite-container { transform: scale(0.55); transform-origin: top left; }
+.compact-char-mini .char-level-badge { font-size: 0.5rem; }
+.compact-info-body {
+  flex: 1;
+  min-width: 0;
+}
+.compact-era-learning {
+  font-size: var(--text-sm);
+  color: var(--text);
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
 /* ── Turn Indicator ── */
 .raising-turn-indicator {
-  margin-bottom: 20px;
+  margin-bottom: 8px;
 }
 .raising-turn-era {
   font-family: var(--font-title);
@@ -1774,8 +1806,8 @@ input:focus {
 .raising-era-info {
   background: var(--panel-2);
   border-radius: var(--radius-md);
-  padding: 16px;
-  margin-bottom: 16px;
+  padding: 12px;
+  margin-bottom: 8px;
 }
 .raising-era-period {
   font-size: var(--text-sm);
@@ -1816,13 +1848,14 @@ input:focus {
 
 /* ── Stat Panel ── */
 .raising-stat-panel {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 .raising-stat-row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
+  gap: 8px;
+  margin-bottom: 4px;
 }
 .raising-stat-label {
   flex: 0 0 90px;
@@ -1832,7 +1865,7 @@ input:focus {
 }
 .raising-stat-bar-track {
   flex: 1;
-  height: 14px;
+  height: 10px;
   background: var(--line);
   border-radius: 7px;
   position: relative;
@@ -1869,9 +1902,9 @@ input:focus {
 /* ── Prompt ── */
 .raising-prompt {
   font-family: var(--font-title);
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   color: var(--text);
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   text-align: center;
 }
 
@@ -2138,13 +2171,14 @@ input:focus {
 .season-display {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
+  gap: 6px;
+  padding: 4px 10px;
   background: var(--panel);
   border: 1px solid var(--line);
-  border-left: 4px solid var(--season-color, var(--primary));
-  border-radius: var(--radius-md);
-  margin-bottom: 12px;
+  border-left: 3px solid var(--season-color, var(--primary));
+  border-radius: var(--radius-sm);
+  margin-bottom: 6px;
+  font-size: var(--text-xs);
 }
 .season-icon { font-size: 1.2rem; }
 .season-name {
@@ -2164,7 +2198,7 @@ input:focus {
 .raising-character-area {
   display: flex;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .char-sprite-container {
@@ -2363,7 +2397,7 @@ input:focus {
    NPC Panel
    ══════════════════════════════════════════ */
 .npc-panel {
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 .npc-panel-title {
   font-family: var(--font-title);
@@ -2381,20 +2415,20 @@ input:focus {
 .npc-card {
   flex: 0 0 auto;
   display: flex;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
   background: var(--panel);
   border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  padding: 10px 14px;
-  min-width: 180px;
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  min-width: 150px;
   transition: border-color 0.2s;
 }
 .npc-card.npc-unlocked {
   border-color: var(--accent-warm);
   box-shadow: 0 0 8px rgba(196, 149, 106, 0.2);
 }
-.npc-emoji { font-size: 1.6rem; }
+.npc-emoji { font-size: 1.2rem; }
 .npc-info { flex: 1; min-width: 0; }
 .npc-name {
   font-size: var(--text-sm);
