@@ -1689,44 +1689,439 @@ input:focus {
 }
 
 /* ══════════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE — Tablet (max-width: 768px)
    ══════════════════════════════════════════ */
-@media (max-width: 720px) {
-  .app-shell { padding: 16px; }
-  .page { padding: 28px 20px; }
+@media (max-width: 768px) {
+  /* ── Global ── */
+  :root {
+    --text-xs: 0.68rem;
+    --text-sm: 0.78rem;
+    --text-base: 0.88rem;
+    --text-lg: 1.02rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.6rem;
+    --text-3xl: 2.2rem;
+  }
 
-  .start-page { padding: 48px 20px 40px; }
-  .start-page h1 { font-size: var(--text-2xl); }
-  .quiz-page { padding: 20px 16px; }
-  .start-timeline { display: none; }
-  .start-points { flex-direction: column; gap: 8px; }
+  .app-shell { padding: 12px; }
+  .page {
+    padding: 24px 16px;
+    border-radius: var(--radius-md);
+  }
+  .page h1 { font-size: var(--text-2xl); margin-bottom: 6px; }
+  .page h2 { font-size: var(--text-xl); margin-bottom: 8px; }
+  .page h3 { font-size: var(--text-lg); }
 
-  .choice-grid { grid-template-columns: 1fr; }
-  .score-indicator { flex-wrap: wrap; gap: 12px; }
-  .stage-progress { padding: 0; }
-
-  .modal-card { padding: 24px 20px; }
-  .delta-scores { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-
-  .final-nickname { font-size: var(--text-2xl); }
-  .final-scores-grid { grid-template-columns: repeat(2, 1fr); }
-  .result-card { width: 100%; max-width: 360px; }
-
-  .timeline-item { grid-template-columns: 1fr; gap: 2px; }
-  .how-to-play-grid { grid-template-columns: 1fr; }
-
-  .button-group { flex-direction: column; }
+  .button-group {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+  }
   .button-group button { width: 100%; }
-  .start-links { flex-direction: column; gap: 8px; }
+
+  .btn-primary,
+  .button-group button:first-child,
+  .modal-card .button-group button:first-child {
+    padding: 12px 20px;
+    font-size: var(--text-base);
+  }
+  .btn-secondary,
+  .button-group button:nth-child(n+2),
+  .modal-card .button-group button:nth-child(n+2) {
+    padding: 10px 18px;
+  }
+
+  /* ── Start Page ── */
+  .start-page {
+    padding: 40px 16px 32px;
+  }
+  .start-page h1 {
+    font-size: var(--text-2xl);
+    margin-bottom: 8px;
+  }
+  .start-subtitle {
+    font-size: var(--text-xs);
+    margin-bottom: 16px;
+    letter-spacing: 0.1em;
+  }
+  .start-desc {
+    font-size: var(--text-sm);
+    margin-bottom: 24px;
+    line-height: 1.65;
+  }
+  .start-timeline { display: none; }
+  .start-points {
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 28px;
+  }
+  .start-actions { gap: 12px; }
+  .start-actions .btn-primary,
+  .start-actions .btn-quiz {
+    max-width: 100%;
+    padding: 14px 24px;
+    font-size: var(--text-base);
+  }
+  .start-links {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  /* ── Stage Page ── */
+  .stage-progress { padding: 0; margin-bottom: 20px; }
+  .stage-header {
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+  }
+  .stage-header h2 { font-size: var(--text-xl); }
+  .stage-keywords { margin-bottom: 14px; }
+  .stage-narrative {
+    margin-bottom: 16px;
+    line-height: 1.65;
+  }
+  .event-card { padding: 10px 14px; margin: 14px 0; }
+  .prompt {
+    font-size: var(--text-base);
+    margin: 20px 0 14px;
+    padding-top: 16px;
+  }
+
+  /* ── Choice Grid ── */
+  .choice-grid { grid-template-columns: 1fr; gap: 10px; }
+  .choice-card {
+    padding: 16px;
+    gap: 6px;
+  }
+  .choice-card h3 { font-size: var(--text-base); }
+  .score-indicator {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px 0;
+    margin-top: 20px;
+  }
+
+  /* ── Result Modal ── */
+  .modal-overlay { padding: 12px; }
+  .modal-card {
+    padding: 20px 16px;
+    max-height: 90vh;
+  }
+  .modal-card h2 {
+    font-size: var(--text-lg);
+    margin-bottom: 16px;
+  }
+  .result-summary-line { font-size: var(--text-base); margin-bottom: 14px; }
+  .result-choice-title { font-size: var(--text-base); }
+  .delta-scores {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+  .delta-score-value { font-size: var(--text-lg); }
+  .commentary-text { margin-bottom: 16px; }
   .result-meta { flex-direction: column; gap: 4px; }
 
+  /* ── Progress Page ── */
+  .progress-subtitle { margin-bottom: 20px; }
+  .progress-tendency { margin-bottom: 24px; }
+  .tendency-name { font-size: var(--text-xl); }
+  .score-bar { margin-bottom: 12px; }
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 2px;
+    padding: 10px 0;
+  }
+  .progress-scores-section,
+  .progress-history-section { margin: 20px 0; }
+
+  /* ── Final Result Page ── */
+  .final-result-header { padding: 24px 0 14px; }
+  .final-label { margin-bottom: 8px; }
+  .final-nickname { font-size: var(--text-2xl); }
+  .final-scores-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .final-score-number { font-size: var(--text-xl); }
+  .final-page section {
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+  .result-card { width: 100%; max-width: 340px; }
+  .result-card-body { padding: 16px; }
+  .result-card-header { padding: 12px 16px 10px; }
+  .result-card-scores { gap: 8px; }
+  .result-card-score-item { padding: 6px; }
+  .result-card-score-number { font-size: var(--text-lg); }
+  .match-card { padding-left: 14px; }
+
+  /* ── How To Play ── */
+  .how-to-play-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  /* ── Score Panel ── */
   .score-panel ul { flex-wrap: wrap; }
   .score-panel li {
     flex: 0 0 calc(50% - 1px);
-    padding: 8px 0;
+    padding: 6px 0;
     border-right: none;
     border-bottom: 1px solid var(--line);
+    font-size: var(--text-xs);
   }
+
+  /* ── History Page ── */
+  .history-item { padding: 12px 0; }
+
+  /* ── Achievement Page ── */
+  .achievement-card { gap: 12px; padding: 12px 0; }
+  .achievement-icon { font-size: 1.3rem; width: 32px; }
+
+  /* ── Achievement Toast ── */
+  .achievement-toast-container { top: 12px; right: 12px; }
+  .achievement-toast { padding: 10px 14px; gap: 10px; }
+
+  /* ── Quiz Page ── */
+  .quiz-page { padding: 16px 12px; }
+  .quiz-question { font-size: var(--text-lg); margin-bottom: 16px; }
+  .quiz-option { padding: 12px 14px; }
+  .quiz-explanation { padding: 12px 14px; margin-bottom: 14px; }
+  .quiz-answer-result { font-size: var(--text-xl); }
+  .quiz-result-header { margin-bottom: 20px; }
+  .quiz-result-header h1 { font-size: var(--text-xl); }
+  .quiz-result-score { font-size: var(--text-2xl); }
+  .quiz-stage-results { margin-bottom: 20px; }
+
+  /* ── Learning / Review / Discussion ── */
+  .stage-learning-point { padding: 10px 12px; margin: 12px 0; }
+  .review-section { margin-bottom: 20px; }
+  .discussion-list li { padding: 8px 0; }
+
+  /* ── Quiz Entry Button ── */
+  .btn-quiz {
+    max-width: 100%;
+    padding: 12px 20px;
+  }
+
+  /* ── Raising Game ── */
+  .raising-page { padding: 0; }
+
+  /* Turn Indicator */
+  .raising-turn-indicator { margin-bottom: 14px; }
+  .raising-turn-era { font-size: var(--text-lg); }
+  .raising-turn-info { font-size: var(--text-xs); }
+  .raising-turn-bar-track { height: 5px; }
+
+  /* Era Info */
+  .raising-era-info {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+  .raising-era-learning { font-size: var(--text-sm); }
+
+  /* Stamina Warning */
+  .raising-stamina-warning { padding: 8px 12px; margin-bottom: 10px; }
+
+  /* Stat Panel */
+  .raising-stat-panel { margin-bottom: 14px; }
+  .raising-stat-row { gap: 8px; margin-bottom: 6px; }
+  .raising-stat-label {
+    flex: 0 0 70px;
+    font-size: var(--text-xs);
+  }
+  .raising-stat-bar-track { height: 10px; border-radius: 5px; }
+  .raising-stat-bar-fill { border-radius: 5px; }
+  .raising-stat-bar-preview { border-radius: 5px; }
+  .raising-stat-value {
+    flex: 0 0 50px;
+    font-size: var(--text-xs);
+  }
+
+  /* Prompt */
+  .raising-prompt {
+    font-size: var(--text-base);
+    margin-bottom: 12px;
+  }
+
+  /* Activity Grid */
+  .raising-activity-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .raising-activity-card {
+    padding: 10px;
+    gap: 4px;
+  }
+  .raising-activity-hanzi { font-size: 1.3rem; }
+  .raising-activity-icon { font-size: 1.2rem; }
+  .raising-activity-title { font-size: var(--text-sm); }
+  .raising-activity-subtitle { font-size: 0.65rem; line-height: 1.3; }
+
+  /* Character Sprite */
+  .raising-character-area { margin-bottom: 10px; }
+  .char-sprite {
+    transform: scale(0.75);
+    transform-origin: center center;
+  }
+  .char-level-badge { font-size: 0.6rem; }
+
+  /* Season Display */
+  .season-display {
+    padding: 6px 10px;
+    margin-bottom: 8px;
+    gap: 6px;
+  }
+  .season-icon { font-size: 1rem; }
+  .season-name { font-size: var(--text-sm); }
+  .season-bonus-text { font-size: 0.65rem; }
+
+  /* NPC Panel */
+  .npc-panel { margin-bottom: 12px; }
+  .npc-panel-title { font-size: var(--text-xs); margin-bottom: 6px; }
+  .npc-list { gap: 8px; }
+  .npc-card {
+    padding: 8px 10px;
+    min-width: 150px;
+    gap: 6px;
+  }
+  .npc-emoji { font-size: 1.3rem; }
+  .npc-name { font-size: var(--text-xs); }
+  .npc-title-text { font-size: 0.65rem; }
+
+  /* NPC Event Modal */
+  .npc-event-overlay { padding: 12px; }
+  .npc-event-modal { padding: 20px 16px; }
+  .npc-event-emoji { font-size: 2.2rem; margin-bottom: 6px; }
+  .npc-event-title { font-size: var(--text-base); }
+
+  /* Activity Result Screen */
+  .raising-result-icon { font-size: 2rem; }
+  .raising-result-flavor { margin-bottom: 14px; }
+  .raising-result-deltas {
+    gap: 10px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .raising-result-delta-value { font-size: var(--text-base); }
+  .raising-title-badge { padding: 10px; margin-bottom: 12px; }
+  .raising-title-text { font-size: var(--text-base); }
+  .raising-result-diary { margin-bottom: 12px; }
+
+  /* Event Screen */
+  .raising-event-badge { padding: 3px 12px; margin-bottom: 10px; }
+  .raising-event-title { font-size: var(--text-lg); margin-bottom: 6px; }
+  .raising-event-description { margin-bottom: 16px; }
+  .raising-event-choices { gap: 8px; }
+  .raising-event-choice-btn { padding: 12px 14px; }
+  .raising-event-choice-text { font-size: var(--text-sm); margin-bottom: 4px; }
+
+  /* Era Transition Screen */
+  .raising-transition-badge { padding: 3px 12px; margin-bottom: 10px; }
+  .raising-transition-era-title { font-size: var(--text-lg); margin-bottom: 12px; }
+  .raising-transition-text { margin-bottom: 12px; line-height: 1.6; }
+  .raising-transition-note { padding: 12px 14px; margin-bottom: 14px; }
+  .raising-transition-next { padding: 12px; margin-bottom: 14px; }
+
+  /* Dead Screen */
+  .raising-dead-screen { padding: 24px 16px; }
+  .dead-icon { font-size: 3rem; }
+  .dead-title { font-size: var(--text-2xl); }
+  .dead-message { margin-bottom: 16px; }
+  .dead-stats { gap: 10px; margin-bottom: 16px; }
+
+  /* Boss Event */
+  .boss-event-badge { padding: 3px 12px; margin-bottom: 10px; }
+
+  /* Pressure Screen */
+  .pressure-exclaim { font-size: 4rem; }
+  .pressure-intro { min-height: 50vh; }
+
+  /* Traits Display */
+  .raising-traits-display { gap: 4px; margin-bottom: 12px; }
+  .raising-trait-tag { padding: 6px 10px; gap: 6px; }
+
+  /* Final NPC Grid */
+  .final-npc-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .final-npc-card { padding: 10px; }
+  .final-npc-emoji { font-size: 1.5rem; }
+
+  /* Mini-games */
+  .minigame-container { max-width: 100%; }
+  .minigame-header { margin-bottom: 14px; }
+  .minigame-icon { font-size: 2rem; }
+  .minigame-header h2 { margin: 6px 0 2px; }
+  .minigame-ready { padding: 14px; }
+  .minigame-result { padding: 14px; }
+  .minigame-score { font-size: 1.6rem; }
+
+  .pulse-area { padding: 24px 16px; }
+  .pulse-circle { width: 80px; height: 80px; }
+  .herb-question { padding: 14px; margin-bottom: 12px; }
+  .herb-effect { font-size: var(--text-lg); }
+  .herb-options, .patient-options {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .herb-option-btn { padding: 10px; }
+  .patient-case { padding: 12px; gap: 10px; margin-bottom: 10px; }
+  .patient-emoji { font-size: 2rem; }
+  .patient-diagnosis { padding: 6px 10px; margin-bottom: 10px; }
+
+  /* MedicalTextCollection */
+  .medtext-container { padding: 16px; max-height: 90vh; }
+  .medtext-title { font-size: var(--text-lg); }
+  .medtext-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 8px;
+  }
+  .medtext-card { padding: 12px; }
+  .medtext-card-icon { font-size: 1.6rem; }
+  .medtext-detail { padding: 16px; max-height: 85vh; }
+  .medtext-detail-icon { font-size: 2.2rem; }
+
+  /* ScholarLineagePage */
+  .scholar-page { padding: 16px; }
+  .scholar-page-title { font-size: var(--text-lg); }
+  .scholar-era-section { flex-direction: column; gap: 8px; }
+  .scholar-era-label { text-align: left; min-width: unset; }
+  .scholar-era-row { gap: 8px; }
+  .scholar-card { width: 120px; padding: 10px; }
+  .scholar-card-icon { font-size: 1.3rem; }
+  .scholar-detail { padding: 16px; }
+  .scholar-detail-icon { font-size: 2.2rem; }
+
+  /* GlossaryTooltip */
+  .glossary-tooltip {
+    width: 280px;
+    padding: 12px;
+  }
+
+  /* EraReviewCard */
+  .era-review-card { padding: 14px; margin: 12px 0; }
+  .era-review-title { font-size: var(--text-base); }
+  .era-review-quiz { padding: 12px; }
+  .era-review-quiz-question { font-size: var(--text-sm); margin-bottom: 10px; }
+  .era-review-quiz-option { padding: 8px 12px; }
+
+  /* GlossaryPage */
+  .glossary-page { padding: 16px; }
+  .glossary-page-title { font-size: var(--text-lg); }
+  .glossary-search-input { padding: 8px 12px; }
+  .glossary-term-header { padding: 10px 12px; }
+  .glossary-term-detail { padding: 10px 12px; }
+
+  /* Review sections */
+  .review-npc-card { padding: 10px; }
+  .review-npc-emoji { font-size: 1.5rem; }
+  .review-keyword-tag { padding: 4px 10px; font-size: var(--text-xs); }
 }
 
 /* ══════════════════════════════════════════
@@ -2986,20 +3381,7 @@ input:focus {
 }
 .mute-btn:hover { background: var(--panel-2); }
 
-/* ── Responsive ── */
-@media (max-width: 600px) {
-  .raising-activity-grid {
-    grid-template-columns: 1fr;
-  }
-  .raising-stat-label {
-    flex: 0 0 70px;
-    font-size: var(--text-xs);
-  }
-  .raising-result-deltas {
-    flex-wrap: wrap;
-  }
-  .char-sprite { transform: scale(0.85); }
-}
+/* (raising responsive rules merged into main 768px block above) */
 
 /* ══════════════════════════════════════════
    MedicalTextCollection (의서 도감)
@@ -3572,12 +3954,213 @@ input:focus {
   border: 1px solid var(--accent);
 }
 
-/* ── Responsive for new components ── */
-@media (max-width: 600px) {
-  .medtext-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
-  .medtext-container { padding: 16px; }
-  .scholar-era-section { flex-direction: column; }
-  .scholar-era-label { text-align: left; min-width: unset; }
-  .scholar-card { width: 120px; }
-  .glossary-tooltip { width: 280px; }
+/* (new component responsive rules merged into main 768px block above) */
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — Small Phones (max-width: 480px)
+   ══════════════════════════════════════════ */
+@media (max-width: 480px) {
+  /* ── Global small phone ── */
+  :root {
+    --text-xs: 0.65rem;
+    --text-sm: 0.75rem;
+    --text-base: 0.85rem;
+    --text-lg: 0.95rem;
+    --text-xl: 1.15rem;
+    --text-2xl: 1.4rem;
+    --text-3xl: 1.8rem;
+  }
+
+  .app-shell { padding: 8px; }
+  .page {
+    padding: 18px 12px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* ── Start Page (small) ── */
+  .start-page {
+    padding: 28px 12px 24px;
+  }
+  .start-page h1 { font-size: var(--text-2xl); }
+  .start-desc {
+    font-size: var(--text-xs);
+    margin-bottom: 18px;
+  }
+  .start-actions .btn-primary,
+  .start-actions .btn-quiz {
+    padding: 12px 16px;
+    font-size: var(--text-sm);
+  }
+
+  /* ── Buttons (small) ── */
+  .btn-primary,
+  .button-group button:first-child,
+  .modal-card .button-group button:first-child {
+    padding: 11px 16px;
+    font-size: var(--text-sm);
+  }
+  .btn-secondary,
+  .button-group button:nth-child(n+2),
+  .modal-card .button-group button:nth-child(n+2) {
+    padding: 9px 14px;
+    font-size: var(--text-xs);
+  }
+
+  /* ── Stage Page (small) ── */
+  .stage-progress-dot { width: 8px; height: 8px; }
+  .stage-header { padding-bottom: 10px; margin-bottom: 12px; }
+  .choice-card { padding: 12px; }
+
+  /* ── Modal (small) ── */
+  .modal-overlay { padding: 8px; }
+  .modal-card {
+    padding: 16px 12px;
+    border-radius: var(--radius-md);
+  }
+  .delta-scores { padding: 10px; }
+  .delta-score-value { font-size: var(--text-base); }
+
+  /* ── Final Result (small) ── */
+  .final-result-header { padding: 16px 0 10px; }
+  .final-nickname { font-size: var(--text-xl); }
+  .final-scores-grid { gap: 8px; margin: 14px 0; }
+  .final-score-number { font-size: var(--text-lg); }
+  .result-card-body { padding: 12px; }
+  .result-card-header { padding: 10px 12px 8px; }
+
+  /* ── Raising Game (small) ── */
+  .raising-turn-era { font-size: var(--text-base); }
+  .raising-era-info { padding: 10px; }
+
+  .raising-stat-label { flex: 0 0 60px; }
+  .raising-stat-bar-track { height: 8px; border-radius: 4px; }
+  .raising-stat-bar-fill { border-radius: 4px; }
+  .raising-stat-bar-preview { border-radius: 4px; }
+  .raising-stat-value { flex: 0 0 44px; }
+
+  .raising-activity-grid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .raising-activity-card {
+    padding: 10px 12px;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+  .raising-activity-hanzi { font-size: 1.1rem; }
+  .raising-activity-icon { font-size: 1rem; }
+  .raising-activity-deltas { margin-top: 2px; }
+
+  /* Character smaller */
+  .char-sprite {
+    transform: scale(0.65);
+  }
+  .raising-character-area { margin-bottom: 6px; }
+
+  /* Season inline */
+  .season-display {
+    padding: 5px 8px;
+    margin-bottom: 6px;
+    border-radius: var(--radius-sm);
+  }
+  .season-icon { font-size: 0.85rem; }
+
+  /* NPC Panel smaller */
+  .npc-card { padding: 6px 8px; min-width: 130px; }
+  .npc-emoji { font-size: 1.1rem; }
+
+  /* NPC Event Modal smaller */
+  .npc-event-modal { padding: 16px 12px; }
+  .npc-event-emoji { font-size: 1.8rem; }
+
+  /* Activity Result compact */
+  .raising-result-icon { font-size: 1.6rem; }
+  .raising-result-deltas { gap: 8px; }
+  .raising-result-delta-value { font-size: var(--text-sm); }
+
+  /* Event Screen compact */
+  .raising-event-choice-btn { padding: 10px 12px; }
+
+  /* Era Transition compact */
+  .raising-transition-note { padding: 10px 12px; }
+  .raising-transition-next { padding: 10px; }
+
+  /* Dead Screen */
+  .raising-dead-screen { padding: 16px 12px; }
+  .dead-icon { font-size: 2.5rem; }
+  .dead-title { font-size: var(--text-xl); }
+
+  /* Pressure */
+  .pressure-exclaim { font-size: 3rem; }
+  .pressure-intro { min-height: 40vh; }
+
+  /* Mini-games (small) */
+  .minigame-icon { font-size: 1.6rem; }
+  .minigame-score { font-size: 1.3rem; }
+  .pulse-area { padding: 16px 12px; }
+  .pulse-circle { width: 64px; height: 64px; }
+  .herb-question { padding: 10px; }
+  .herb-options, .patient-options {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .herb-option-btn { padding: 10px 8px; font-size: var(--text-xs); }
+  .patient-case { flex-direction: column; gap: 8px; padding: 10px; }
+  .patient-emoji { font-size: 1.6rem; }
+
+  /* MedicalTextCollection (small) */
+  .medtext-container { padding: 12px; }
+  .medtext-header { gap: 8px; margin-bottom: 12px; }
+  .medtext-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  .medtext-card { padding: 10px; border-radius: var(--radius-md); }
+  .medtext-card-icon { font-size: 1.3rem; margin-bottom: 2px; }
+  .medtext-card-name { font-size: var(--text-xs); }
+  .medtext-detail { padding: 14px; }
+
+  /* ScholarLineagePage (small) */
+  .scholar-page { padding: 12px; }
+  .scholar-era-row { gap: 6px; }
+  .scholar-card { width: 100px; padding: 8px; }
+  .scholar-card-icon { font-size: 1.1rem; }
+  .scholar-card-name { font-size: var(--text-xs); }
+  .scholar-detail { padding: 14px; }
+  .scholar-lineage-legend { gap: 6px; margin-bottom: 14px; }
+  .scholar-legend-item { padding: 2px 8px; }
+
+  /* EraReviewCard (small) */
+  .era-review-card { padding: 12px; }
+  .era-review-quiz { padding: 10px; }
+  .era-review-quiz-options { gap: 6px; }
+  .era-review-quiz-option { padding: 8px 10px; }
+
+  /* GlossaryPage (small) */
+  .glossary-page { padding: 12px; }
+  .glossary-page-filters { gap: 4px; }
+  .glossary-filter-btn { padding: 3px 8px; font-size: 0.6rem; }
+  .glossary-term-header { padding: 8px 10px; }
+  .glossary-term-detail { padding: 8px 10px; }
+  .glossary-tooltip { width: 260px; padding: 10px; }
+
+  /* Traits (small) */
+  .raising-trait-tag { padding: 5px 8px; }
+  .trait-hanja { min-width: 50px; font-size: var(--text-xs); }
+
+  /* Final NPC (small) */
+  .final-npc-card { padding: 8px; gap: 8px; }
+  .final-npc-emoji { font-size: 1.3rem; }
+
+  /* Review sections (small) */
+  .review-keyword-tag { padding: 3px 8px; }
+  .review-npc-card { padding: 8px; gap: 8px; }
+
+  /* Mute button */
+  .mute-btn { width: 32px; height: 32px; font-size: 0.85rem; }
+
+  /* Quiz (small) */
+  .quiz-option { padding: 10px 12px; }
+  .quiz-question { font-size: var(--text-base); }
 }
