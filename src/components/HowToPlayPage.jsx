@@ -1,10 +1,11 @@
 import React from "react";
 
 const SCORE_ITEMS = [
-  { label: "學術名聲", desc: "학설적 권위, 이론 형성력, 후대 영향" },
-  { label: "臨床信賴度", desc: "실제 치료 역량, 임상 적용성, 현장 영향" },
-  { label: "文獻理解度", desc: "고전과 의서 이해, 체계적 학습" },
-  { label: "百姓好感度", desc: "민생, 구휼, 생활 의료, 실용성" }
+  { label: "의술(醫術)", desc: "진료와 처방, 침구와 본초 등 실제 치료 능력" },
+  { label: "학식(學識)", desc: "경전과 이론, 음양오행과 병리학설에 대한 이해" },
+  { label: "덕행(德行)", desc: "의덕(醫德)과 인품, 환자와 백성에 대한 신뢰" },
+  { label: "체력(體力)", desc: "수련과 활동을 지탱하는 건강과 체력" },
+  { label: "명성(名聲)", desc: "의학계와 세상에 알려진 정도" }
 ];
 
 export default function HowToPlayPage({ game }) {
@@ -12,8 +13,9 @@ export default function HowToPlayPage({ game }) {
     <main className="page how-to-play-page">
       <h1>게임 방법</h1>
       <p>
-        7개 시대를 순서대로 통과하는 개인형 학습 시뮬레이션입니다.
-        각 시대마다 4개의 선택지 중 하나를 고르면 4가지 성향 점수가 변합니다.
+        10개 시대를 순서대로 통과하는 육성 시뮬레이션입니다.
+        매 턴마다 7가지 행동 중 하나를 선택하면 5가지 능력치가 변합니다.
+        체력 관리에 주의하세요!
       </p>
 
       <div className="how-to-play-grid">

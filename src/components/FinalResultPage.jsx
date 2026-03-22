@@ -2,28 +2,32 @@ import React, { useRef, useCallback } from "react";
 import ResultCard from "./ResultCard";
 
 const SCORE_LABELS = {
-  academicReputation: "학술",
-  clinicalTrust: "임상",
-  textUnderstanding: "문헌",
-  publicFavor: "민생"
+  medical: "의술",
+  knowledge: "학식",
+  virtue: "덕행",
+  stamina: "체력",
+  reputation: "명성"
 };
 
 const SCORE_COLORS = {
-  academicReputation: "var(--score-academic)",
-  clinicalTrust: "var(--score-clinical)",
-  textUnderstanding: "var(--score-text)",
-  publicFavor: "var(--score-public)"
+  medical: "#8b5e3c",
+  knowledge: "#4a6a8f",
+  virtue: "#3d7a66",
+  stamina: "#b85c38",
+  reputation: "#8a7232"
 };
 
 const TENDENCY_NAMES = {
-  academicReputation: "이론 탐구",
-  clinicalTrust: "현장 임상",
-  textUnderstanding: "문헌 탐독",
-  publicFavor: "백성 구휼"
+  medical: "의술 수련",
+  knowledge: "경전 탐구",
+  virtue: "덕행 실천",
+  stamina: "체력 관리",
+  reputation: "명성 쌓기"
 };
 
 export default function FinalResultPage({ game }) {
-  const { finalResult, scores, history, stages, gameMeta, restartGame, goToStart, goToHistory } = game;
+  const { finalResult, playerStats, turnHistory, gameMeta, restartGame, goToStart, goToHistory } = game;
+  const scores = playerStats;
   const cardRef = useRef(null);
 
   const handleSaveCard = useCallback(async () => {
@@ -36,7 +40,7 @@ export default function FinalResultPage({ game }) {
         useCORS: true
       });
       const link = document.createElement("a");
-      link.download = `명의의길_${finalResult.nickname || "결과"}.png`;
+      link.download = `한의사메이커_${finalResult.nickname || "결과"}.png`;
       link.href = canvas.toDataURL("image/png");
       link.click();
     } catch {
@@ -52,7 +56,6 @@ export default function FinalResultPage({ game }) {
         <button className="btn-home" onClick={goToStart}>홈</button>
       </nav>
 
-      {/* 상단: 결과 비주얼 */}
       <div className="final-result-header">
         <p className="final-label">당신의 의원 유형은</p>
         <h1 className="final-nickname">{finalResult.nickname || finalResult.title}</h1>
@@ -62,7 +65,6 @@ export default function FinalResultPage({ game }) {
         )}
       </div>
 
-      {/* 점수 4개 그리드 */}
       <div className="final-scores-grid">
         {Object.entries(SCORE_LABELS).map(([key, label]) => (
           <div key={key} className="final-score-item">
@@ -74,12 +76,10 @@ export default function FinalResultPage({ game }) {
         ))}
       </div>
 
-      {/* 설명 */}
       <section>
         <p className="final-long-desc">{finalResult.longDescription}</p>
       </section>
 
-      {/* 닮은 인물 */}
       {finalResult.historicalMatch && (
         <section>
           <h2>닮은 역사 속 인물</h2>
@@ -90,15 +90,14 @@ export default function FinalResultPage({ game }) {
         </section>
       )}
 
-      {/* 타임라인 */}
       <section>
-        <h2>시대별 선택 기록</h2>
+        <h2>턴별 행동 기록</h2>
         <div className="final-timeline">
-          {history.map((item, idx) => (
-            <div key={`${idx}-${item.stageId}-${item.choiceId}`} className="timeline-item">
-              <div className="timeline-stage">{item.stageTitle}</div>
+          {turnHistory.map((item, idx) => (
+            <div key={idx} className="timeline-item">
+              <div className="timeline-stage">{item.eraTitle}</div>
               <div className="timeline-choice">
-                {item.choiceTitle}
+                {item.activityTitle}
                 {item.eventTitle && (
                   <span className="timeline-event"> ({item.eventTitle})</span>
                 )}
@@ -108,7 +107,6 @@ export default function FinalResultPage({ game }) {
         </div>
       </section>
 
-      {/* 결과 카드 */}
       <section className="result-card-section">
         <h2>결과 카드</h2>
         <ResultCard
@@ -122,21 +120,14 @@ export default function FinalResultPage({ game }) {
         </button>
       </section>
 
-      {/* 복습 섹션 */}
       <section className="review-section">
         <h2>학습 복습</h2>
         {(() => {
-          const topKey = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
-          const topStage = history.reduce((best, item) => {
-            const delta = item.delta?.[topKey] || 0;
-            return delta > (best.delta || 0) ? { title: item.stageTitle, delta } : best;
-          }, { title: "", delta: 0 });
+          const scoreKeys = ["medical", "knowledge", "virtue", "reputation"];
+          const topKey = scoreKeys.sort((a, b) => (scores[b] || 0) - (scores[a] || 0))[0];
           return (
             <div className="review-content">
-              <p>당신은 <strong>{TENDENCY_NAMES[topKey]}</strong>을(를) 가장 자주 택했습니다.</p>
-              {topStage.title && (
-                <p>특히 <strong>{topStage.title}</strong> 단계의 선택이 이 성향을 강화했습니다.</p>
-              )}
+              <p>당신은 <strong>{TENDENCY_NAMES[topKey]}</strong>을(를) 가장 중시했습니다.</p>
               {finalResult.reviewKeywords && (
                 <div className="review-keywords">
                   <p className="review-keywords-label">복습 키워드</p>
@@ -152,7 +143,6 @@ export default function FinalResultPage({ game }) {
         })()}
       </section>
 
-      {/* 토론 질문 */}
       {gameMeta?.discussionQuestions && (
         <section className="discussion-section">
           <h2>수업에서 함께 이야기해 보세요</h2>
@@ -164,7 +154,6 @@ export default function FinalResultPage({ game }) {
         </section>
       )}
 
-      {/* 안내 · 오해 방지 */}
       <section className="final-learning">
         <p>
           이 결과는 정답이 아니라, 당신이 어떤 역사적 선택을 더 중시했는지를 보여 줍니다.
@@ -176,7 +165,6 @@ export default function FinalResultPage({ game }) {
         </p>
       </section>
 
-      {/* 버튼 */}
       <div className="button-group">
         <button onClick={restartGame}>다시 시작</button>
         <button className="btn-text" onClick={goToHistory}>이전 기록 보기</button>

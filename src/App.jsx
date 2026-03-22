@@ -1,38 +1,26 @@
 import React from "react";
-import { useGameState } from "./hooks/useGameState";
+import { useRaisingGameState } from "./hooks/useRaisingGameState";
 import StartPage from "./components/StartPage";
 import HowToPlayPage from "./components/HowToPlayPage";
-import StagePage from "./components/StagePage";
+import RaisingGamePage from "./components/raising/RaisingGamePage";
 import FinalResultPage from "./components/FinalResultPage";
-import ProgressPage from "./components/ProgressPage";
-import ResultModal from "./components/ResultModal";
 import HistoryPage from "./components/HistoryPage";
 import AchievementPage from "./components/AchievementPage";
 import AchievementToast from "./components/AchievementToast";
 import QuizPage from "./components/QuizPage";
 
 export default function App() {
-  const game = useGameState();
+  const game = useRaisingGameState();
 
   return (
     <div className="app-shell">
       {game.screen === "start" && <StartPage game={game} />}
       {game.screen === "howToPlay" && <HowToPlayPage game={game} />}
-      {game.screen === "stage" && <StagePage game={game} />}
+      {game.screen === "raising" && <RaisingGamePage game={game} />}
       {game.screen === "final" && <FinalResultPage game={game} />}
-      {game.screen === "progress" && <ProgressPage game={game} />}
       {game.screen === "history" && <HistoryPage game={game} />}
       {game.screen === "achievements" && <AchievementPage game={game} />}
       {game.screen === "quiz" && <QuizPage game={game} />}
-
-      {game.isResultModalOpen && (
-        <ResultModal
-          result={game.selectedChoiceResult}
-          onNext={game.goToNextStage}
-          onViewProgress={game.goToProgress}
-          gameMeta={game.gameMeta}
-        />
-      )}
 
       {game.newAchievements.length > 0 && (
         <AchievementToast

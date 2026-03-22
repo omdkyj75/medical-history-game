@@ -1,6 +1,9 @@
 import React from "react";
 
-const ERAS = ["춘추전국", "진한", "수당", "송", "금원", "명청민국", "조선"];
+const ERAS = [
+  "상고", "전국", "진한", "위진수당", "송",
+  "금원", "명", "청", "고려", "조선"
+];
 
 export default function StartPage({ game }) {
   const { gameMeta } = game;
@@ -11,7 +14,7 @@ export default function StartPage({ game }) {
       <p className="start-desc">{gameMeta.description}</p>
 
       <div className="start-timeline">
-        {ERAS.map((era, i) => (
+        {ERAS.map((era) => (
           <div key={era} className="start-timeline-dot">
             <div className="start-timeline-line" />
             <span>{era}</span>
@@ -20,18 +23,18 @@ export default function StartPage({ game }) {
       </div>
 
       <div className="start-points">
-        <span>7개 시대</span>
-        <span>4가지 성향</span>
-        <span>당신만의 의원</span>
+        <span>10개 시대</span>
+        <span>5가지 능력치</span>
+        <span>31턴 육성</span>
       </div>
 
       <div className="start-actions">
         <button className="btn-primary" onClick={() => game.startGame("")}>
-          시작하기
+          육성 시뮬레이션 시작
         </button>
         <button className="btn-quiz" onClick={game.goToQuiz}>
           퀴즈 도전
-          <span className="btn-quiz-desc">7시대 × 4문제, 총 28문제</span>
+          <span className="btn-quiz-desc">10시대 × 4문제, 총 40문제</span>
         </button>
         <div className="start-links">
           <button className="btn-text" onClick={game.goToHowToPlay}>게임 방법</button>

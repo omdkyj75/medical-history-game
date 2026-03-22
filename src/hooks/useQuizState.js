@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo } from "react";
 import { drawQuizQuestions } from "../utils/drawQuizQuestions";
 
-const INITIAL_SCORES = { "學術名聲": 0, "臨床信賴度": 0, "文獻理解度": 0, "百姓好感度": 0 };
+const INITIAL_SCORES = { medical: 0, knowledge: 0, virtue: 0, reputation: 0 };
 
 export function useQuizState() {
   const [questions, setQuestions] = useState([]);

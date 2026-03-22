@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { useQuizState } from "../hooks/useQuizState";
 
 const SCORE_LABEL_MAP = {
-  "學術名聲": { label: "학술", color: "var(--score-academic)" },
-  "臨床信賴度": { label: "임상", color: "var(--score-clinical)" },
-  "文獻理解度": { label: "문헌", color: "var(--score-text)" },
-  "百姓好感度": { label: "민생", color: "var(--score-public)" }
+  medical: { label: "의술", color: "#8b5e3c" },
+  knowledge: { label: "학식", color: "#4a6a8f" },
+  virtue: { label: "덕행", color: "#3d7a66" },
+  reputation: { label: "명성", color: "#8a7232" }
 };
 
 export default function QuizPage({ game }) {

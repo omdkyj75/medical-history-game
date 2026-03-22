@@ -1,17 +1,19 @@
 import React, { forwardRef } from "react";
 
 const SCORE_COLORS = {
-  academicReputation: "#8b5e3c",
-  clinicalTrust: "#3d7a66",
-  textUnderstanding: "#4a6a8f",
-  publicFavor: "#8a7232"
+  medical: "#8b5e3c",
+  knowledge: "#4a6a8f",
+  virtue: "#3d7a66",
+  stamina: "#b85c38",
+  reputation: "#8a7232"
 };
 
 const SCORE_SHORT = {
-  academicReputation: "학술",
-  clinicalTrust: "임상",
-  textUnderstanding: "문헌",
-  publicFavor: "민생"
+  medical: "의술",
+  knowledge: "학식",
+  virtue: "덕행",
+  stamina: "체력",
+  reputation: "명성"
 };
 
 const ResultCard = forwardRef(function ResultCard({ result, scores, timestamp }, ref) {
@@ -28,7 +30,7 @@ const ResultCard = forwardRef(function ResultCard({ result, scores, timestamp },
   return (
     <div className="result-card" ref={ref}>
       <div className="result-card-header">
-        <div className="result-card-game-title">명의(名醫)의 길</div>
+        <div className="result-card-game-title">한의사메이커</div>
       </div>
 
       <div className="result-card-body">

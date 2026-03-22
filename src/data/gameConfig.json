@@ -1,7 +1,7 @@
 {
   "gameMeta": {
     "id": "medical-history-raising-sim",
-    "title": "명의(名醫)의 길",
+    "title": "한의사메이커",
     "subtitle": "10개 시대를 거치며 성장하는 한중의학사 육성 시뮬레이션",
     "description": "당신은 시대를 건너며 수련하는 의원입니다. 상고시대에서 조선에 이르는 10개 시대를 통과하며, 매 턴 행동을 선택해 자신만의 의학적 길을 완성하십시오.",
     "totalEras": 10,
