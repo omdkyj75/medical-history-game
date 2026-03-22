@@ -2415,20 +2415,20 @@ input:focus {
 .npc-card {
   flex: 0 0 auto;
   display: flex;
-  gap: 6px;
+  gap: 8px;
   align-items: center;
   background: var(--panel);
   border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  padding: 6px 10px;
-  min-width: 150px;
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  min-width: 170px;
   transition: border-color 0.2s;
 }
 .npc-card.npc-unlocked {
   border-color: var(--accent-warm);
   box-shadow: 0 0 8px rgba(196, 149, 106, 0.2);
 }
-.npc-emoji { font-size: 1.2rem; }
+.npc-emoji { font-size: 1.4rem; }
 .npc-info { flex: 1; min-width: 0; }
 .npc-name {
   font-size: var(--text-sm);
