@@ -2680,6 +2680,71 @@ input:focus {
   margin-bottom: 12px;
 }
 
+/* ── Activity Badge ── */
+.activity-card-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.activity-badge {
+  font-size: 0.58rem;
+  padding: 1px 6px;
+  border-radius: 8px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.season-badge {
+  background: rgba(78, 205, 196, 0.2);
+  color: var(--score-knowledge);
+  border: 1px solid rgba(78, 205, 196, 0.3);
+}
+.npc-badge {
+  background: rgba(167, 139, 250, 0.2);
+  color: var(--score-reputation);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+}
+.raising-activity-card.season-boosted {
+  border-color: var(--score-knowledge);
+}
+
+/* ── Diary & Title ── */
+.raising-result-diary {
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+.raising-title-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px;
+  margin-bottom: 16px;
+  background: rgba(255, 170, 68, 0.1);
+  border: 1px solid rgba(255, 170, 68, 0.3);
+  border-radius: var(--radius-md);
+  animation: title-glow 1.5s ease-in-out;
+}
+.raising-title-label {
+  font-size: var(--text-xs);
+  color: var(--accent-warm);
+  font-weight: 600;
+}
+.raising-title-text {
+  font-family: var(--font-title);
+  font-size: var(--text-lg);
+  color: var(--accent-warm);
+  font-weight: 700;
+}
+@keyframes title-glow {
+  0% { box-shadow: 0 0 0 rgba(255, 170, 68, 0); }
+  50% { box-shadow: 0 0 20px rgba(255, 170, 68, 0.3); }
+  100% { box-shadow: 0 0 0 rgba(255, 170, 68, 0); }
+}
+
 /* ── Dead Screen ── */
 .raising-dead-screen {
   text-align: center;

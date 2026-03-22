@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import gameConfig from "../data/gameConfig.json";
 import resultTypesData from "../data/resultTypes.json";
 import { saveResult, getResults } from "../utils/resultStorage";
@@ -160,24 +160,38 @@ export function useRaisingGameState() {
   const [newAchievements, setNewAchievements] = useState([]);
   const [savedResults, setSavedResults] = useState(() => getResults());
 
+  // navigate로 인한 hashchange는 무시 (내부 전환), 사용자 직접 URL 입력만 가드
+  const navigatingRef = useRef(false);
+
   const navigate = useCallback((screenName) => {
+    navigatingRef.current = true;
     setScreenRaw(screenName);
     const hash = SCREEN_TO_HASH[screenName] || "#/";
     if (window.location.hash !== hash) {
       window.location.hash = hash;
     }
+    // 다음 틱에 플래그 리셋
+    setTimeout(() => { navigatingRef.current = false; }, 0);
   }, []);
 
   useEffect(() => {
     function onHashChange() {
+      // 내부 navigate에 의한 변경은 무시
+      if (navigatingRef.current) return;
+
       const hash = window.location.hash || "#/";
       const target = HASH_TO_SCREEN[hash];
       if (!target) { navigate("start"); return; }
+      // 사용자가 직접 URL로 guarded screen에 진입 시도 → 게임 미시작이면 차단
+      if (GUARDED_SCREENS.has(target) && turnHistory.length === 0) {
+        navigate("start");
+        return;
+      }
       setScreenRaw(target);
     }
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
-  }, [navigate]);
+  }, [navigate, turnHistory.length]);
 
   useEffect(() => {
     const hash = SCREEN_TO_HASH[screen];
@@ -323,6 +337,17 @@ export function useRaisingGameState() {
     setPlayerStats(newStats);
     setMinigameType(null);
 
+    // Record minigame result in turn history
+    setTurnHistory((prev) => {
+      const updated = [...prev];
+      const last = { ...updated[updated.length - 1] };
+      last.minigameType = minigameType;
+      last.minigameDelta = delta;
+      last.statsAfter = newStats;
+      updated[updated.length - 1] = last;
+      return updated;
+    });
+
     // Continue to NPC/event check
     checkNpcAndEvents();
   }
@@ -366,12 +391,14 @@ export function useRaisingGameState() {
       const newStats = applyDelta(playerStats, event.delta);
       setPlayerStats(newStats);
 
-      // Mark this NPC event as triggered in history
+      // Mark this NPC event as triggered in history with delta and updated stats
       setTurnHistory((prev) => {
         const updated = [...prev];
         const last = { ...updated[updated.length - 1] };
         last.npcEventId = npc.id;
         last.npcEventTitle = event.title;
+        last.npcEventDelta = event.delta;
+        last.statsAfter = newStats;
         updated[updated.length - 1] = last;
         return updated;
       });

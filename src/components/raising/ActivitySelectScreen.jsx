@@ -6,18 +6,14 @@ import CharacterSprite from "./CharacterSprite";
 import SeasonDisplay from "./SeasonDisplay";
 import NpcPanel from "./NpcPanel";
 
-// 7개 중 5개를 랜덤 선택 (휴식은 항상 포함)
 function pickActivities(allActivities, seed) {
   const rest = allActivities.find((a) => a.id === "rest");
   const others = allActivities.filter((a) => a.id !== "rest");
-
-  // 시드 기반 셔플 (같은 턴에서는 일관성 유지)
   const shuffled = [...others];
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(((seed * (i + 1) * 9301 + 49297) % 233280) / 233280 * (i + 1));
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
-
   return [...shuffled.slice(0, 4), rest];
 }
 
@@ -33,6 +29,23 @@ export default function ActivitySelectScreen({ game }) {
 
   const activityInfos = availableActivities.map((a) => game.getActivityInfo(a.id));
   const staminaLow = game.playerStats.stamina <= 2;
+
+  // NPC likes per activity
+  const npcLikesMap = useMemo(() => {
+    const map = {};
+    for (const npc of game.currentNpcs) {
+      for (const [actId, val] of Object.entries(npc.likes || {})) {
+        if (val > 0) {
+          if (!map[actId]) map[actId] = [];
+          map[actId].push(npc.name);
+        }
+      }
+    }
+    return map;
+  }, [game.currentNpcs]);
+
+  // Season boosted activity
+  const seasonBoostedId = game.seasonBonus?.activityId;
 
   return (
     <div className="raising-activity-screen" style={
@@ -86,6 +99,8 @@ export default function ActivitySelectScreen({ game }) {
             activity={info}
             onSelect={game.selectActivity}
             disabled={false}
+            npcLikes={npcLikesMap[info.id]}
+            seasonBoosted={info.id === seasonBoostedId}
           />
         ))}
       </div>
